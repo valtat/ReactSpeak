@@ -1,8 +1,11 @@
 ### Web Project
 
 -Title of the project: ReactSpeak
+
 -The names of the members: Kristiina Saarinen (project owner), Jonne Karhunen (scrum master), Elena Blinova (dev), Valerio Tatananni (dev)
+
 -The target users and other stakeholders: People who want to learn a new language
+
 -The main functionality of the application:
 
 1. User registration and Authentication:
