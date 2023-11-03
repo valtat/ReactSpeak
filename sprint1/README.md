@@ -1,4 +1,4 @@
-### Web Project
+# Web Project
 
 -Title of the project: ReactSpeak
 
@@ -135,3 +135,53 @@
 -As an administrator, I want tools within the ReactSpeak app to effectively manage user reviews and ratings, including the ability to moderate or remove inappropriate content, ensuring a positive and safe learning environment.
 
 -As an administrator, I need efficient tools within the ReactSpeak app to manage and respond to user inquiries, feedback, and support requests promptly, ensuring a seamless and satisfactory user experience.
+
+
+## Product Backlog:
+
+#### User Registration and Authentication:
+
+- Implement user registration via email and password.
+- Develop user login functionality and profile access.
+- Display clear error messages for incorrect login credentials or existing email registration.
+- Implement a "Stay Logged In" option for users.
+- Develop the "Forgot Password" feature that sends a reset link via email.
+- Create a selection feature for users to choose their preferred language for learning.
+
+#### Dashboard and Learning Progress:
+
+- Design and display a user dashboard showing language learning progress, words learned, and quiz scores.
+- Develop vocabulary exercises with text, audio, and image-based content.
+- Create a flashcard feature for word memorization and review.
+- Implement interactive lessons focused on practical travel phrases and vocabulary.
+  
+#### Tourist Information and Language Overview:
+
+- Develop an overview showcasing the country's tourist attractions for itinerary planning.
+- Create a section outlining the country's languages to guide users in choosing the language to learn.
+- Provide cultural insights and language-specific etiquette for deeper understanding.
+  
+#### Quizzes and Assessments:
+
+- Develop quizzes to test language knowledge and track user scores.
+- Implement feedback mechanisms for improving quiz performance.
+  
+#### Progress Tracking and Learning Goals:
+
+- Design progress tracking functionality displaying achievements and badges.
+- Create options for users to set and track daily, weekly, or monthly learning goals.
+  
+#### Profile Management:
+
+- Develop a profile management section allowing users to view and edit personal details and language preferences.
+Support and Help Center:
+- Implement a support/help section providing assistance and answers to common questions related to language learning.
+  
+#### Admin Functionalities:
+- Implement secure login with role-based access control for administrators.
+- Develop tools for managing language learning content: addition, editing, and deletion.
+- Create tools for managing user reviews and ratings, including moderation features.
+- Develop tools for managing and responding to user inquiries and support requests.
+
+  
+![image](https://github.com/valtat/ReactSpeak/assets/111984410/bc0477d0-5da5-4bcd-ac91-ab46f39ae642)
