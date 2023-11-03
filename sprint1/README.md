@@ -183,5 +183,3 @@ Support and Help Center:
 - Create tools for managing user reviews and ratings, including moderation features.
 - Develop tools for managing and responding to user inquiries and support requests.
 
-  
-![image](https://github.com/valtat/ReactSpeak/assets/111984410/bc0477d0-5da5-4bcd-ac91-ab46f39ae642)
