@@ -6,65 +6,66 @@
 -The main functionality of the application:
 
 1. User registration and Authentication:
-   New users can create accounts with their email and password.
 
-Registered users can log in to access their language learning profiles.
+    New users can create accounts with their email and password.
+
+    Registered users can log in to access their language learning profiles.
 
 2. Users can choose the language they want to learn from a list of available languages.
 
 3. User Dashboard:
 
-Upon login, users are presented with a dashboard that displays their current language learning progress.
+    Upon login, users are presented with a dashboard that displays their current language learning progress.
 
-Progress includes the number of words learned, quiz scores, and other relevant metrics.
+    Progress includes the number of words learned, quiz scores, and other relevant metrics.
 
 4. Vocabulary Exercises:
 
-Users can access a vocabulary exercise section to learn and practice new words and phrases in the chosen language.
+    Users can access a vocabulary exercise section to learn and practice new words and phrases in the chosen language.
 
-Exercises can include text, audio, and image-based content.
+    Exercises can include text, audio, and image-based content.
 
 5. Flashcards:
 
-The app provides flashcards to help users memorize and review vocabulary words.
+    The app provides flashcards to help users memorize and review vocabulary words.
 
-Users can customize flashcard sets based on their preferences.
+    Users can customize flashcard sets based on their preferences.
 
 6. Quizzes and Assessments:
 
-Users can take quizzes to test their knowledge of the language.
+    Users can take quizzes to test their knowledge of the language.
 
-The app tracks quiz scores and offers feedback for improvement.
+    The app tracks quiz scores and offers feedback for improvement.
 
 7. Progress Tracking:
 
-Users can view their language learning progress over time, including a history of their achievements and badges.
+    Users can view their language learning progress over time, including a history of their achievements and badges.
 
 8. Reset or Restart Option:
 
-Users have the option to reset or restart their language learning progress if needed.
+    Users have the option to reset or restart their language learning progress if needed.
 
 9. Learning Goals:
 
-Users can set daily, weekly, or monthly learning goals.
+    Users can set daily, weekly, or monthly learning goals.
 
-The app tracks and encourages users to meet their goals.
+    The app tracks and encourages users to meet their goals.
 
 10. Notifications and Reminders:
 
-Users receive notifications and reminders to practice and learn the language regularly, helping them stay engaged.
+    Users receive notifications and reminders to practice and learn the language regularly, helping them stay engaged.
 
 11. Profile Management:
 
-Users can view and edit their profile information, including personal details and language preferences.
+    Users can view and edit their profile information, including personal details and language preferences.
 
 12. Support and Help Center:
 
-Users can access a support or help section to seek assistance and find answers to common questions or issues.
+    Users can access a support or help section to seek assistance and find answers to common questions or issues.
 
 13. Community Interaction:
 
-Users can leave comments on profiles.
+    Users can leave comments on profiles.
 
 ## User Stories
 
