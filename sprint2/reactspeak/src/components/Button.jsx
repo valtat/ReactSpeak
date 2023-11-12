@@ -1,9 +1,5 @@
-const Button = ({name}) => {
-  return (
-    <div>
-      <button>{name}</button>
-    </div>
-  );
-}
+const Button = ({ name }) => {
+  return <button>{name}</button>;
+};
 
 export default Button;

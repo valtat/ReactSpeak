@@ -23,6 +23,8 @@ body {
 
 .header-logo {
   margin-left: 120px;
+  width: 228px;
+  height: 88px;
 }
 
 .navbar {
@@ -78,4 +80,5 @@ button {
   align-items: center;
   margin-right: 43px;
   gap: 66px;
+
 }

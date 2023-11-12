@@ -4,16 +4,18 @@ import Button from "./Button";
 
 const Header = () => {
   return (
-  <div>
     <header className="header">
-      <img src={logo} alt="reactSpeak logo" className="header-logo" width={228} height={88} />
+      <img
+        src={logo}
+        alt="reactSpeak logo"
+        className="header-logo"
+      />
       <Navbar />
       <div className="header-buttons">
         <Button name="Log in" />
         <Button name="Register" />
       </div>
     </header>
-  </div>
   );
 };
 
