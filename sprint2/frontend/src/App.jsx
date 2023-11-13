@@ -1,19 +1,18 @@
-//import Header from "./components/Header";
-//import Welcome from "./components/Welcome";
-//import Footer from "./components/Footer";
 import Home from "./pages/Home/index.jsx";
-import NoMatch from "./pages/404.jsx";
-import { Route, Routes } from "react-router-dom";
+import ErrorPage from "./pages/error.jsx";
+
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage />,
+  },
+]);
 
 function App() {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
