@@ -28,9 +28,12 @@ body {
 
 .header-logo {
   margin-left: 120px;
+}
+.header-logo img{
   width: 228px;
   height: 88px;
 }
+
 
 .navbar {
   display: flex;

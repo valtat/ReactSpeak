@@ -4,6 +4,7 @@ import ErrorPage from "./pages/error.jsx";
 import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
 import StudyView from "./pages/StudyView/index.jsx";
+import "./App.css";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 

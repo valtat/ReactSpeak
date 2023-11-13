@@ -5,7 +5,9 @@ import Button from "./Button";
 const Header = () => {
   return (
     <header className="header">
-      <img src={logo} alt="reactSpeak logo" className="header-logo" />
+      <div className="header-logo">
+        <img src={logo} alt="reactSpeak logo" />
+      </div>
       <Navbar />
       <div className="header-buttons">
         <Button name="Log in" />
