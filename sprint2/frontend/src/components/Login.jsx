@@ -1,34 +1,25 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import userService from "../services/userService.js";
 
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     if (email && password) {
-      try {
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        if (response.ok) {
-          //TO DO: Redirect to dashboard or home page
+      userService
+        .login(email, password)
+        .then((response) => {
+          navigate("/dashboard");
           console.log("Login successful!");
-        } else {
-          const error = await response.json();
+        })
+        .catch((error) => {
           alert(error.message);
-        }
-      } catch (error) {
-        console.error(error);
-        alert("An error occurred while logging in");
-      }
-      
+        });
       console.log("Performing login...");
     } else {
       console.log("Please enter email and password.");
