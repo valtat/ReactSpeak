@@ -3,19 +3,45 @@ import React, { useState } from "react";
 export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log("email: " + email);
+    
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (response.ok) {
+        props.onFormSwitch("login");
+        console.log("Registration successful!");
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while registering");
+    }
   };
 
   return (
     <div className="auth-form-container">
       <h2>Register</h2>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input value={name} name="name" id="name" placeholder="Username" />
+        <label htmlFor="name">Username</label>
+        <input value={name} name="name" id="name" placeholder="Username" onChange={(e) => setName(e.target.value)} />
         <label htmlFor="email">Email</label>
         <input
           value={email}
@@ -34,15 +60,16 @@ export const Register = (props) => {
           id="password"
           name="password"
         />
-        <label htmlFor="password">Confirm password</label>
+        <label htmlFor="confirmPassword">Confirm password</label>
         <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           type="password"
           placeholder="******"
-          id="password"
-          name="password"
+          id="confirmPassword"
+          name="confirmPassword"
         />
+
         <button type="submit">Register</button>
       </form>
       <button className="link-btn" onClick={() => props.onFormSwitch("login")}>

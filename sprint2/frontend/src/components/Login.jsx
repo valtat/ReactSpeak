@@ -4,16 +4,42 @@ export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log("email: " + email);
+
+    if (email && password) {
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          //TO DO: Redirect to dashboard or home page
+          console.log("Login successful!");
+        } else {
+          const error = await response.json();
+          alert(error.message);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred while logging in");
+      }
+      
+      console.log("Performing login...");
+    } else {
+      console.log("Please enter email and password.");
+    }
   };
 
   return (
     <div className="auth-form-container">
       <h2>Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="email">Username or Email</label>
+        <label htmlFor="email">Email</label>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -39,7 +65,7 @@ export const Login = (props) => {
       >
         Don't have an account? Register!
       </button>
-      <button className="link-btn">Reset password</button>
+      <button className="link-btn">Forgot password</button>
     </div>
   );
 };
