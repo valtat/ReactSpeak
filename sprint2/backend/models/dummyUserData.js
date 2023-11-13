@@ -17,9 +17,7 @@ const users = [
 ];
 
 const forgotPassword = (email) => {
-  console.log("EMAIL" + email);
   const user = users.find((user) => user.email === email);
-  console.log("DA USER" + user);
   return user;
 };
 
