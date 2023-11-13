@@ -6,7 +6,9 @@ const Header = () => {
   return (
   <div>
     <header className="header">
-      <img src={logo} alt="reactSpeak logo" className="header-logo" width={228} height={88} />
+      <div className="header-logo">
+        <img src={logo} alt="reactSpeak logo" className="logo" width={228} height={88} />
+      </div>
       <Navbar />
       <div className="header-buttons">
         <Button name="Log in" />
