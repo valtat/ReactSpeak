@@ -1,6 +1,5 @@
-import Navbar from "./Navbar";
 import logo from "../assets/images/ReactSpeakLogo.png";
-import Button from "./Button";
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (
@@ -9,10 +8,6 @@ const Header = () => {
         <img src={logo} alt="reactSpeak logo" />
       </div>
       <Navbar />
-      <div className="header-buttons">
-        <Button name="Log in" />
-        <Button name="Register" />
-      </div>
     </header>
   );
 };

@@ -1,13 +1,24 @@
+import Button from "./Button";
 
-import PageLink from './PageLink'
-
-const PageLinks = ({ parentClass, itemClass }) => {
+const PageLinks = (props) => {
   return (
-    <ul className={parentClass} id='nav-links'>
-        <PageLink link={{ id: 1, href: '#home', text: 'Home' }} itemClass={itemClass} />
-        <PageLink link={{ id: 2, href: '#courses', text: 'Courses' }} itemClass={itemClass} />
-        <PageLink link={{ id: 3, href: '#users', text: 'Users' }} itemClass={itemClass} />
+    <ul>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <a href="/">Home</a>
+      </li>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <a href="/courses">Courses</a>
+        </li>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <a href="/users">Users</a>
+      </li>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <Button name="Log in" />
+      </li>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <Button name="Register" />
+      </li>
     </ul>
-  )
-}
-export default PageLinks
+  );
+};
+export default PageLinks;
