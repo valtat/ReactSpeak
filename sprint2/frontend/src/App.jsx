@@ -4,8 +4,15 @@ import ErrorPage from "./pages/error.jsx";
 import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
 import StudyView from "./pages/StudyView/index.jsx";
+import TestLayout from "./pages/TestLayout/index.jsx";
+import "./App.css";
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +46,18 @@ const router = createBrowserRouter([
   },
 ]);
 
+const router2 = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
+      <Route errorElement={<ErrorPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+    </Route>
+  )
+);
+
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router2} />;
 }
 
 export default App;
