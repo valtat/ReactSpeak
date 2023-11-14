@@ -1,9 +1,12 @@
-import PageLinks from "./PageLinks";
+import classes from "../assets/css/Navbar.module.css";
+import MobileNavigation from "./MobileNavigation";
+import Navigation from "./Navigation";
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <PageLinks parentClass="nav-links" itemClass="nav-link" />
+    <nav className={classes.Navbar}>
+      <MobileNavigation />
+      <Navigation />
     </nav>
   );
 };

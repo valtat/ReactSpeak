@@ -1,16 +1,13 @@
-import Navbar from "./Navbar";
 import logo from "../assets/images/ReactSpeakLogo.png";
-import Button from "./Button";
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (
     <header className="header">
-      <img src={logo} alt="reactSpeak logo" className="header-logo" />
-      <Navbar />
-      <div className="header-buttons">
-        <Button name="Log in" />
-        <Button name="Register" />
+      <div className="header-logo">
+        <img src={logo} alt="reactSpeak logo" />
       </div>
+      <Navbar />
     </header>
   );
 };
