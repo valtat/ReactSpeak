@@ -1,0 +1,37 @@
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #000;
+  transition: all 0.3s ease-in-out;
+}
+
+.subtitle {
+  color: #0f5259;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 3rem;
+}
+
+.text {
+  color: #0f5259;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 1rem;
+}

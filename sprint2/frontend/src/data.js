@@ -14,31 +14,85 @@ export const countries = [
     id: 1,
     name: "Finland",
     image: finland,
+    languages: [
+      {
+        id : 1,
+        languageName: "Finnish",
+        flag: "https://restcountries.eu/data/fin.svg",
+      },
+      {
+        id : 2,
+        languageName: "Swedish",
+        flag: "https://restcountries.eu/data/swe.svg",
+      }
+
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 2,
     name: "France",
     image: france,
+    languages: [
+      {
+        id : 1,
+        languageName: "French",
+        flag: "https://restcountries.eu/data/fra.svg",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 3,
     name: "Russia",
     image: russia,
+    languages: [
+      {
+        id : 1,
+        languageName: "Russian",
+        flag: "https://restcountries.eu/data/rus.svg",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 4,
     name: "Italy",
     image: italy,
+    languages: [
+      {
+        id : 1,
+        languageName: "Italian",
+        flag: "https://restcountries.eu/data/ita.svg",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 5,
     name: "Japan",
     image: japan,
+    languages: [
+      {
+        id : 1,
+        languageName: "Japanese",
+        flag: "https://restcountries.eu/data/jpn.svg",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 6,
     name: "Poland",
     image: poland,
+    languages: [
+      {
+        id : 1,
+        languageName: "Polish",
+        flag: "https://restcountries.eu/data/pol.svg",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
 ];
 
