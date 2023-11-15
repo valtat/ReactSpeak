@@ -5,7 +5,9 @@ import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
 import StudyView from "./pages/StudyView/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
+import CountriesPage from "./pages/CountriesPage/index.jsx";
 import "./App.css";
+import "./assets/css/Country.css";
 
 import {
   RouterProvider,
@@ -44,6 +46,11 @@ const router = createBrowserRouter([
     path: "*",
     element: <ErrorPage />,
   },
+  {
+    path: "/countries",
+    element: <CountriesPage />,
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 const router2 = createBrowserRouter(
@@ -52,6 +59,7 @@ const router2 = createBrowserRouter(
       <Route errorElement={<ErrorPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/countries" element={<CountriesPage />} />
     </Route>
   )
 );
