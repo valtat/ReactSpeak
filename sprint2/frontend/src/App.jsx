@@ -10,7 +10,7 @@ import CountriesPage from "./pages/CountriesPage/index.jsx";
 import "./App.css";
 import "./assets/css/Country.css";
 import "./assets/css/Login.css";
-import "./assets/css/Dashboard.css";
+// import "./assets/css/Dashboard.css";
 
 import {
   RouterProvider,
@@ -76,7 +76,7 @@ const router2 = createBrowserRouter(
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/countries" element={<CountriesPage />} />
-      <Route path="/welcome" element={<WelcomePage/>} />
+      <Route path="/" element={<WelcomePage/>} />
     </Route>
   )
 );
