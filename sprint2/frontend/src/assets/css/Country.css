@@ -60,6 +60,7 @@
   margin: 0 auto;
   max-width: 1170px;
   width: 200vw;
+  padding: 0 0 10rem;
 }
 
 .country-card:hover {
