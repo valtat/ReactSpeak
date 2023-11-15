@@ -28,6 +28,8 @@ export const ForgotPassword = () => {
   };
 
   return (
+
+    <div className="parent-container">
     <div className="auth-form-container">
       <h2>Forgot Password</h2>
       <form className="login-form" onSubmit={handleSubmit}>
@@ -42,10 +44,11 @@ export const ForgotPassword = () => {
           required
         />
         {error && <p className="error-message">{error}</p>}
-        <button type="submit" disabled={loading}>
+        <button className="submit-button" type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
+    </div>
     </div>
   );
 };

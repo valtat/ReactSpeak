@@ -1,5 +1,6 @@
 import Home from "./pages/Home/index.jsx";
 import { Login } from "./components/Login.jsx";
+import { Register } from "./components/Register.jsx";
 import ErrorPage from "./pages/error.jsx";
 import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
@@ -8,6 +9,8 @@ import TestLayout from "./pages/TestLayout/index.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
 import "./App.css";
 import "./assets/css/Country.css";
+import "./assets/css/Login.css";
+import "./assets/css/Dashboard.css";
 
 import {
   RouterProvider,
@@ -25,6 +28,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
     errorElement: <ErrorPage />,
   },
   {
@@ -57,6 +65,8 @@ const router2 = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/countries" element={<CountriesPage />} />
