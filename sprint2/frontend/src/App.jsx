@@ -18,6 +18,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import WelcomePage from "./pages/WelcomePage/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
     path: "/countries",
     element: <CountriesPage />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/welcome",
+    element: <WelcomePage />,
+    errorElement: <ErrorPage />,
   }
 ]);
 
@@ -70,6 +76,7 @@ const router2 = createBrowserRouter(
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/countries" element={<CountriesPage />} />
+      <Route path="/welcome" element={<WelcomePage/>} />
     </Route>
   )
 );
