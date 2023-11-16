@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   margin: 0 auto;
   max-width: 1170px;
   width: 200vw;
@@ -27,13 +27,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 2rem;
 }
 
 .country-card {
   width: 337px;
   height: auto;
-  margin: 20px;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   transition: transform 0.5s ease-in-out;
@@ -71,4 +71,31 @@
 
 .country-link {
   text-decoration: none;
+}
+
+@media screen and (max-width: 990px) {
+  .countries {
+    width: 100vw;
+  }
+
+  .country-card {
+    width: 100%;
+  }
+
+  .country-footer {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .country-img {
+    width: 100%;
+  }
+
+  .country-card:hover {
+    transform: none;
+  }
+
 }
