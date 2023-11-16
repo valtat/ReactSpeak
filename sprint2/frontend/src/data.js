@@ -14,31 +14,85 @@ export const countries = [
     id: 1,
     name: "Finland",
     image: finland,
+    languages: [
+      {
+        id : 1,
+        languageName: "Finnish",
+        icon: "fas fa-comments",
+      },
+      {
+        id : 2,
+        languageName: "Swedish",
+        icon: "fas fa-comments",
+      }
+
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 2,
     name: "France",
     image: france,
+    languages: [
+      {
+        id : 1,
+        languageName: "French",
+        icon: "fas fa-comments",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 3,
     name: "Russia",
     image: russia,
+    languages: [
+      {
+        id : 1,
+        languageName: "Russian",
+        icon: "fas fa-comments",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 4,
     name: "Italy",
     image: italy,
+    languages: [
+      {
+        id : 1,
+        languageName: "Italian",
+        icon: "fas fa-comments",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 5,
     name: "Japan",
     image: japan,
+    languages: [
+      {
+        id : 1,
+        languageName: "Japanese",
+        icon: "fas fa-comments",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 6,
     name: "Poland",
     image: poland,
+    languages: [
+      {
+        id : 1,
+        languageName: "Polish",
+        icon: "fas fa-comments",
+      }
+    ],
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
 ];
 

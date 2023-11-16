@@ -1,6 +1,7 @@
 import React from "react";
 import Country from "./Country";
 import { countries } from "../data";
+import "../assets/css/Country.css";
 
 function Countries() {
   return (
