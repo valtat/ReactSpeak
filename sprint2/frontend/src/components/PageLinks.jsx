@@ -1,22 +1,27 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const PageLinks = (props) => {
   return (
     <ul>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <a href="/">Home</a>
+        <Link to="/">Home</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <a href="/courses">Courses</a>
-        </li>
-      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <a href="/users">Users</a>
+        <Link to="/courses">Courses</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <Button name="Log in" />
+        <Link to="/users">Users</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <Button name="Register" />
+        <Link to="/login">
+          <Button name="Log in" />
+        </Link>
+      </li>
+      <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+        <Link to="/register">
+          <Button name="Register" />
+        </Link>
       </li>
     </ul>
   );
