@@ -11,7 +11,9 @@ function Languages() {
   }, []);
 
   const { countryName } = useParams();
-  const country = countries.find((country) => country.name === countryName);
+  const country = countries.find(
+    (country) => country.name.toLowerCase() === countryName
+  );
 
   return (
     <div>
