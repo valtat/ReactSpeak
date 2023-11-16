@@ -29,25 +29,25 @@ export const ForgotPassword = () => {
 
   return (
     <div className="parent-container">
-      <div className="auth-form-container">
-        <h2>Forgot Password</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="youremail@gmail.com"
-            id="email"
-            name="email"
-            required
-          />
-          {error && <p className="error-message">{error}</p>}
-          <button className="submit-button" type="submit" disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
-          </button>
-        </form>
-      </div>
+    <div className="auth-form-container">
+      <h2>Forgot Password</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="youremail@gmail.com"
+          id="email"
+          name="email"
+          required
+        />
+        {error && <p className="error-message">{error}</p>}
+        <button className="submit-button" type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
+        </button>
+      </form>
+    </div>
     </div>
   );
 };

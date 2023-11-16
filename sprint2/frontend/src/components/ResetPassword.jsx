@@ -24,7 +24,8 @@ export const ResetPassword = () => {
   };
 
   return (
-    <div className="auth-form-container">
+    <div className="parent-container">
+      <div className="auth-form-container">
       <h2>Reset Password</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="password">New Password</label>
@@ -45,8 +46,9 @@ export const ResetPassword = () => {
           id="confirmPassword"
           name="confirmPassword"
         />
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
+    </div>
     </div>
   );
 };

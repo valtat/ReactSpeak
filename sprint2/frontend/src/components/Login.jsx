@@ -27,8 +27,9 @@ export const Login = (props) => {
   };
 
   return (
+    <div className="parent-container">
     <div className="auth-form-container">
-      <h2>Login</h2>
+      <h2>Log in</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -48,7 +49,7 @@ export const Login = (props) => {
           id="password"
           name="password"
         />
-        <button type="submit">Login</button>
+        <button className="submit-button" type="submit">Log in</button>
       </form>
       <button
         className="link-btn"
@@ -57,6 +58,7 @@ export const Login = (props) => {
         Don't have an account? Register!
       </button>
       <button className="link-btn">Forgot password</button>
+    </div>
     </div>
   );
 };
