@@ -32,10 +32,11 @@
 
 .country-card {
   width: 337px;
-  height: auto; /* Allow the height to adjust based on content */
+  height: auto;
   margin: 20px;
   display: flex;
-  flex-direction: column; /* Display children in a column */
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
 }
 
 .country-image-container {
