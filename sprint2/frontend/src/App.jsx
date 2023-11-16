@@ -5,7 +5,6 @@ import {
   Route,
 } from "react-router-dom";
 
-import Home from "./pages/Home/index.jsx";
 import { Login } from "./components/Login.jsx";
 import { Register } from "./components/Register.jsx";
 import ErrorPage from "./pages/error.jsx";
@@ -15,24 +14,23 @@ import StudyView, {
   loader as languageDataLoader,
 } from "./pages/StudyView/index.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import CountriesPage from "./pages/CountriesPage/index.jsx";
+import CountriesPage, {
+  loader as countriesLoader,
+} from "./pages/CountriesPage/index.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
-
 
 import "./assets/css/Country.css";
 import "./App.css";
 import "./assets/css/Login.css";
 // import "./assets/css/Dashboard.css";
 
-
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
-      <Route index element={<WelcomePage/>} />
+      <Route index element={<WelcomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoute />}>
@@ -49,11 +47,10 @@ const router = createBrowserRouter(
         element={<StudyView />}
         loader={languageDataLoader}
       />
-      <Route path ="/countries/:countryName" element={<CountryPage />} /> "
+      <Route path="/countries/:countryName" element={<CountryPage />} />
     </Route>
   )
 );
-
 
 function App() {
   return <RouterProvider router={router} />;
