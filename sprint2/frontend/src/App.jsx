@@ -83,8 +83,8 @@ const router2 = createBrowserRouter(
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/countries" element={<CountriesPage />} />
-      <Route path="/" element={<WelcomePage/>} />
       <Route path ="/countries/:countryName" element={<CountryPage />} /> "
+      <Route index element={<WelcomePage/>} />
     </Route>
   )
 );

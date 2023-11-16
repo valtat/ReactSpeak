@@ -8,7 +8,6 @@ function Language({ flag, languageName }) {
         <Link to={`/countries/${languageName}`} className="country-link">
           <div className="country-image-container">
             <img src={flag} className="country-img" alt={languageName} />
-            {console.log(languageName)}
           </div>
           <div className="country-footer">
             <h3>{languageName}</h3>
