@@ -1,9 +1,9 @@
-import React from "react";
 import Country from "./Country";
 import { countries } from "../data";
 import "../assets/css/Country.css";
 
-function Countries() {
+export default function Countries({ countries }) {
+  console.log(countries);
   return (
     <div>
       <h1 className="title"> Choose a country </h1>
@@ -15,5 +15,3 @@ function Countries() {
     </div>
   );
 }
-
-export default Countries;

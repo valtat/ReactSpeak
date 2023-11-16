@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap");
 
+main
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,7 +30,7 @@ body {
   background-color: #9fd3cb;
 }
 
-.header-logo img{
+.header-logo img {
   width: 228px;
   height: 88px;
 }

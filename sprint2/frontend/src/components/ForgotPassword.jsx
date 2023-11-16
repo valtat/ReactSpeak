@@ -28,7 +28,6 @@ export const ForgotPassword = () => {
   };
 
   return (
-
     <div className="parent-container">
     <div className="auth-form-container">
       <h2>Forgot Password</h2>
