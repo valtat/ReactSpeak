@@ -18,12 +18,12 @@ export const countries = [
       {
         id : 1,
         languageName: "Finnish",
-        flag: "https://restcountries.eu/data/fin.svg",
+        icon: "fas fa-comments",
       },
       {
         id : 2,
         languageName: "Swedish",
-        flag: "https://restcountries.eu/data/swe.svg",
+        icon: "fas fa-comments",
       }
 
     ],
@@ -37,7 +37,7 @@ export const countries = [
       {
         id : 1,
         languageName: "French",
-        flag: "https://restcountries.eu/data/fra.svg",
+        icon: "fas fa-comments",
       }
     ],
     info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -50,7 +50,7 @@ export const countries = [
       {
         id : 1,
         languageName: "Russian",
-        flag: "https://restcountries.eu/data/rus.svg",
+        icon: "fas fa-comments",
       }
     ],
     info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -63,7 +63,7 @@ export const countries = [
       {
         id : 1,
         languageName: "Italian",
-        flag: "https://restcountries.eu/data/ita.svg",
+        icon: "fas fa-comments",
       }
     ],
     info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -76,7 +76,7 @@ export const countries = [
       {
         id : 1,
         languageName: "Japanese",
-        flag: "https://restcountries.eu/data/jpn.svg",
+        icon: "fas fa-comments",
       }
     ],
     info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -89,7 +89,7 @@ export const countries = [
       {
         id : 1,
         languageName: "Polish",
-        flag: "https://restcountries.eu/data/pol.svg",
+        icon: "fas fa-comments",
       }
     ],
     info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."

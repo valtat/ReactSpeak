@@ -9,8 +9,6 @@ import TestLayout from "./pages/TestLayout/index.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import "./App.css";
-import "./assets/css/Country.css";
-import "./assets/css/CountryInformation.css";
 import "./assets/css/Login.css";
 // import "./assets/css/Dashboard.css";
 

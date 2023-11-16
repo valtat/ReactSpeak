@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Language({ flag, languageName }) {
+function Language({ icon, languageName }) {
   return (
-    <article className="country-container">
-      <div className="country-card">
-        <Link to={`/countries/${languageName}`} className="country-link">
-          <div className="country-image-container">
-            <img src={flag} className="country-img" alt={languageName} />
+      <div className="language-card">
+        <Link to={`/${languageName}`} className="language-link">
+          <div className="language-image-container">
+            <i className={icon} alt={languageName}/>
           </div>
-          <div className="country-footer">
+          <div className="language-footer">
             <h3>{languageName}</h3>
           </div>
         </Link>
       </div>
-    </article>
   );
 }
 

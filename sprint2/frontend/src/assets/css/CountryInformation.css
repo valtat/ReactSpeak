@@ -1,3 +1,15 @@
+.title {
+  color: #0f5259;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Roboto;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 50px;
+}
+
 .information {
   display: flex;
   flex-direction: column;
@@ -6,12 +18,11 @@
   margin: 0 auto;
   width: 70%;
   height: 100%;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   text-align: center;
   color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem #000;
-  transition: all 0.3s ease-in-out;
 }
 
 .subtitle {
@@ -34,4 +45,69 @@
   font-weight: 400;
   line-height: normal;
   padding: 1rem;
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1170px;
+  width: 40%;
+  padding: 2rem 2rem 5rem;
+}
+
+.language-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 40%;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #000;
+}
+
+.language-link {
+  text-decoration: none;
+}
+
+.language-image-container {
+  flex-shrink: 0;
+}
+
+.language-image-container i {
+  font-size: 5rem;
+  padding: 1rem;
+  color: #9fd3cb;
+}
+
+.language-image-container i:hover {
+  color: #0f5259;
+}
+
+.language-footer {
+  color: #0f5259;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 1px;
+}
+
+@media screen and (max-width: 990px) {
+  .languages {
+    width: 80%;
+  }
+  .language-card {
+    width: 80%;
+  }
 }

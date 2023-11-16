@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Language from "./Language";
 import { countries } from "../data";
 import CountryInformation from "./CountryInformation";
+import "../assets/css/CountryInformation.css";
 
 function Languages() {
   useEffect(() => {
@@ -11,7 +12,6 @@ function Languages() {
 
   const { countryName } = useParams();
   const country = countries.find((country) => country.name === countryName);
-  console.log(country);
 
   if (!country) {
     return <h2>Country not found!</h2>;
@@ -20,17 +20,17 @@ function Languages() {
   return (
     <div>
       <h2 className="title">{country.name}</h2>
-      <div className="countries">
+      <div className="languages">
         {Object.values(country.languages).map((language, index) => (
           <Language
             key={index}
-            flag={language.flag}
+            icon={language.icon}
             languageName={language.languageName}
           />
         ))}
       </div>
       <div className="information">
-        <CountryInformation />
+        <CountryInformation info={country.info} />
       </div>
     </div>
   );
