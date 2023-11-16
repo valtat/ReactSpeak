@@ -3,7 +3,9 @@ import { Login } from "./components/Login.jsx";
 import ErrorPage from "./pages/error.jsx";
 import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
-import StudyView from "./pages/StudyView/index.jsx";
+import StudyView, {
+  loader as languageDataLoader,
+} from "./pages/StudyView/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 import CountriesPage, {
   loader as countriesLoader,
@@ -33,6 +35,11 @@ const router = createBrowserRouter(
         path="/countries"
         element={<CountriesPage />}
         loader={countriesLoader}
+      />
+      <Route
+        path="/study"
+        element={<StudyView />}
+        loader={languageDataLoader}
       />
       <Route path="/countries/:country" element={<CountryPage />} />
     </Route>
