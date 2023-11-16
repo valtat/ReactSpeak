@@ -13,10 +13,6 @@ function Languages() {
   const { countryName } = useParams();
   const country = countries.find((country) => country.name === countryName);
 
-  if (!country) {
-    return <h2>Country not found!</h2>;
-  }
-
   return (
     <div>
       <h2 className="title">{country.name}</h2>
