@@ -1,47 +1,52 @@
 import { useState } from "react";
 import userService from "../services/userService.js";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 export const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const onSubmit = async ({ email }) => {
     setLoading(true);
-    userService
-      .forgotPassword(email)
-      .then(() => {
-        console.log("Email for resetting password sent!");
-        // TO DO: Show success message or redirect to login page
-        navigate("/reset-password");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("An error occurred while resetting password");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const response = await userService.forgotPassword(email);
+      console.log(response);
+      navigate("/reset-password");
+    } catch (error) {
+      console.log(error);
+      alert("Fuck you.");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  console.log(watch("example"));
+  const navigate = useNavigate();
+
   return (
-    <div className="auth-form-container">
-      <h2>Forgot Password</h2>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="youremail@gmail.com"
-          id="email"
-          name="email"
-          required
-        />
-        {error && <p className="error-message">{error}</p>}
+    <div className="App">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-control">
+          <label>Email </label>
+          <input
+            type="text"
+            name="email"
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+            placeholder="youremail@gmail.com"
+          />
+          {errors.email?.type === "required" && (
+            <p className="errorMsg">⚠ Email is required.</p>
+          )}
+          {errors.email?.type === "pattern" && (
+            <p className="errorMsg">⚠ Email is not valid.</p>
+          )}
+        </div>
         <button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </button>

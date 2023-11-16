@@ -5,9 +5,13 @@ import { ForgotPassword } from "./components/ForgotPassword.jsx";
 import { ResetPassword } from "./components/ResetPassword.jsx";
 import StudyView from "./pages/StudyView/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
-import CountriesPage from "./pages/CountriesPage/index.jsx";
+import CountriesPage, {
+  loader as countriesLoader,
+} from "./pages/CountriesPage/index.jsx";
+import CountryPage from "./components/CountryPage.jsx";
 import "./App.css";
 import "./assets/css/Country.css";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 import {
   RouterProvider,
@@ -16,56 +20,27 @@ import {
   Route,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/study-temp",
-    element: <StudyView />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
-  {
-    path: "/countries",
-    element: <CountriesPage />,
-    errorElement: <ErrorPage />,
-  }
-]);
-
-const router2 = createBrowserRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/countries" element={<CountriesPage />} />
+      <Route index element={<Home />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Route>
+      <Route
+        path="/countries"
+        element={<CountriesPage />}
+        loader={countriesLoader}
+      />
+      <Route path="/countries/:country" element={<CountryPage />} />
     </Route>
   )
 );
 
 function App() {
-  return <RouterProvider router={router2} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

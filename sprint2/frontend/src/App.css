@@ -4,6 +4,7 @@
 html {
   height: 100%;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,7 +33,7 @@ body {
   background-color: #9fd3cb;
 }
 
-.header-logo img{
+.header-logo img {
   width: 228px;
   height: 88px;
 }
