@@ -16,7 +16,7 @@ function Languages() {
   );
 
   return (
-    <div>
+    <div className="country-page-container">
       <h2 className="title">{country.name}</h2>
       <div className="languages">
         {Object.values(country.languages).map((language, index) => (
