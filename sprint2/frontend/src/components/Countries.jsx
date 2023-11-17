@@ -2,7 +2,7 @@ import Country from "./Country";
 import { countries } from "../data";
 import "../assets/css/Country.css";
 
-export default function Countries({ countries }) {
+export default function Countries() {
   console.log(countries);
   return (
     <div>

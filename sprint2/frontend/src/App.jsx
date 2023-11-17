@@ -14,9 +14,7 @@ import StudyView, {
   loader as languageDataLoader,
 } from "./pages/StudyView/index.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import CountriesPage, {
-  loader as countriesLoader,
-} from "./pages/CountriesPage/index.jsx";
+import CountriesPage from "./pages/CountriesPage/index.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
@@ -37,11 +35,7 @@ const router = createBrowserRouter(
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
-      <Route
-        path="/countries"
-        element={<CountriesPage />}
-        loader={countriesLoader}
-      />
+      <Route path="/countries" element={<CountriesPage />} />
       <Route
         path="/study"
         element={<StudyView />}
