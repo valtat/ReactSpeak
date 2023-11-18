@@ -7,6 +7,7 @@ import { ResetPassword } from "./components/ResetPassword.jsx";
 import StudyView from "./pages/StudyView/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
+import { Dashboard } from "./components/Dashboard.jsx";
 import "./App.css";
 import "./assets/css/Country.css";
 import "./assets/css/Login.css";
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
     path: "/countries",
     element: <CountriesPage />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    errorElement: <ErrorPage />,
   }
 ]);
 
@@ -70,6 +76,7 @@ const router2 = createBrowserRouter(
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/countries" element={<CountriesPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Route>
   )
 );
