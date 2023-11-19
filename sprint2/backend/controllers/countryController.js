@@ -1,6 +1,6 @@
 const countryModel = require("../models/dummyCountryModel");
 
-exports.returnSingleCountry = (req, res) => {
+const returnSingleCountry = (req, res) => {
   const country = countryModel.returnSingleCountry(req.params.country);
   if (country) {
     res.status(200).json({
@@ -17,7 +17,12 @@ exports.returnSingleCountry = (req, res) => {
   }
 };
 
-exports.returnAllCountries = (req, res) => {
+const returnAllCountries = (req, res) => {
   const countries = countryModel.returnAllCountries();
   res.status(200).json(countries);
+};
+
+module.exports = {
+  returnAllCountries,
+  returnSingleCountry,
 };

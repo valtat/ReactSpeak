@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Card = ({
   phrase,
@@ -7,19 +7,23 @@ const Card = ({
   setCorrectTranslation,
   setTranslationSelected,
 }) => {
+  const [shuffledTranslations, setShuffledTranslations] = useState([]);
+
   const handleTranslationSelected = (translation) => {
     setTranslationSelected(translation);
   };
 
   useEffect(() => {
     setCorrectTranslation(correctTranslation);
+    const shuffled = shuffleTranslations(translations);
+    setShuffledTranslations(shuffled);
     console.log("Correct translation: ", correctTranslation);
-  });
+  }, [translations, correctTranslation, setCorrectTranslation]);
 
   return (
     <div>
       <h1 className="styles.h1">{phrase}</h1>
-      {translations.map((translation, index) => (
+      {shuffledTranslations.map((translation, index) => (
         <button
           key={index}
           onClick={() => handleTranslationSelected(translation)}
@@ -30,4 +34,9 @@ const Card = ({
     </div>
   );
 };
+
+function shuffleTranslations(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
 export default Card;
