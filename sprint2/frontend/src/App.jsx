@@ -1,18 +1,3 @@
-import Home from "./pages/Home/index.jsx";
-import { Login } from "./components/Login.jsx";
-import { Register } from "./components/Register.jsx";
-import ErrorPage from "./pages/error.jsx";
-import { ForgotPassword } from "./components/ForgotPassword.jsx";
-import { ResetPassword } from "./components/ResetPassword.jsx";
-import StudyView from "./pages/StudyView/index.jsx";
-import TestLayout from "./pages/TestLayout/index.jsx";
-import CountriesPage from "./pages/CountriesPage/index.jsx";
-import { Dashboard } from "./components/Dashboard.jsx";
-import "./App.css";
-import "./assets/css/Country.css";
-import "./assets/css/Login.css";
-import "./assets/css/Dashboard.css";
-
 import {
   RouterProvider,
   createBrowserRouter,
@@ -20,69 +5,51 @@ import {
   Route,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/study-temp",
-    element: <StudyView />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
-  {
-    path: "/countries",
-    element: <CountriesPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    errorElement: <ErrorPage />,
-  }
-]);
+import { Login } from "./components/Login.jsx";
+import { Register } from "./components/Register.jsx";
+import ErrorPage from "./pages/error.jsx";
+import { ForgotPassword } from "./components/ForgotPassword.jsx";
+import { ResetPassword } from "./components/ResetPassword.jsx";
+import StudyView, {
+  loader as languageDataLoader,
+} from "./pages/StudyView/index.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import CountriesPage from "./pages/CountriesPage/index.jsx";
+import { Dashboard } from "./components/Dashboard.jsx";
+import CountryPage from "./pages/CountryPage/index.jsx";
+import WelcomePage from "./pages/WelcomePage/index.jsx";
+import TestLayout from "./pages/TestLayout/index.jsx";
+import "./assets/css/Country.css";
+import "./App.css";
+import "./assets/css/Login.css";
+import "./assets/css/Dashboard.css";
 
-const router2 = createBrowserRouter(
+
+const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
+      <Route index element={<WelcomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Route>
       <Route path="/countries" element={<CountriesPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/study"
+        element={<StudyView />}
+        loader={languageDataLoader}
+      />
+      <Route path="/countries/:countryName" element={<CountryPage />} />
     </Route>
   )
 );
 
 function App() {
-  return <RouterProvider router={router2} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

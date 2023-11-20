@@ -5,7 +5,7 @@ export const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     if (password !== confirmPassword) {
@@ -13,16 +13,14 @@ export const ResetPassword = () => {
       return;
     }
 
-    userService
-      .forgotPassword({ password })
-      .then(() => {
-        //TO DO: Redirect to dashboard or home page
-        console.log("Password reset successful!");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("An error occurred while resetting password");
-      });
+    try {
+      await userService.forgotPassword({ password });
+      //TO DO: Redirect to dashboard or home page
+      console.log("Password reset successful!");
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while resetting password");
+    }
   };
 
   return (

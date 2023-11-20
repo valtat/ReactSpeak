@@ -1,7 +1,22 @@
+import classes from "../assets/css/Welcome.module.css";
+import { welcomeSection } from "../data";
+import Button from "./Button";
+import WelcomeSection from "./WelcomeSection";
+
 const Welcome = () => {
   return (
-    <div>
-      <h1>Hello, World!</h1>
+    <div className={classes.welcome}>
+      {welcomeSection.map((section) => {
+        return (
+          <WelcomeSection
+            key={section.id}
+            {...section}
+            // className={section.id === 2 ? classes.reverse : ""}
+          >
+            {section.id === 3 && <Button name={"Get Started"} />}
+          </WelcomeSection>
+        );
+      })}
     </div>
   );
 };

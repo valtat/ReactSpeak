@@ -1,9 +1,10 @@
 import Countries from "../../components/Countries";
+import { useLoaderData } from "react-router-dom";
+import countryService from "../../services/countryService";
 
 const CountriesPage = () => {
-  return (
-        <Countries />
-  );
+  /* const { countries } = useLoaderData(); */
+  return <Countries />;
 };
 
 export default CountriesPage;

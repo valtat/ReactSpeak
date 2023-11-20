@@ -1,35 +1,16 @@
 import { useState, useEffect } from "react";
-import Card from "../../components/LearningCard/Card";
+import Card from "../../components/Card/Card";
+import languageService from "../../services/languageService";
+import { useLoaderData } from "react-router-dom";
 
-const words = [
-  {
-    phrase: "Hello",
-    translations: ["Xin chào", "Xin chào bạn", "Tạm biệt", "Cảm ơn"],
-    correctTranslation: "Xin chào",
-  },
-  {
-    phrase: "Goodbye",
-    translations: ["Tạm biệt", "Chào tạm biệt", "Hẹn gặp lại"],
-    correctTranslation: "Tạm biệt",
-  },
-  {
-    phrase: "Thank you",
-    translations: ["Cảm ơn", "Cảm ơn bạn", "Cảm ơn nhiều"],
-    correctTranslation: "Cảm ơn",
-  },
-  {
-    phrase: "Sorry",
-    translations: ["Xin lỗi", "Lỗi rồi", "Thật xin lỗi"],
-    correctTranslation: "Xin lỗi",
-  },
-  {
-    phrase: "Yes",
-    translations: ["Vâng", "Đúng", "Ừ"],
-    correctTranslation: "Vâng",
-  },
-];
+export const loader = async () => {
+  const languageData = await languageService.getLanguage("vietnamese");
+  return { languageData };
+};
 
 const StudyView = () => {
+  const { languageData } = useLoaderData();
+  const useData = languageData.data.languages;
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");
@@ -49,7 +30,7 @@ const StudyView = () => {
   return (
     <div>
       <Card
-        {...words[activeWord]}
+        {...useData[activeWord]}
         setCorrectTranslation={setCorrectTranslation}
         setTranslationSelected={setTranslationSelected}
       />
