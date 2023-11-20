@@ -5,29 +5,43 @@ import italy from "./assets/images/italy.jpg";
 import japan from "./assets/images/japan.jpg";
 import poland from "./assets/images/poland.jpg";
 import hello from "./assets/images/hello.png";
-import learning from "./assets/images/learningLanguage.png";
 import language2 from "./assets/images/language2.png";
 import earth from "./assets/images/earth.png";
+import finland_aurora from "./assets/images/finland_aurora.jpeg";
+import finland_flag from "./assets/images/finland-flag.png";
+import sweden_flag from "./assets/images/sweden-flag.png";
+import france_flag from "./assets/images/france-flag.png";
+import russia_flag from "./assets/images/russia-flag.png";
+import italy_flag from "./assets/images/italy-flag.png";
+import japan_flag from "./assets/images/japan-flag.png";
+import poland_flag from "./assets/images/poland-flag.png";
+import finland_map from "./assets/images/finland-map.png";
+import france_map from "./assets/images/france-map.png";
+import italy_map from "./assets/images/italy-map.png";
+import poland_map from "./assets/images/poland-map.png";
+import japan_map from "./assets/images/japan-map.png";
+import russia_map from "./assets/images/russia-map.png";
 
 export const countries = [
   {
     id: 1,
     name: "Finland",
-    image: finland,
+    image: finland_aurora,
     languages: [
       {
         id : 1,
         languageName: "Finnish",
-        icon: "fas fa-comments",
+        icon: finland_flag,
       },
       {
         id : 2,
         languageName: "Swedish",
-        icon: "fas fa-comments",
+        icon: sweden_flag,
       }
 
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: finland_map,
   },
   {
     id: 2,
@@ -37,10 +51,11 @@ export const countries = [
       {
         id : 1,
         languageName: "French",
-        icon: "fas fa-comments",
+        icon: france_flag,
       }
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: france_map,
   },
   {
     id: 3,
@@ -50,10 +65,11 @@ export const countries = [
       {
         id : 1,
         languageName: "Russian",
-        icon: "fas fa-comments",
+        icon: russia_flag,
       }
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: russia_map,
   },
   {
     id: 4,
@@ -63,10 +79,11 @@ export const countries = [
       {
         id : 1,
         languageName: "Italian",
-        icon: "fas fa-comments",
+        icon: italy_flag,
       }
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: italy_map,
   },
   {
     id: 5,
@@ -76,10 +93,11 @@ export const countries = [
       {
         id : 1,
         languageName: "Japanese",
-        icon: "fas fa-comments",
+        icon: japan_flag,
       }
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: japan_map,
   },
   {
     id: 6,
@@ -89,10 +107,11 @@ export const countries = [
       {
         id : 1,
         languageName: "Polish",
-        icon: "fas fa-comments",
+        icon: poland_flag,
       }
     ],
-    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    info: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    map: poland_map,
   },
 ];
 

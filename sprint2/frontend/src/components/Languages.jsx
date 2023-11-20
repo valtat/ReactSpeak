@@ -17,7 +17,9 @@ function Languages() {
 
   return (
     <div className="country-page-container">
-      <h2 className="title">{country.name}</h2>
+      {/* <img src={country.image} className="background-image" alt='' /> */}
+      <div className="container">
+      <h2 className="title">{country.name.toUpperCase()}</h2>
       <div className="languages">
         {Object.values(country.languages).map((language, index) => (
           <Language
@@ -30,6 +32,8 @@ function Languages() {
       <div className="information">
         <CountryInformation info={country.info} />
       </div>
+      </div>
+      <img src={country.map} className="map-image" alt='' />
     </div>
   );
 }

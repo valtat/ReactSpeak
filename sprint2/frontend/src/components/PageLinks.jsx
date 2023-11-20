@@ -8,7 +8,7 @@ const PageLinks = (props) => {
         <Link to="/">Home</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <Link to="/courses">Courses</Link>
+        <Link to="/countries">Courses</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
         <Link to="/users">Users</Link>
