@@ -1,5 +1,31 @@
+
 .country-page-container {
-  padding: 0 0 5rem;
+  display: flex;
+  position: relative;
+  height: calc(100vh - 160px);
+  justify-content: center;
+  padding: 0 5rem 0 5rem;
+}
+
+.map-image {
+  width: 25vw;
+  height: auto;
+  padding: 3rem 0;
+  object-fit: contain;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  /* background-color: #FCF6F4; */
+  /* border-radius: 0.5rem;
+  box-shadow: 1px 1px 5px 0 #0f5259; */
 }
 
 .title {
@@ -11,7 +37,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 50px;
+  /* padding-top: 50px; */
+  padding-bottom: 10px;
+  /* margin-top: 50px; */
 }
 
 .information {
@@ -20,13 +48,13 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  width: 70%;
-  height: 100%;
+  width: 85%;
   padding: 0 0.5rem;
   text-align: center;
   color: #fff;
+  background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
+  box-shadow: 1px 1px 5px 0 #0f5259;
 }
 
 .subtitle {
@@ -37,7 +65,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .text {
@@ -59,7 +87,7 @@
   gap: 2rem;
   margin: 0 auto;
   max-width: 1170px;
-  width: 40%;
+  width: 100%;
   padding: 2rem 2rem 5rem;
 }
 
@@ -74,8 +102,14 @@
   padding: 0 1rem;
   text-align: center;
   color: #fff;
+  /* background-color: #fff; */
   border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
+  box-shadow: 1px 1px 5px 0 #0f5259;
+  transition: transform 0.5s ease-in-out;
+}
+
+.language-card:hover {
+  transform: scale(1.1);
 }
 
 .language-link {
@@ -86,14 +120,12 @@
   flex-shrink: 0;
 }
 
-.language-image-container i {
+.language-image-container img {
   font-size: 5rem;
   padding: 1rem;
   color: #9fd3cb;
-}
-
-.language-image-container i:hover {
-  color: #0f5259;
+  width: 80%;
+  height: auto;
 }
 
 .language-footer {
@@ -108,10 +140,29 @@
 }
 
 @media screen and (max-width: 990px) {
-  .languages {
+  .country-page-container {
+    flex-direction: column;
+    height: auto;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .container {
     width: 80%;
+  }
+
+  .languages {
+    min-width: 200px;
+    max-width: 500px;
   }
   .language-card {
     width: 80%;
+  }
+
+  .information {
+    width: 100%;
+  }
+
+  .map-image {
+    display: none;
   }
 }

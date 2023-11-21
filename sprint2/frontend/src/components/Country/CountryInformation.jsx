@@ -1,4 +1,5 @@
 import React from "react";
+import "./CountryInformation.css";
 
 function CountryInformation({info}) {
   return (

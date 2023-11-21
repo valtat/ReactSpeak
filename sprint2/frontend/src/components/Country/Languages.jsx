@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Language from "./Language";
-import { countries } from "../data";
+import { countries } from "../../data";
 import CountryInformation from "./CountryInformation";
-import "../assets/css/CountryInformation.css";
+import "./CountryInformation.css";
 
 function Languages() {
   useEffect(() => {
@@ -17,6 +17,7 @@ function Languages() {
 
   return (
     <div className="country-page-container">
+      <div className="container">
       <h2 className="title">{country.name}</h2>
       <div className="languages">
         {country.languages.map((language) => (
@@ -30,6 +31,8 @@ function Languages() {
       <div className="information">
         <CountryInformation info={country.info} />
       </div>
+      </div>
+      <img src={country.map} alt={country.name} className="map-image" />
     </div>
   );
 }

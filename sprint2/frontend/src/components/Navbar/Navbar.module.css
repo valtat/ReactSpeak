@@ -83,6 +83,7 @@
         width: 100%;
         background: #9fd3cb;
         border-top: 2px solid #167373;
+        z-index: 1000;
       }
 
       .Navbar {

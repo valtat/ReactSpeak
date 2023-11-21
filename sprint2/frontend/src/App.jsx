@@ -5,11 +5,11 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Login } from "./components/Login.jsx";
-import { Register } from "./components/Register.jsx";
+import { Login } from "./components/Forms/Login.jsx";
+import { Register } from "./components/Forms/Register.jsx";
 import ErrorPage from "./pages/error.jsx";
-import { ForgotPassword } from "./components/ForgotPassword.jsx";
-import { ResetPassword } from "./components/ResetPassword.jsx";
+import { ForgotPassword } from "./components/Forms/ForgotPassword.jsx";
+import { ResetPassword } from "./components/Forms/ResetPassword.jsx";
 import StudyView, {
   loader as languageDataLoader,
 } from "./pages/StudyView/index.jsx";
@@ -19,9 +19,10 @@ import { Dashboard } from "./components/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
-import "./assets/css/Country.css";
+
+// import "./assets/css/Country.css";
 import "./App.css";
-import "./assets/css/Login.css";
+// import "./assets/css/Login.css";
 import "./assets/css/Dashboard.css";
 
 

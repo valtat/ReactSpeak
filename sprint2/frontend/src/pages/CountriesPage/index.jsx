@@ -1,4 +1,4 @@
-import Countries from "../../components/Countries";
+import Countries from "../../components/Countries/Countries";
 import { useLoaderData } from "react-router-dom";
 import countryService from "../../services/countryService";
 
