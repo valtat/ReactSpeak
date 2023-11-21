@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from "../assets/css/Welcome.module.css";
+import classes from "./Welcome.module.css";
 
 const WelcomeSection = ({image, name, title, paragraph, children, className}) => {
   return (

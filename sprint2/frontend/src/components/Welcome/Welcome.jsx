@@ -1,6 +1,6 @@
-import classes from "../assets/css/Welcome.module.css";
-import { welcomeSection } from "../data";
-import Button from "./Button";
+import classes from "./Welcome.module.css";
+import { welcomeSection } from "../../data";
+import Button from "../Navbar/Button";
 import WelcomeSection from "./WelcomeSection";
 
 const Welcome = () => {

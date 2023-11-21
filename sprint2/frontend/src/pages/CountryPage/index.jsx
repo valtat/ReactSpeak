@@ -1,9 +1,9 @@
-import Languages from "../../components/Languages";
+import Languages from "../../components/Country/Languages";
 
 const CountryPage = () => {
   return (
     <div className="country-page">
-      < Languages />
+      <Languages />
     </div>
   );
 };

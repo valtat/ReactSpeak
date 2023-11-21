@@ -1,6 +1,6 @@
 import Country from "./Country";
-import { countries } from "../data";
-import "../assets/css/Country.css";
+import { countries } from "../../data";
+import "./Country.css";
 
 export default function Countries() {
   console.log(countries);
