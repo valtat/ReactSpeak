@@ -3,8 +3,11 @@ const cors = require("cors");
 const dummyUserRouter = require("./routes/dummyUserRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
+const connectDB = require("./utils/db");
 
 const app = express();
+connectDB();
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());

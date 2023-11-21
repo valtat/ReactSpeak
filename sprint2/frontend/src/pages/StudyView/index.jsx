@@ -14,26 +14,43 @@ const StudyView = () => {
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");
+  const [score, setScore] = useState(0);
+  const [activeSession, setActiveSession] = useState(true);
 
   useEffect(() => {
-    if (correctTranslation === "") {
+    if (activeWord >= useData.length - 1) {
+      setActiveSession(false);
+    }
+  }, [activeWord, useData.length]);
+
+  useEffect(() => {
+    if (
+      correctTranslation === "" ||
+      translationSelected === "" ||
+      !activeSession
+    ) {
       return;
     }
     if (translationSelected === correctTranslation) {
       console.log("Correct");
-      setActiveWord(activeWord + 1);
+      setScore((s) => s + 1);
     } else {
       console.log("Incorrect");
     }
-  }, [correctTranslation, translationSelected]);
+    setActiveWord((a) => a + 1);
+    setTranslationSelected("");
+  }, [correctTranslation, translationSelected, activeSession]);
 
   return (
     <div>
-      <Card
-        {...useData[activeWord]}
-        setCorrectTranslation={setCorrectTranslation}
-        setTranslationSelected={setTranslationSelected}
-      />
+      {activeSession && (
+        <Card
+          {...useData[activeWord]}
+          setCorrectTranslation={setCorrectTranslation}
+          setTranslationSelected={setTranslationSelected}
+        />
+      )}
+      <p>Score: {score}</p>
     </div>
   );
 };

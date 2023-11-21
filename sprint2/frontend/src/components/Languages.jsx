@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Language from "./Language";
 import { countries } from "../data";
@@ -19,9 +19,9 @@ function Languages() {
     <div className="country-page-container">
       <h2 className="title">{country.name}</h2>
       <div className="languages">
-        {Object.values(country.languages).map((language, index) => (
+        {country.languages.map((language) => (
           <Language
-            key={index}
+            key={language.languageName}
             icon={language.icon}
             languageName={language.languageName}
           />

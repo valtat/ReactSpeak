@@ -1,6 +1,6 @@
 const user = require("../models/dummyUserData");
 
-exports.forgotPassword = (req, res) => {
+const forgotPassword = (req, res) => {
   if (user.forgotPassword(req.body.email)) {
     res.status(200).json({
       status: "success",
@@ -13,3 +13,5 @@ exports.forgotPassword = (req, res) => {
     });
   }
 };
+
+module.exports = { forgotPassword };
