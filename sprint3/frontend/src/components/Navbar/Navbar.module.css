@@ -25,28 +25,34 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    letter-spacing: 0.1rem;
   }
   
   .Navbar a:hover {
     color: #167373;
   }
 
-  button {
-    font-family: "Inter", sans-serif;
-    background-color: #167373;
-    color: #fcf6f4;
-    border: 1px solid #0f5259;
-    border-radius: 14px;
-    font-size: 20px;
-    cursor: pointer;
-    width: 145px;
-    height: 43px;
+  .Navbar button {
+    width: 143px;
+    height: 3rem;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #167373;
+    border-bottom: 2.5px solid #167373;
+    transition: all 0.3s ease;
+    background-color: #9fd3cb;
+    text-shadow: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #0f5259;
     text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.1rem;
+    font-family: 'Roboto', sans-serif;
   }
 
-  button:hover {
-    background-color: #0F5259;
+  .Navbar button:hover {
+    background-color: #17A597;
+    color: #fff;
   }
   
 
