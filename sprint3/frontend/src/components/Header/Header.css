@@ -10,7 +10,10 @@
   }
   
   .header-logo img {
-    width: 228px;
-    height: 88px;
+    width: auto;
+    height: 4rem;
+    position: absolute;
+    left: 2rem;
+    top: 1rem;
   }
   
