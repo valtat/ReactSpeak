@@ -1,4 +1,4 @@
-import logo from "../../assets/images/ReactSpeakLogo.png";
+import logo from "../../assets/images/logo.png";
 import "./Header.css";
 import Navbar from "../Navbar/Navbar";
 

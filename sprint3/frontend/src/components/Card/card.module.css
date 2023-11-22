@@ -110,9 +110,29 @@
     }
     .phrasebox {
         height: auto;
+        min-height: 60%;
     }
     .Card button {
         margin-bottom: 1rem;
+        margin-left: 0;
+    }  
+}
+
+@media (max-height: 800px) {
+    .phrasebox {
+        height: 40vh;
+        justify-content: flex-start;
     }
-    
+
+    .progressBar {
+        margin-bottom: 1rem;
+    }
+    .Card button{
+        height: 2rem;
+    }
+
+    .Card h2 {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
 }
