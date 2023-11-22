@@ -1,0 +1,92 @@
+ .Navbar nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 10px;
+  }
+  
+  .Navbar nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  .Navbar nav ul li {
+    margin: 1.5vw;
+  }
+  
+  .Navbar li a {
+    text-decoration: none;
+    color: #0f5259;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .Navbar a:hover {
+    color: #167373;
+  }
+
+  button {
+    font-family: "Inter", sans-serif;
+    background-color: #167373;
+    color: #fcf6f4;
+    border: 1px solid #0f5259;
+    border-radius: 14px;
+    font-size: 20px;
+    cursor: pointer;
+    width: 145px;
+    height: 43px;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  button:hover {
+    background-color: #0F5259;
+  }
+  
+
+  .Navbar .MobileNavigation {
+    display: none;
+  }
+
+
+  
+  @media (max-width: 990px) {
+    .Navbar .Navigation {
+      display: none;
+    }
+
+    .Navbar .MobileNavigation{
+        display: flex;
+        align-items: center;
+    }
+
+    .Navbar .MobileNavigation .Burger {
+        position: absolute;
+        right: 5%;
+        font-size: 40px;
+        cursor: pointer;
+        color: #0f5259;
+      }
+
+      .Navbar nav ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 100%;
+        background: #9fd3cb;
+        border-top: 2px solid #167373;
+        z-index: 1000;
+      }
+
+      .Navbar {
+        opacity: 1;
+      }
+    }
