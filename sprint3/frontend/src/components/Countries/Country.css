@@ -93,6 +93,7 @@
 
   .country-img {
     width: 100%;
+    max-width: 300px;
   }
 
   .country-card:hover {
