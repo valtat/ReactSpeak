@@ -73,6 +73,8 @@ const loginUser = async (req, res) => {
     message: "User successfully logged in",
     user: {
       id: user.id,
+      username: user.username,
+      role: user.role,
     },
   });
 };
