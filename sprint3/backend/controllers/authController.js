@@ -47,42 +47,34 @@ const registerUser = async (req, res, next) => {
 };
 
 const loginUser = async (req, res) => {
-  const { username, password } = req.body;
+  const user = req.user;
 
-  const user = await User.findOne({ username });
+  const accessToken = jwt.sign({ id: user.id }, JWT_SECRET, {
+    expiresIn: "30m",
+  });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const accessToken = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: "30m",
-    });
+  const refreshToken = jwt.sign({ id: user.id }, JWT_REFRESH_SECRET, {
+    expiresIn: req.body.rememberMe ? "7d" : "1d",
+  });
 
-    const refreshToken = jwt.sign({ id: user.id }, JWT_REFRESH_SECRET, {
-      expiresIn: req.body.rememberMe ? "7d" : "1d",
-    });
+  redisClient.set(refreshToken, user.id, "EX", 7 * 24 * 60 * 60);
 
-    redisClient.set(refreshToken, user.id, "EX", 7 * 24 * 60 * 60);
+  res.cookie("access_token", accessToken, {
+    httpOnly: true,
+    maxAge: 30 * 60 * 1000,
+  });
 
-    res.cookie("access_token", accessToken, {
-      httpOnly: true,
-      maxAge: 30 * 60 * 1000,
-    });
+  res.cookie("refresh_token", refreshToken, {
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
-    res.cookie("refresh_token", refreshToken, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    res.status(200).json({
-      message: "User successfully logged in",
-      user: {
-        id: user.id,
-        username: user.username,
-        role: user.role,
-      },
-    });
-  } else {
-    res.status(401).json({ message: "Invalid username or password" });
-  }
+  res.status(200).json({
+    message: "User successfully logged in",
+    user: {
+      id: user.id,
+    },
+  });
 };
 
 const refreshAccessToken = async (req, res) => {

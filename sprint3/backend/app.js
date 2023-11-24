@@ -5,6 +5,7 @@ const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
 const { connectMongo, connectToRedis } = require("./utils/db");
 const cookieParser = require("cookie-parser");
+var morgan = require("morgan");
 
 const passport = require("passport");
 require("./utils/passport-config")(passport);
@@ -21,10 +22,7 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+app.use(morgan("dev"));
 
 app.use("/api/v1/auth", authRouter);
 
