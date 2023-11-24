@@ -4,9 +4,8 @@ const passport = require("passport");
 const {
   registerUser,
   loginUser,
-  getAllUsers,
   refreshAccessToken,
-  refreshSession,
+  logoutUser,
 } = require("../controllers/authController");
 const {
   adminAuth,
@@ -19,6 +18,8 @@ const {
 router.post("/register", registerUser);
 
 router.post("/login", localAuth, loginUser);
+
+router.post("/logout", logoutUser);
 
 router.post("/refresh-token", refreshAuth, refreshAccessToken);
 

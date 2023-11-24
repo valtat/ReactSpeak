@@ -78,6 +78,21 @@ const loginUser = async (req, res) => {
   });
 };
 
+const logoutUser = (req, res) => {
+  const refreshToken = req.cookies.refresh_token;
+
+  // Remove the refresh token from Redis
+  redisClient.del(refreshToken);
+
+  // Clear the cookies and set them to expire immediately
+  res.cookie("access_token", "", { expires: new Date(0) });
+  res.cookie("refresh_token", "", { expires: new Date(0) });
+
+  res.status(200).json({
+    message: "User successfully logged out",
+  });
+};
+
 const refreshAccessToken = async (req, res) => {
   const refresh_token = req.cookies.refresh_token;
 
@@ -118,4 +133,5 @@ module.exports = {
   registerUser,
   loginUser,
   refreshAccessToken,
+  logoutUser,
 };
