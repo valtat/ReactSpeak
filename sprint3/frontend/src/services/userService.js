@@ -6,8 +6,9 @@ const register = async (newUser) => {
   return response.data;
 };
 
-const login = async (user) => {
-  const response = await axios.post(`${baseUrl}/login`, user);
+const login = async (email, password) => {
+  const response = await axios.post(`${baseUrl}/login`, {email: email, password: password}, {withCredentials: true});
+  console.log("RESPONSE: ", response);
   return response.data;
 };
 

@@ -24,7 +24,7 @@ import TestLayout from "./pages/TestLayout/index.jsx";
 import "./App.css";
 // import "./assets/css/Login.css";
 import "./assets/css/Dashboard.css";
-
+import { AuthProvider } from "./context/Auth.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,7 +50,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />;
+    </AuthProvider>
+  );
 }
 
 export default App;

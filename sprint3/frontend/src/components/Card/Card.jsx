@@ -11,8 +11,6 @@ const Card = ({
 }) => {
   const [shuffledTranslations, setShuffledTranslations] = useState([]);
 
-
-
   const handleTranslationSelected = (translation) => {
     setTranslationSelected(translation);
     increaseProgress();
@@ -27,10 +25,15 @@ const Card = ({
 
   return (
     <div className={classes.Card}>
-       <div className={classes.progressBar}>
-      <div className={classes.activeProgress} style={{ width: `${progress}%`}}></div>
-    </div>
-      
+      <div className={classes.progressContainer}>
+        <i className={`fas fa-times ${classes.close}`}></i>
+        <div className={classes.progressBar}>
+          <div
+            className={classes.activeProgress}
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      </div>
       <h1>Pick the right option</h1>
       <div className={classes.phrasebox}>
         <h2>{phrase}</h2>
@@ -38,8 +41,10 @@ const Card = ({
           {shuffledTranslations.map((translation, index) => (
             <button
               key={index}
-              onClick={() => {handleTranslationSelected(translation)
-              increaseProgress()}}
+              onClick={() => {
+                handleTranslationSelected(translation);
+                increaseProgress();
+              }}
             >
               {translation}
             </button>
