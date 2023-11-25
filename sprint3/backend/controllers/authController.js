@@ -7,7 +7,7 @@ const { redisClient } = require("../utils/db");
 
 const registerUser = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
     if (password.length < 8) {
       return res
         .status(400)
@@ -16,25 +16,12 @@ const registerUser = async (req, res, next) => {
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({
       username,
+      email,
       password: hash,
-    });
-
-    const token = jwt.sign(
-      { id: user.id, username, role: user.role },
-      JWT_SECRET,
-      {
-        expiresIn: "30m",
-      }
-    );
-
-    res.cookie("access_token", token, {
-      httpOnly: true,
-      maxAge: 30 * 60 * 1000,
     });
 
     res.status(201).json({
       message: "User successfully created",
-      user: user.id,
       username: user.username,
       role: user.role,
     });
@@ -81,10 +68,8 @@ const loginUser = async (req, res) => {
 const logoutUser = (req, res) => {
   const refreshToken = req.cookies.refresh_token;
 
-  // Remove the refresh token from Redis
   redisClient.del(refreshToken);
 
-  // Clear the cookies and set them to expire immediately
   res.cookie("access_token", "", { expires: new Date(0) });
   res.cookie("refresh_token", "", { expires: new Date(0) });
 

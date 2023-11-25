@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "../../components/Card/Card";
 import languageService from "../../services/languageService";
 import { useLoaderData } from "react-router-dom";
+import classes from "./StudyView.module.css";
 
 export const loader = async () => {
   const languageData = await languageService.getLanguage("vietnamese");
@@ -11,11 +12,13 @@ export const loader = async () => {
 const StudyView = () => {
   const { languageData } = useLoaderData();
   const useData = languageData.data.languages;
+  console.log(useData);
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");
   const [score, setScore] = useState(0);
   const [activeSession, setActiveSession] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (activeWord >= useData.length - 1) {
@@ -41,16 +44,21 @@ const StudyView = () => {
     setTranslationSelected("");
   }, [correctTranslation, translationSelected, activeSession]);
 
+  useEffect(() => {
+    setProgress((activeWord / (useData.length - 1)) * 100);
+  }, [activeWord, useData.length]);
+
   return (
-    <div>
+    <div className={classes.StudyView}>
       {activeSession && (
         <Card
           {...useData[activeWord]}
           setCorrectTranslation={setCorrectTranslation}
           setTranslationSelected={setTranslationSelected}
+          progress={progress}
         />
       )}
-      <p>Score: {score}</p>
+      <p className={classes.p}>Score: {score}</p>
     </div>
   );
 };

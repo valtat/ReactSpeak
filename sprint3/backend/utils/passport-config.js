@@ -41,7 +41,6 @@ module.exports = (passport) => {
     "refreshToken",
     new JwtStrategy(refreshOpts, async (jwt_payload, done) => {
       try {
-        console.log(jwt_payload);
         const user = await User.findById(jwt_payload.id);
         if (user) {
           return done(null, user);
@@ -54,22 +53,29 @@ module.exports = (passport) => {
   );
 
   passport.use(
-    new LocalStrategy(async (username, password, done) => {
-      try {
-        const user = await User.findOne({ username: username });
-        if (!user) {
-          return done(null, false, { message: "No user with that username" });
-        }
+    new LocalStrategy(
+      {
+        usernameField: "email",
+        passwordField: "password",
+      },
+      async (email, password, done) => {
+        console.log(email, password);
+        try {
+          const user = await User.findOne({ email });
+          if (!user) {
+            return done(null, false, { message: "No user with that username" });
+          }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-          return done(null, false, { message: "Password incorrect" });
-        }
+          const isMatch = await bcrypt.compare(password, user.password);
+          if (!isMatch) {
+            return done(null, false, { message: "Password incorrect" });
+          }
 
-        return done(null, user);
-      } catch (err) {
-        return done(err);
+          return done(null, user);
+        } catch (err) {
+          return done(err);
+        }
       }
-    })
+    )
   );
 };

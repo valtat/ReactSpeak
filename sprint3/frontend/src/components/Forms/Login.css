@@ -13,6 +13,16 @@
   margin: auto;
 }
 
+.errmsg {
+  color: red;
+  font-size: 1.5rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+
 .auth-form-container,
 .login-form,
 .register-form {
@@ -60,5 +70,3 @@ input {
   cursor: pointer;
   margin: 0.5rem 0;
 }
-
-

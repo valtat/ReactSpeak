@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import classes from "./card.module.css";
 
 const Card = ({
   phrase,
@@ -6,11 +7,13 @@ const Card = ({
   correctTranslation,
   setCorrectTranslation,
   setTranslationSelected,
+  progress,
 }) => {
   const [shuffledTranslations, setShuffledTranslations] = useState([]);
 
   const handleTranslationSelected = (translation) => {
     setTranslationSelected(translation);
+    // increaseProgress();
   };
 
   useEffect(() => {
@@ -21,16 +24,33 @@ const Card = ({
   }, [translations, correctTranslation, setCorrectTranslation]);
 
   return (
-    <div>
-      <h1 className="styles.h1">{phrase}</h1>
-      {shuffledTranslations.map((translation, index) => (
-        <button
-          key={index}
-          onClick={() => handleTranslationSelected(translation)}
-        >
-          {translation}
-        </button>
-      ))}
+    <div className={classes.Card}>
+      <div className={classes.progressContainer}>
+        <i className={`fas fa-times ${classes.close}`}></i>
+        <div className={classes.progressBar}>
+          <div
+            className={classes.activeProgress}
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      </div>
+      <h1>Pick the right option</h1>
+      <div className={classes.phrasebox}>
+        <h2>{phrase}</h2>
+        <div className={classes.choices}>
+          {shuffledTranslations.map((translation, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                handleTranslationSelected(translation);
+                // increaseProgress();
+              }}
+            >
+              {translation}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
