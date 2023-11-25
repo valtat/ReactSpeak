@@ -11,7 +11,7 @@ const login = async (userLogin) => {
     withCredentials: true,
   });
   console.log("RESPONSE: ", response);
-  return response.data;
+  return response;
 };
 
 const logout = async () => {

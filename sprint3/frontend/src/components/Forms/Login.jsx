@@ -5,7 +5,7 @@ import userService from "../../services/userService.js";
 import "./Login.css";
 
 export const Login = (props) => {
-  const { setAuth } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -26,16 +26,13 @@ export const Login = (props) => {
     evt.preventDefault();
     try {
       const userLogin = { email, password };
-      const data = await userService.login(userLogin);
-      console.log(data);
-      if (data.status !== "success") {
-        setErrMsg(data.message);
+      const response = await userService.login(userLogin);
+      if (response.status !== 200) {
+        setErrMsg(response.message);
       } else {
-        setAuth({
-          name: data.name,
-          email: data.email,
-          role: data.role,
-        });
+        console.log(response.data);
+        const { username, email, role } = response.data.user;
+        login({ username, email, role });
         setEmail("");
         setPassword("");
         navigate("/dashboard");

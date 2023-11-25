@@ -1,12 +1,15 @@
-import React from "react";
+import { useContext } from "react";
+import AuthContext from "../context/Auth";
 
 export const Dashboard = () => {
+  const { username } = useContext(AuthContext);
+  console.log(username);
   return (
     <div className="parent-container">
       <div className="dashboard-container">
         <div className="user-info">
           <ul>
-            <li>Username:</li>
+            <li>Username:{username}</li>
             <li>Email:</li>
             <li>Languages studied:</li>
             <li>Courses completed:</li>
