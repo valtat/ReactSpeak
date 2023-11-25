@@ -9,6 +9,7 @@ export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -24,6 +25,7 @@ export const Login = (props) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    setLoading(true);
     try {
       const userLogin = { email, password };
       const response = await userService.login(userLogin);
@@ -31,7 +33,7 @@ export const Login = (props) => {
         setErrMsg(response.message);
       } else {
         console.log(response.data);
-        const { username, email, role } = response.data.user;
+        const { username, email, role } = response.data;
         login({ username, email, role });
         setEmail("");
         setPassword("");
@@ -39,6 +41,8 @@ export const Login = (props) => {
       }
     } catch (err) {
       setErrMsg(err.message);
+    } finally {
+      setLoading(false);
     }
     errRef.current.focus();
   };
@@ -77,7 +81,7 @@ export const Login = (props) => {
             name="password"
             required
           />
-          <button className="submit-button" type="submit">
+          <button className="submit-button" type="submit" disabled={loading}>
             Log in
           </button>
         </form>

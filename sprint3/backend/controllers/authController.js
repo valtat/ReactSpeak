@@ -57,12 +57,9 @@ const loginUser = async (req, res) => {
   });
 
   res.status(200).json({
-    message: "User successfully logged in",
-    user: {
-      username: user.username,
-      role: user.role,
-      email: user.email,
-    },
+    username: user.username,
+    role: user.role,
+    email: user.email,
   });
 };
 
