@@ -15,16 +15,13 @@ import StudyView, {
 } from "./pages/StudyView/index.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
-import { Dashboard } from "./components/Dashboard.jsx";
+import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 
 // import "./assets/css/Country.css";
 import "./App.css";
-// import "./assets/css/Login.css";
-import "./assets/css/Dashboard.css";
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
