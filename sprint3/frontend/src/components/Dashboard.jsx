@@ -2,7 +2,7 @@ import { useContext } from "react";
 import AuthContext from "../context/Auth";
 
 export const Dashboard = () => {
-  const { username } = useContext(AuthContext);
+  const { username, email } = useContext(AuthContext);
 
   return (
     <div className="parent-container">
@@ -10,7 +10,7 @@ export const Dashboard = () => {
         <div className="user-info">
           <ul>
             <li>Username:{username}</li>
-            <li>Email:</li>
+            <li>Email:{email}</li>
             <li>Languages studied:</li>
             <li>Courses completed:</li>
           </ul>

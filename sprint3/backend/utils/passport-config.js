@@ -13,7 +13,7 @@ const cookieExtractor = function (req, cookieName) {
 };
 
 const opts = {
-  jwtFromRequest: (req) => cookieExtractor(req, "access_token"),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET,
 };
 

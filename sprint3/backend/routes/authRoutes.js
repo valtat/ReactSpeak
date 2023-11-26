@@ -23,16 +23,10 @@ router.post("/logout", logoutUser);
 
 router.post("/refresh-token", refreshAuth, refreshAccessToken);
 
-router.get("/verify-token", jwtAuth, (req, res) => {
-  res.status(200).json({ message: "Token is valid" });
-});
+router.get("/verify-token", jwtAuth);
 
-router.get(
-  "/check",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send("You are logged in as " + req.user.username);
-  }
-);
+router.get("/check", jwtAuth, (req, res) => {
+  res.send("You are logged in as " + req.user.username);
+});
 
 module.exports = router;

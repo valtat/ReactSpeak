@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import authService from "../services/authService";
 import { jwtDecode } from "jwt-decode";
+import { set } from "react-hook-form";
 
 const AuthContext = createContext({});
 
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (user) => {
+    setLoading(true);
     try {
       const response = await authService.login(user);
       if (response.status === 200) {
@@ -51,6 +53,8 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
