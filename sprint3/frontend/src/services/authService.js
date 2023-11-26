@@ -1,14 +1,21 @@
-import axios from "axios";
-const baseUrl = "api/v1/auth";
+import { authInstance as axios } from "../services/axiosInstance";
 
 const refreshToken = async () => {
-  const response = await axios.post(`${baseUrl}/refresh-token`);
+  const response = await axios.post("/refresh-token");
   return response.data;
 };
 
 const verifyToken = async () => {
-  const response = await axios.get(`${baseUrl}/verify-token`);
+  const response = await axios.get("/verify-token");
   return response;
 };
 
-export default { refreshToken, verifyToken };
+const login = async (userLogin) => {
+  const response = await axios.post("/login", userLogin, {
+    withCredentials: true,
+  });
+  console.log(response);
+  return response;
+};
+
+export default { refreshToken, verifyToken, login };

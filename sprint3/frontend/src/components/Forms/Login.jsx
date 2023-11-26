@@ -28,17 +28,8 @@ export const Login = (props) => {
     setLoading(true);
     try {
       const userLogin = { email, password };
-      const response = await userService.login(userLogin);
-      if (response.status !== 200) {
-        setErrMsg(response.message);
-      } else {
-        console.log(response.data);
-        const { username, email, role } = response.data;
-        login({ username, email, role });
-        setEmail("");
-        setPassword("");
-        navigate("/dashboard");
-      }
+      login(userLogin);
+      navigate("/dashboard");
     } catch (err) {
       setErrMsg(err.message);
     } finally {

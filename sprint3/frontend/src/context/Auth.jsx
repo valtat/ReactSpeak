@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import authService from "../services/authService";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext({});
 
@@ -13,12 +14,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const response = await authService.verifyToken();
-        if (response.status === 200) {
+        const token = localStorage.getItem("access_token");
+        if (token) {
+          const decodedToken = jwtDecode(token);
           setLogged(true);
-          setUsername(response.data.username);
-          setEmail(response.data.email);
-          setRole(response.data.role);
+          setUsername(decodedToken.username);
+          setEmail(decodedToken.email);
+          setRole(decodedToken.role);
         } else {
           setLogged(false);
           setUsername("");
@@ -35,11 +37,21 @@ export const AuthProvider = ({ children }) => {
     checkToken();
   }, []);
 
-  const login = (user) => {
-    setLogged(true);
-    setUsername(user.username);
-    setEmail(user.email);
-    setRole(user.role);
+  const login = async (user) => {
+    try {
+      const response = await authService.login(user);
+      if (response.status === 200) {
+        const { access_token } = response.data;
+        const decodedToken = jwtDecode(access_token);
+        localStorage.setItem("access_token", access_token);
+        setLogged(true);
+        setUsername(decodedToken.username);
+        setEmail(decodedToken.email);
+        setRole(decodedToken.role);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const logout = () => {

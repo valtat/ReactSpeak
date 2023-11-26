@@ -10,7 +10,6 @@ const login = async (userLogin) => {
   const response = await axios.post(`${baseUrl}/login`, userLogin, {
     withCredentials: true,
   });
-  console.log("RESPONSE: ", response);
   return response;
 };
 

@@ -36,7 +36,14 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res) => {
   const user = req.user;
 
-  const accessToken = jwt.sign({ id: user.id }, JWT_SECRET, {
+  const payload = {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "30m",
   });
 
@@ -46,20 +53,14 @@ const loginUser = async (req, res) => {
 
   redisClient.set(refreshToken, user.id, "EX", 7 * 24 * 60 * 60);
 
-  res.cookie("access_token", accessToken, {
-    httpOnly: true,
-    maxAge: 30 * 60 * 1000,
-  });
-
   res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   res.status(200).json({
-    username: user.username,
-    role: user.role,
-    email: user.email,
+    message: "User successfully logged in",
+    access_token: accessToken,
   });
 };
 
@@ -97,7 +98,6 @@ const refreshAccessToken = async (req, res) => {
     });
 
     res.cookie("access_token", accessToken, {
-      httpOnly: true,
       maxAge: 3 * 60 * 60 * 1000, // 3 hours
     });
 
@@ -110,6 +110,10 @@ const refreshAccessToken = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Error checking refresh token" });
   }
+};
+
+const verifyToken = (req, res) => {
+  res.json({ message: "Token is valid" });
 };
 
 module.exports = {

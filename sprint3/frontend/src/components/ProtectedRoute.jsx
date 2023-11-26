@@ -4,7 +4,6 @@ import AuthContext from "../context/Auth";
 
 export default function ProtectedRoute() {
   let { isLogged, loading } = useContext(AuthContext);
-
   if (loading) {
     return <Outlet />;
   }
