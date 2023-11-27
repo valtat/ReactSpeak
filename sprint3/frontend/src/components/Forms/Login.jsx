@@ -77,13 +77,6 @@ export const Login = (props) => {
             Log in
           </button>
         </form>
-        <button
-          className="link-btn"
-          onClick={() => props.onFormSwitch("register")}
-        >
-          Don&apos;t have an account? Register!
-        </button>
-        <button className="link-btn">Forgot password</button>
         <Link to="/register" className="link-btn">
           Don't have an account? Register!
         </Link>
