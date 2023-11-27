@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import AuthContext from "../../context/Auth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import userService from "../../services/userService.js";
 import "./Login.css";
 
@@ -83,6 +84,12 @@ export const Login = (props) => {
           Don&apos;t have an account? Register!
         </button>
         <button className="link-btn">Forgot password</button>
+        <Link to="/register" className="link-btn">
+          Don't have an account? Register!
+        </Link>
+        <Link to="/forgot-password" className="link-btn">
+          Forgot password
+        </Link>
       </div>
     </div>
   );

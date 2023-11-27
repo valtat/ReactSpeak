@@ -1,6 +1,7 @@
 import { useState } from "react";
 import userService from "../../services/userService.js";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export const ForgotPassword = () => {
@@ -44,6 +45,12 @@ export const ForgotPassword = () => {
           <button className="submit-button" type="submit" disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </button>
+          <Link to="/login" className="link-btn">
+            Already have an account? Login!
+          </Link>
+          <Link to="/register" className="link-btn">
+            Don't have an account? Register!
+          </Link>
         </form>
       </div>
     </div>

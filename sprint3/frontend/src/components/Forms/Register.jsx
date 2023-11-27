@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
@@ -16,16 +18,18 @@ export const Register = (props) => {
     }
 
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: userName, password: password }),
+        }
+      );
 
       if (response.ok) {
-        props.onFormSwitch("login");
         console.log("Registration successful!");
       } else {
         const error = await response.json();
@@ -44,11 +48,11 @@ export const Register = (props) => {
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="name">Username</label>
           <input
-            value={name}
+            value={userName}
             name="name"
             id="name"
             placeholder="Username"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
           />
           <label htmlFor="email">Email</label>
           <input
@@ -82,12 +86,12 @@ export const Register = (props) => {
             Register
           </button>
         </form>
-        <button
-          className="link-btn"
-          onClick={() => props.onFormSwitch("login")}
-        >
+        <Link to="/login" className="link-btn">
           Already have an account? Login!
-        </button>
+        </Link>
+        <Link to="/forgot-password" className="link-btn">
+          Forgot password
+        </Link>
       </div>
     </div>
   );
