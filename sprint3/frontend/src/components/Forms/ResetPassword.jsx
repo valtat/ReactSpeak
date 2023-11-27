@@ -27,29 +27,31 @@ export const ResetPassword = () => {
   return (
     <div className="parent-container">
       <div className="auth-form-container">
-      <h2>Reset Password</h2>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="password">New Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="******"
-          id="password"
-          name="password"
-        />
-        <label htmlFor="confirmPassword">Re-Type Password</label>
-        <input
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          type="password"
-          placeholder="******"
-          id="confirmPassword"
-          name="confirmPassword"
-        />
-        <button className="submit-button" type="submit">Submit</button>
-      </form>
-    </div>
+        <h2>Reset Password</h2>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="password">New Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="******"
+            id="password"
+            name="password"
+          />
+          <label htmlFor="confirmPassword">Re-Type Password</label>
+          <input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            type="password"
+            placeholder="******"
+            id="confirmPassword"
+            name="confirmPassword"
+          />
+          <button className="submit-button" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

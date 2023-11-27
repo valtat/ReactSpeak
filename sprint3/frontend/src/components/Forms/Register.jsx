@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 
@@ -10,6 +10,7 @@ export const Register = (props) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
