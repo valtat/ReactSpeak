@@ -5,11 +5,19 @@ import { jwtDecode } from "jwt-decode";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [isLogged, setLogged] = useState(false);
+  const [isLogged, setLogged] = useState(
+    localStorage.access_token ? true : false
+  );
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLogged) {
+      console.log("Login successful", isLogged);
+    }
+  }, [isLogged]);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -50,14 +58,15 @@ export const AuthProvider = ({ children }) => {
         setEmail(decodedToken.email);
         setRole(decodedToken.role);
       }
-    } catch (error) {
-      console.error(error);
+    // } catch (error) {
+    //   console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
   const logout = () => {
+    localStorage.clear();
     setLogged(false);
     setUsername("");
     setEmail("");
@@ -70,7 +79,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isLogged, login, username, email, role, loading }}
+      value={{ isLogged, login, logout, username, email, role, loading }}
     >
       {children}
     </AuthContext.Provider>

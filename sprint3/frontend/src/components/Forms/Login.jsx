@@ -29,7 +29,7 @@ export const Login = (props) => {
     setLoading(true);
     try {
       const userLogin = { email, password };
-      login(userLogin);
+      await login(userLogin);
       navigate("/dashboard");
     } catch (err) {
       setErrMsg(err.message);
@@ -41,13 +41,6 @@ export const Login = (props) => {
 
   return (
     <div className="parent-container">
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"} // hide error message when empty
-        aria-live="assertive" // announce changes to error message
-      >
-        {errMsg}
-      </p>
       <div className="auth-form-container">
         <h2>Log in</h2>
         <form className="login-form" onSubmit={handleSubmit}>
@@ -76,6 +69,13 @@ export const Login = (props) => {
           <button className="submit-button" type="submit" disabled={loading}>
             Log in
           </button>
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"} // hide error message when empty
+            aria-live="assertive" // announce changes to error message
+          >
+            {errMsg}
+          </p>
         </form>
         <button
           className="link-btn"
