@@ -1,4 +1,4 @@
-import ResetPassword from "../components/Forms/ResetPassword";
+import ResetPassword from "../../components/Forms/ResetPassword";
 
 const ResetPasswordPage = () => {
   return <ResetPassword />;
