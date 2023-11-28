@@ -5,17 +5,17 @@ import {
   Route,
 } from "react-router-dom";
 
-import LoginPage from "./pages/LoginPage/index.jsx";
-import RegisterPage from "./pages/RegisterPage/index.jsx";
+import { Login } from "./components/Forms/Login.jsx";
+import { Register } from "./components/Forms/Register.jsx";
 import ErrorPage from "./pages/error.jsx";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage/index.jsx";
-import ResetPasswordPage from "./pages/ResetPasswordPage/index.jsx";
+import { ForgotPassword } from "./components/Forms/ForgotPassword.jsx";
+import { ResetPassword } from "./components/Forms/ResetPassword.jsx";
 import StudyView, {
   loader as languageDataLoader,
 } from "./pages/StudyView/index.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
-// import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
+import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
@@ -30,14 +30,14 @@ const router = createBrowserRouter(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
       <Route index element={<WelcomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="/countries" element={<CountriesPage />} />
-      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route
         path="/study"
         element={<StudyView />}
