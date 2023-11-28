@@ -50,7 +50,6 @@ const StudyView = () => {
 
   return (
     <div className={classes.StudyView}>
-      
       {activeSession && (
         <Card
           {...useData[activeWord]}

@@ -1,43 +1,50 @@
-import React, { useState } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../context/Auth";
 import "./Login.css";
 
 export const Register = (props) => {
+  const { register } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const userNameRef = useRef();
+  const errRef = useRef();
+
+  useEffect(() => {
+    userNameRef.current.focus(); // focus on username input on render
+  }, []);
+
+  useEffect(() => {
+    setErrMsg(""); // clear error message on input change
+  }, [userName, email, password]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setErrMsg("Passwords do not match");
       return;
     }
 
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/v1/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: userName, password: password }),
-        }
-      );
+    setLoading(true);
 
-      if (response.ok) {
-        console.log("Registration successful!");
-      } else {
-        const error = await response.json();
-        alert(error.message);
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while registering");
+    try {
+      const userRegister = { userName, email, password };
+      register(userRegister);
+      navigate("/login");
+    } catch (err) {
+      setErrMsg(err.message);
+    } finally {
+      setLoading(false);
     }
+    errRef.current.focus();
   };
 
   return (
@@ -48,9 +55,13 @@ export const Register = (props) => {
           <label htmlFor="name">Username</label>
           <input
             value={userName}
+            ref={userNameRef}
+            autoComplete="username"
+            type="text"
             name="name"
             id="name"
             placeholder="Username"
+            required
             onChange={(e) => setUserName(e.target.value)}
           />
           <label htmlFor="email">Email</label>
@@ -61,6 +72,7 @@ export const Register = (props) => {
             placeholder="youremail@gmail.com"
             id="email"
             name="email"
+            required
           />
           <label htmlFor="password">Password</label>
           <input
@@ -70,6 +82,7 @@ export const Register = (props) => {
             placeholder="******"
             id="password"
             name="password"
+            required
           />
           <label htmlFor="confirmPassword">Confirm password</label>
           <input
@@ -79,11 +92,19 @@ export const Register = (props) => {
             placeholder="******"
             id="confirmPassword"
             name="confirmPassword"
+            required
           />
 
-          <button className="submit-button" type="submit">
+          <button className="submit-button" type="submit" disabled={loading}>
             Register
           </button>
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"} // hide error message when empty
+            aria-live="assertive" // announce changes to error message
+          >
+            {errMsg}
+          </p>
         </form>
         <Link to="/login" className="link-btn">
           Already have an account? Login!

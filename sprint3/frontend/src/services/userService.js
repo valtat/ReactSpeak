@@ -6,9 +6,11 @@ const register = async (newUser) => {
   return response.data;
 };
 
-const login = async (user) => {
-  const response = await axios.post(`${baseUrl}/login`, user);
-  return response.data;
+const login = async (userLogin) => {
+  const response = await axios.post(`${baseUrl}/login`, userLogin, {
+    withCredentials: true,
+  });
+  return response;
 };
 
 const logout = async () => {
