@@ -4,21 +4,13 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 
-const cookieExtractor = function (req, cookieName) {
-  let token = null;
-  if (req && req.cookies) {
-    token = req.cookies[cookieName];
-  }
-  return token;
-};
-
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET,
 };
 
 const refreshOpts = {
-  jwtFromRequest: (req) => cookieExtractor(req, "refresh_token"),
+  jwtFromRequest: (req) => req.cookies.refresh_token,
   secretOrKey: process.env.JWT_REFRESH_SECRET,
 };
 
