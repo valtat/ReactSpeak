@@ -2,14 +2,6 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/keys");
 const passport = require("passport");
 
-const userAuth = (req, res, next) => {
-  if (req.user && (req.user.role === "user" || req.user.role === "admin")) {
-    next();
-  } else {
-    return res.status(401).json({ message: "Not authorized" });
-  }
-};
-
 const adminAuth = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
     next();
@@ -18,7 +10,7 @@ const adminAuth = (req, res, next) => {
   }
 };
 
-function jwtAuth(req, res, next) {
+const jwtAuth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (error, user, info) => {
     if (error) {
       return next(error);
@@ -29,9 +21,9 @@ function jwtAuth(req, res, next) {
     req.user = user;
     next();
   })(req, res, next);
-}
+};
 
-function refreshAuth(req, res, next) {
+const refreshAuth = (req, res, next) => {
   passport.authenticate(
     "refreshToken",
     { session: false },
@@ -46,7 +38,7 @@ function refreshAuth(req, res, next) {
       next();
     }
   )(req, res, next);
-}
+};
 
 const localAuth = (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user, info) => {
@@ -65,4 +57,4 @@ const localAuth = (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports = { userAuth, adminAuth, localAuth, jwtAuth, refreshAuth };
+module.exports = { adminAuth, localAuth, jwtAuth, refreshAuth };

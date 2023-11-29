@@ -48,13 +48,9 @@ const loginUser = async (req, res) => {
 
   const expiry = req.body.rememberMe ? 7 : 1;
 
-  const refreshToken = jwt.sign(
-    { id: user._id },
-    process.env.JWT_REFRESH_SECRET,
-    {
-      expiresIn: `${expiry}d`,
-    }
-  );
+  const refreshToken = jwt.sign({ id: user._id }, JWT_REFRESH_SECRET, {
+    expiresIn: `${expiry}d`,
+  });
 
   redisClient.set(refreshToken, user.id, "EX", expiry * 24 * 60 * 60);
 
@@ -107,7 +103,7 @@ const refreshAccessToken = async (req, res) => {
       expiresIn: "15m",
     });
 
-    res.json({
+    res.status(200).json({
       message: "Access token refreshed",
       access_token: accessToken,
     });
