@@ -39,19 +39,24 @@ const loginUser = async (req, res) => {
   const payload = {
     id: user.id,
     username: user.username,
-    email: user.email,
     role: user.role,
   };
 
   const accessToken = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: "30m",
+    expiresIn: "15m",
   });
 
-  const refreshToken = jwt.sign({ id: user.id }, JWT_REFRESH_SECRET, {
-    expiresIn: req.body.rememberMe ? "7d" : "1d",
-  });
+  const expiry = req.body.rememberMe ? 7 : 1;
 
-  redisClient.set(refreshToken, user.id, "EX", 7 * 24 * 60 * 60);
+  const refreshToken = jwt.sign(
+    { id: user._id },
+    process.env.JWT_REFRESH_SECRET,
+    {
+      expiresIn: `${expiry}d`,
+    }
+  );
+
+  redisClient.set(refreshToken, user.id, "EX", expiry * 24 * 60 * 60);
 
   res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
@@ -69,7 +74,6 @@ const logoutUser = (req, res) => {
 
   redisClient.del(refreshToken);
 
-  res.cookie("access_token", "", { expires: new Date(0) });
   res.cookie("refresh_token", "", { expires: new Date(0) });
 
   res.status(200).json({
@@ -93,27 +97,24 @@ const refreshAccessToken = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const accessToken = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: "3h",
-    });
+    const payload = {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    };
 
-    res.cookie("access_token", accessToken, {
-      maxAge: 3 * 60 * 60 * 1000, // 3 hours
+    const accessToken = jwt.sign(payload, JWT_SECRET, {
+      expiresIn: "15m",
     });
 
     res.json({
       message: "Access token refreshed",
-      username: user.username,
-      role: user.role,
+      access_token: accessToken,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error checking refresh token" });
   }
-};
-
-const verifyToken = (req, res) => {
-  res.json({ message: "Token is valid" });
 };
 
 module.exports = {
