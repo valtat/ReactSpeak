@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import authService from "../services/authService";
 import { jwtDecode } from "jwt-decode";
 
+
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -19,22 +20,28 @@ export const AuthProvider = ({ children }) => {
     }
   }, [isLogged]);
 
+
   useEffect(() => {
     const checkToken = async () => {
       try {
+        
         const token = localStorage.getItem("access_token");
+        console.log("Access token is ", token);
         if (token) {
           const decodedToken = jwtDecode(token);
           setLogged(true);
           setUsername(decodedToken.username);
           setEmail(decodedToken.email);
           setRole(decodedToken.role);
+          console.log("decodedToken", decodedToken);
         } else {
           setLogged(false);
           setUsername("");
           setEmail("");
           setRole("");
         }
+
+        await authService.verifyToken();
       } catch (error) {
         console.error(error);
       } finally {
@@ -44,6 +51,7 @@ export const AuthProvider = ({ children }) => {
 
     checkToken();
   }, []);
+
 
   const login = async (user) => {
     setLoading(true);
@@ -65,17 +73,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     localStorage.clear();
+    await authService.logout();
     setLogged(false);
     setUsername("");
     setEmail("");
     setRole("");
   };
 
-  const refreshToken = () => {
-    // TO DO: Refresh token
-  };
 
   return (
     <AuthContext.Provider

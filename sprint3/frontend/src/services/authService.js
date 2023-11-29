@@ -1,9 +1,9 @@
 import { authInstance as axios } from "../services/axiosInstance";
 
-const refreshToken = async () => {
-  const response = await axios.post("/refresh-token");
-  return response.data;
-};
+// const refreshToken = async () => {
+//   const response = await axios.post("/refresh-token");
+//   return response.data;
+// };
 
 const verifyToken = async () => {
   const response = await axios.get("/verify-token");
@@ -14,8 +14,14 @@ const login = async (userLogin) => {
   const response = await axios.post("/login", userLogin, {
     withCredentials: true,
   });
-  console.log(response);
+  console.log("login", response);
   return response;
 };
 
-export default { refreshToken, verifyToken, login };
+const logout = async () => {
+  const response = await axios.post("/logout");
+  console.log("logout", response);
+  return response;
+}
+
+export default { verifyToken, login, logout };
