@@ -34,6 +34,8 @@ export const AuthProvider = ({ children }) => {
           setEmail(decodedToken.email);
           setRole(decodedToken.role);
           console.log("decodedToken", decodedToken);
+
+          await authService.verifyToken();
         } else {
           setLogged(false);
           setUsername("");
@@ -41,7 +43,7 @@ export const AuthProvider = ({ children }) => {
           setRole("");
         }
 
-        await authService.verifyToken();
+        
       } catch (error) {
         console.error(error);
       } finally {
