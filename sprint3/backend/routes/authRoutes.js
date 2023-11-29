@@ -23,7 +23,9 @@ router.post("/logout", logoutUser);
 
 router.post("/refresh-token", refreshAuth, refreshAccessToken);
 
-router.get("/verify-token", jwtAuth);
+router.get("/verify-token", jwtAuth, (req, res) => {
+  res.status(200).json({ message: "Token is valid" });
+});
 
 router.get("/check", jwtAuth, (req, res) => {
   res.send("You are logged in as " + req.user.username);

@@ -24,6 +24,7 @@ function jwtAuth(req, res, next) {
       return next(error);
     }
     if (!user) {
+      console.log('JWT auth failed, returning 401');
       return res.status(401).json({ message: info.message });
     }
     req.user = user;
@@ -40,6 +41,7 @@ function refreshAuth(req, res, next) {
         return next(error);
       }
       if (!user) {
+        console.log('Refresh auth failed, returning 401');
         return res.status(401).json({ message: info.message });
       }
       req.user = user;
