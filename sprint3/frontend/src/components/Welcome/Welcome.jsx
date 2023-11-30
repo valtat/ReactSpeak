@@ -2,6 +2,7 @@ import classes from "./Welcome.module.css";
 import { welcomeSection } from "../../data";
 import Button from "../Navbar/Button";
 import WelcomeSection from "./WelcomeSection";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   return (
@@ -13,7 +14,7 @@ const Welcome = () => {
             {...section}
             // className={section.id === 2 ? classes.reverse : ""}
           >
-            {section.id === 3 && <Button name={"Get Started"} />}
+            {section.id === 3 && <Link to="/countries"><Button name={"Get Started"}/></Link>}
           </WelcomeSection>
         );
       })}
