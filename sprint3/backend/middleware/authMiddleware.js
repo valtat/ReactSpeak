@@ -56,7 +56,7 @@ const localAuth = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(401).json({ message: "Authentication failed" });
+      return res.status(404).json({ message: "Authentication failed" });
     }
     req.logIn(user, { session: false }, (err) => {
       if (err) {
