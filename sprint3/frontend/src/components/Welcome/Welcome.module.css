@@ -2,13 +2,15 @@
   display: flex;
   flex-direction: column;
 }
+
 .section:nth-child(2) {
   display: flex;
   flex-direction: row-reverse;
 }
-.section:nth-child(2) img{
-    width: 50vw;
-  }
+
+.section:nth-child(2) img {
+  width: 50vw;
+}
 
 .section {
   display: flex;
@@ -16,6 +18,7 @@
   justify-content: space-around;
   min-height: 90vh;
   align-items: center;
+  opacity: 0;
 }
 
 .section img {
@@ -48,7 +51,7 @@
   line-height: 24px;
   color: #0f5259;
   text-align: left;
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .text button {
@@ -59,3 +62,17 @@
   display: flex;
   flex-direction: row-reverse !important;
 } */
+
+.animate {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,21 +1,23 @@
-import React from 'react'
+import { forwardRef } from "react";
 import classes from "./Welcome.module.css";
 
-const WelcomeSection = ({image, name, title, paragraph, children, className}) => {
-  return (
-    <section className={`${classes.section}`}>
-      <div>
-        <img src={image} alt={name} />
-      </div>
-      <div className={classes.text}>
-        <h1>{title}</h1>
-        <p>
-          {paragraph}
-        </p>
-        {children} {/* Button component */}
-      </div>
+const WelcomeSection = forwardRef(
+  ({ image, name, title, paragraph, children, className = "" }, ref) => {
+    return (
+      <section ref={ref} className={`${classes.section} ${className}`}>
+        <div>
+          <img src={image} alt={name} />
+        </div>
+        <div className={classes.text}>
+          <h1>{title}</h1>
+          <p>{paragraph}</p>
+          {children} {/* Button component */}
+        </div>
       </section>
-  )
-}
+    );
+  }
+);
 
-export default WelcomeSection
+WelcomeSection.displayName = "WelcomeSection";
+
+export default WelcomeSection;
