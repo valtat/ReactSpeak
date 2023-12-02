@@ -47,46 +47,90 @@ const UserInfo = () => {
           <div
             className={activeTab === 1 ? "content active-content" : "content"}
           >
-            <ul>
-              <li>
-                <FontAwesomeIcon icon={faUser} className="fa-icon" />
-                <span>Username:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faEnvelope} className="fa-icon" />
-                <span>Email:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faCalendarDays} className="fa-icon" />
-                <span>Registration date:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faClock} className="fa-icon" />
-                <span>Last login:</span>
-              </li>
-            </ul>
+            <div className="column">
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faUser} className="fa-icon" />
+                  <span>Username:</span>
+                </div>
+                <div className="info-card">
+                  <span>Test</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faEnvelope} className="fa-icon" />
+                  <span>Email:</span>
+                </div>
+                <div className="info-card">
+                  <span>test@gmail.com</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faCalendarDays} className="fa-icon" />
+                  <span>Registration date:</span>
+                </div>
+                <div className="info-card">
+                  <span>2.12.2023</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faClock} className="fa-icon" />
+                  <span>Last login:</span>
+                </div>
+                <div className="info-card">
+                  <span>1.12.2023 12:00</span>
+                </div>
+              </div>
+              <div className="column">
+                <button className="button">Delete Account</button>
+                <button className="button">Change Password</button>
+              </div>
+            </div>
           </div>
           <div
             className={activeTab === 2 ? "content active-content" : "content"}
           >
-            <ul>
-              <li>
-                <FontAwesomeIcon icon={faLanguage} className="fa-icon" />
-                <span>Default Language:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faGlobe} className="fa-icon" />
-                <span>Languages studied:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faChartLine} className="fa-icon" />
-                <span>Progress by language:</span>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faFlag} className="fa-icon" />
-                <span>Sentences learned:</span>
-              </li>
-            </ul>
+            <div className="column">
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faLanguage} className="fa-icon" />
+                  <span>Default Language:</span>
+                </div>
+                <div className="info-card">
+                  <span>Finnish</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faGlobe} className="fa-icon" />
+                  <span>Languages studied:</span>
+                </div>
+                <div className="info-card">
+                  <span>FI, SWE, JP, PL, RU, IT, FR</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faChartLine} className="fa-icon" />
+                  <span>Progress by language:</span>
+                </div>
+                <div className="info-card">
+                  <span>FI: 100%</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="info-card">
+                  <FontAwesomeIcon icon={faFlag} className="fa-icon" />
+                  <span>Sentences learned:</span>
+                </div>
+                <div className="info-card">
+                  <span>125</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div
