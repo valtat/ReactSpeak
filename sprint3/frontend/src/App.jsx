@@ -19,6 +19,7 @@ import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
+import AdminPage from "./pages/AdminPage/index.jsx";
 
 // import "./assets/css/Country.css";
 import "./App.css";
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
         loader={languageDataLoader}
       />
       <Route path="/countries/:countryName" element={<CountryPage />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Route>
   )
 );
