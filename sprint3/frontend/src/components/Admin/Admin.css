@@ -21,7 +21,7 @@
   padding-top: 30px;
 }
 
-.subtitle{
+.subtitle {
   font-size: 30px;
   font-weight: 400;
   margin: 0;
@@ -50,8 +50,7 @@
   background-color: white;
   border-radius: 10px;
   margin: 0.5rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #0f5259;
 }
 
 .selection-box {
@@ -65,36 +64,70 @@
 
 .tools-container {
   display: flex;
+  width: 100%;
   padding: 2rem;
   font-size: 1.8rem;
   flex-direction: column;
   text-align: left;
-  color: black;
   background-color: white;
   border-radius: 10px;
   margin: 0.5rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #0f5259;
 }
 
 .tools {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0 0 0;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+label {
+  text-align: left;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  color: #0f5259;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  flex-basis: content;
+}
+
+select {
+  width: 100%;
+  padding: 1rem 14rem 1rem 13rem;
+  border: 1px solid #0f5259;
+  border-radius: 5px;
+  font-size: 16px;
+  flex-basis: content;
+}
+
+option {
+  text-align: center;
+  font-size: 1rem;
+  font-family: sans-serif;
+  color: black;
 }
 
 input[type="text"] {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 1rem 10rem 1rem 10rem;
+  border: 1px solid #0f5259;
   border-radius: 5px;
   font-size: 16px;
+  flex-basis: content;
 }
 
 .admin-button {
+  width: max-content;
+  align-self: right;
   background-color: #9fd3cb;
   color: white;
   border-radius: 10px;
@@ -133,5 +166,4 @@ input[type="text"] {
   .tools-container {
     width: 100%;
   }
-    
 }
