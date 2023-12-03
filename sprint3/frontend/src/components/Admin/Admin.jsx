@@ -1,6 +1,8 @@
 import React from "react";
 import "./Admin.css";
 import AdminAddLanguage from "./AdminAddLanguage.jsx";
+import AdminEditLanguage from "./AdminEditLanguage.jsx";
+import AdminDelete from "./AdminDelete.jsx";
 
 const Admin = () => {
   return (
@@ -17,6 +19,8 @@ const Admin = () => {
         </div>
         <div className="tools-container">
           <AdminAddLanguage />
+          <AdminEditLanguage />
+          <AdminDelete />
         </div>
       </div>
     </div>
