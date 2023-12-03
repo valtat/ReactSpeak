@@ -16,6 +16,7 @@ const jwtAuth = (req, res, next) => {
       return next(error);
     }
     if (!user) {
+      console.log('JWT auth failed, returning 401');
       return res.status(401).json({ message: info.message });
     }
     req.user = user;
@@ -32,6 +33,7 @@ const refreshAuth = (req, res, next) => {
         return next(error);
       }
       if (!user) {
+        console.log('Refresh auth failed, returning 401');
         return res.status(401).json({ message: info.message });
       }
       req.user = user;
@@ -46,7 +48,7 @@ const localAuth = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(401).json({ message: "Authentication failed" });
+      return res.status(404).json({ message: "Authentication failed" });
     }
     req.logIn(user, { session: false }, (err) => {
       if (err) {

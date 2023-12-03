@@ -8,5 +8,5 @@ export default function ProtectedRoute() {
     return <Outlet />;
   }
 
-  return isLogged ? <Outlet /> : <Navigate to="/" />;
+  return isLogged ? <Outlet /> : <Navigate to="/login" />;
 }

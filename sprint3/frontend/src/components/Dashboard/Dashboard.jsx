@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext } from "react";
+import AuthContext from "../../context/Auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -13,6 +14,8 @@ import {
 import "./Dashboard.css";
 
 export const Dashboard = () => {
+  const { username, email } = useContext(AuthContext);
+
   return (
     <div className="parent-container">
       <div className="dashboard-container">
@@ -21,10 +24,12 @@ export const Dashboard = () => {
             <li>
               <FontAwesomeIcon icon={faUser} className="fa-icon" />
               <span>Username:</span>
+              <span>{username}</span>
             </li>
             <li>
               <FontAwesomeIcon icon={faEnvelope} className="fa-icon" />
               <span>Email:</span>
+              <span>{email}</span>
             </li>
             <li>
               <FontAwesomeIcon icon={faLanguage} className="fa-icon" />

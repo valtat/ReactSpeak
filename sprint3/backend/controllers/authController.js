@@ -78,6 +78,7 @@ const logoutUser = (req, res) => {
 };
 
 const refreshAccessToken = async (req, res) => {
+  console.log('refreshAccessToken called');
   const refresh_token = req.cookies.refresh_token;
 
   try {
