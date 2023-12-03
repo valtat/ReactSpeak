@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
+
 const {
   registerUser,
   loginUser,
@@ -9,7 +9,6 @@ const {
 } = require("../controllers/authController");
 const {
   adminAuth,
-  userAuth,
   localAuth,
   jwtAuth,
   refreshAuth,
@@ -29,6 +28,12 @@ router.get("/verify-token", jwtAuth, (req, res) => {
 
 router.get("/check", jwtAuth, (req, res) => {
   res.send("You are logged in as " + req.user.username);
+});
+
+router.get("/admin", jwtAuth, adminAuth, (req, res) => {
+  res.send(
+    "You are logged in as " + req.user.username + " and you are an admin"
+  );
 });
 
 module.exports = router;
