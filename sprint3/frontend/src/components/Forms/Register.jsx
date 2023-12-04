@@ -37,10 +37,15 @@ export const Register = () => {
 
     try {
       const userRegister = { username, email, password };
-      register(userRegister);
+      await register(userRegister);
       navigate("/login");
     } catch (err) {
-      setErrMsg(err.message);
+      if (err.response && err.response.status === 400 ) {
+        setErrMsg('User already exists');
+      } else {
+        setErrMsg("Something went wrong. Please try again later.");
+      }
+      
     } finally {
       setLoading(false);
     }
