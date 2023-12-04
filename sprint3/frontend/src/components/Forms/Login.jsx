@@ -31,7 +31,18 @@ export const Login = () => {
       await login(userLogin);
       navigate("/dashboard");
     } catch (err) {
-      setErrMsg(err.message);
+      if (!err?.response) {
+        setErrMsg('No Server Response');
+    } else if (err.response?.status === 400) {
+        setErrMsg('Missing Username or Password');
+    } else if (err.response?.status === 401) {
+        setErrMsg('Unauthorized');
+    } else if (err.response?.status === 404) {
+        setErrMsg('User Not Found');
+    }
+    else {
+        setErrMsg('Login Failed');
+    }
     } finally {
       setLoading(false);
     }

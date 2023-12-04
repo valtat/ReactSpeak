@@ -4,7 +4,7 @@ import { useContext } from "react";
 import AuthContext from "../../context/Auth";
 
 const PageLinks = (props) => {
-  const { isLogged, logout } = useContext(AuthContext);
+  const { isLogged, logout, username, role } = useContext(AuthContext);
 
   return (
     <ul>
@@ -26,9 +26,16 @@ const PageLinks = (props) => {
           </li>
           <li onClick={() => {props.isMobile && props.closeMobileMenu()}}>
             <Link to="/dashboard">
-              <Button name="Profile" />
+              <Button name={`Hi, ${username}!`} />
             </Link>
           </li>
+          {role === "admin" && (
+            <li onClick={() => {props.isMobile && props.closeMobileMenu()}}>
+              <Link to="/">
+                <Button name="Admin tools" />
+              </Link>
+            </li>
+          )}
         </>
       ) : (
         <>

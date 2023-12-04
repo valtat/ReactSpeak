@@ -1,29 +1,29 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/Auth";
+import authService from "../../services/authService";
 import "./Login.css";
 
-export const Register = (props) => {
-  const { register } = useContext(AuthContext);
+export const Register = () => {
+  const { register } = authService;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const userNameRef = useRef();
+  const usernameRef = useRef();
   const errRef = useRef();
 
   useEffect(() => {
-    userNameRef.current.focus(); // focus on username input on render
+    usernameRef.current.focus(); // focus on username input on render
   }, []);
 
   useEffect(() => {
     setErrMsg(""); // clear error message on input change
-  }, [userName, email, password]);
+  }, [username, email, password]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -36,11 +36,16 @@ export const Register = (props) => {
     setLoading(true);
 
     try {
-      const userRegister = { userName, email, password };
-      register(userRegister);
+      const userRegister = { username, email, password };
+      await register(userRegister);
       navigate("/login");
     } catch (err) {
-      setErrMsg(err.message);
+      if (err.response && err.response.status === 400 ) {
+        setErrMsg('User already exists');
+      } else {
+        setErrMsg("Something went wrong. Please try again later.");
+      }
+      
     } finally {
       setLoading(false);
     }
@@ -52,17 +57,17 @@ export const Register = (props) => {
       <div className="auth-form-container">
         <h2>Register</h2>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="name">Username</label>
+          <label htmlFor="name">username</label>
           <input
-            value={userName}
-            ref={userNameRef}
+            value={username}
+            ref={usernameRef}
             autoComplete="username"
             type="text"
             name="name"
             id="name"
-            placeholder="Username"
+            placeholder="username"
             required
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <label htmlFor="email">Email</label>
           <input

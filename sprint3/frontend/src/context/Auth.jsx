@@ -15,13 +15,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isLogged) {
-      console.log("Login successful", isLogged);
-    }
-  }, [isLogged]);
-
-
-  useEffect(() => {
     const checkToken = async () => {
       try {
         

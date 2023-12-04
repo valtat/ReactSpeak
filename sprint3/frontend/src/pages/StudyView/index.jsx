@@ -12,13 +12,18 @@ export const loader = async () => {
 const StudyView = () => {
   const { languageData } = useLoaderData();
   const useData = languageData.data.languages;
-  console.log(useData);
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");
   const [score, setScore] = useState(0);
   const [activeSession, setActiveSession] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [startTime, setStartTime] = useState(null);
+  const [duration, setDuration] = useState(null);
+
+  useEffect(() => {
+    setStartTime(new Date());
+  }, []);
 
   useEffect(() => {
     if (activeWord >= useData.length - 1) {
@@ -48,6 +53,14 @@ const StudyView = () => {
     setProgress((activeWord / (useData.length - 1)) * 100);
   }, [activeWord, useData.length]);
 
+  useEffect(() => {
+    if (!activeSession && startTime) {
+      const endTime = new Date();
+      const durationSeconds = (endTime - startTime) / 1000;
+      setDuration(durationSeconds);
+    }
+  }, [activeSession, startTime]);
+
   return (
     <div className={classes.StudyView}>
       {activeSession && (
@@ -59,6 +72,11 @@ const StudyView = () => {
         />
       )}
       <p className={classes.p}>Score: {score}</p>
+      {!activeSession && (
+        <div>
+          <p>Duration: {duration} seconds</p>
+        </div>
+      )}
     </div>
   );
 };

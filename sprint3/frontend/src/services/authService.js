@@ -10,6 +10,14 @@ const verifyToken = async () => {
   return response;
 };
 
+const register = async (userRegister) => {
+  const response = await axios.post("/register", userRegister, {
+    withCredentials: true,
+  });
+  console.log("register", response);
+  return response;
+}
+
 const login = async (userLogin) => {
   const response = await axios.post("/login", userLogin, {
     withCredentials: true,
@@ -24,4 +32,4 @@ const logout = async () => {
   return response;
 }
 
-export default { verifyToken, login, logout };
+export default { verifyToken, login, logout, register };
