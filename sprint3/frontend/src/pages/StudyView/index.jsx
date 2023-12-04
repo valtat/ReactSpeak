@@ -12,7 +12,6 @@ export const loader = async () => {
 const StudyView = () => {
   const { languageData } = useLoaderData();
   const useData = languageData.data.languages;
-  console.log(useData);
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");

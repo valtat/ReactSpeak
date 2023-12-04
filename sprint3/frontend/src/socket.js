@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
-const URL = "http://localhost:4000";
-const yourJwtToken = localStorage.getItem("yourJwtTokenKey");
+const URL = "http://localhost:3012";
+const yourJwtToken = localStorage.getItem("access_token");
 const spokenLanguage = "English";
 const learningLanguage = "Spanish";
 
