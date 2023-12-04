@@ -19,6 +19,7 @@ import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
+import ChatComponent from "./components/Chat/ChatComponent.jsx";
 
 // import "./assets/css/Country.css";
 import "./App.css";
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
       <Route index element={<WelcomePage />} />
+      <Route path="/chat" element={<ChatComponent />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoute />}>

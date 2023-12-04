@@ -19,7 +19,12 @@ const StudyView = () => {
   const [score, setScore] = useState(0);
   const [activeSession, setActiveSession] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [timer, setTimer] = useState(0);
+  const [startTime, setStartTime] = useState(null);
+  const [duration, setDuration] = useState(null);
+
+  useEffect(() => {
+    setStartTime(new Date());
+  }, []);
 
   useEffect(() => {
     if (activeWord >= useData.length - 1) {
@@ -50,16 +55,12 @@ const StudyView = () => {
   }, [activeWord, useData.length]);
 
   useEffect(() => {
-    let interval = null;
-    if (activeSession) {
-      interval = setInterval(() => {
-        setTimer((timer) => timer + 1);
-      }, 1000);
-    } else if (!activeSession && timer !== 0) {
-      clearInterval(interval);
+    if (!activeSession && startTime) {
+      const endTime = new Date();
+      const durationSeconds = (endTime - startTime) / 1000;
+      setDuration(durationSeconds);
     }
-    return () => clearInterval(interval);
-  }, [activeSession, timer]);
+  }, [activeSession, startTime]);
 
   return (
     <div className={classes.StudyView}>
@@ -71,8 +72,12 @@ const StudyView = () => {
           progress={progress}
         />
       )}
-      <p>Time: {timer} seconds</p>
       <p className={classes.p}>Score: {score}</p>
+      {!activeSession && (
+        <div>
+          <p>Duration: {duration} seconds</p>
+        </div>
+      )}
     </div>
   );
 };

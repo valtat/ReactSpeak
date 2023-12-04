@@ -6,11 +6,17 @@ const languageRouter = require("./routes/languageRoutes");
 const { connectMongo, connectToRedis } = require("./utils/db");
 const cookieParser = require("cookie-parser");
 var morgan = require("morgan");
+const http = require("http");
 
 const passport = require("passport");
 require("./utils/passport-config")(passport);
 
 const app = express();
+const server = http.createServer(app);
+
+const chat = require("./controllers/chatController");
+
+chat(server);
 
 app.use(express.static("public"));
 
@@ -30,4 +36,4 @@ app.use("/api/v1/countries", countryRouter);
 
 app.use("/api/v1/languages", languageRouter);
 
-module.exports = app;
+module.exports = server;

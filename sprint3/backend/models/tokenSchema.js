@@ -1,3 +1,5 @@
+///////////// OUTDATED, DON'T USE THIS FILE ///////////////
+
 require("dotenv").config();
 
 const { createClient } = require("redis");
