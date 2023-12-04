@@ -12,9 +12,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import "./UserInfo.css";
+import { dummyUserInfo } from "../../../../backend/dummyData/dummyUserInfo";
 
 const UserInfo = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    dummyUserInfo.progressByLanguage[0].language
+  );
 
   const toggleTab = (index) => {
     setActiveTab(index);
@@ -54,7 +58,7 @@ const UserInfo = () => {
                   <span>Username:</span>
                 </div>
                 <div className="info-card">
-                  <span>Test</span>
+                  <span>{dummyUserInfo.username}</span>
                 </div>
               </div>
               <div className="row">
@@ -63,7 +67,7 @@ const UserInfo = () => {
                   <span>Email:</span>
                 </div>
                 <div className="info-card">
-                  <span>test@gmail.com</span>
+                  <span>{dummyUserInfo.email}</span>
                 </div>
               </div>
               <div className="row">
@@ -72,7 +76,7 @@ const UserInfo = () => {
                   <span>Registration date:</span>
                 </div>
                 <div className="info-card">
-                  <span>2.12.2023</span>
+                  <span>{dummyUserInfo.registrationDate}</span>
                 </div>
               </div>
               <div className="row">
@@ -81,12 +85,12 @@ const UserInfo = () => {
                   <span>Last login:</span>
                 </div>
                 <div className="info-card">
-                  <span>1.12.2023 12:00</span>
+                  <span>{dummyUserInfo.lastLogin}</span>
                 </div>
               </div>
               <div className="column">
-                <button className="button">Delete Account</button>
                 <button className="button">Change Password</button>
+                <button className="button">Delete Account</button>
               </div>
             </div>
           </div>
@@ -100,7 +104,7 @@ const UserInfo = () => {
                   <span>Default Language:</span>
                 </div>
                 <div className="info-card">
-                  <span>Finnish</span>
+                  <span>{dummyUserInfo.defaultLanguage}</span>
                 </div>
               </div>
               <div className="row">
@@ -109,7 +113,7 @@ const UserInfo = () => {
                   <span>Languages studied:</span>
                 </div>
                 <div className="info-card">
-                  <span>FI, SWE, JP, PL, RU, IT, FR</span>
+                  <span>{dummyUserInfo.languagesStudied}</span>
                 </div>
               </div>
               <div className="row">
@@ -118,7 +122,25 @@ const UserInfo = () => {
                   <span>Progress by language:</span>
                 </div>
                 <div className="info-card">
-                  <span>FI: 100%</span>
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                  >
+                    {dummyUserInfo.languagesStudied[0]
+                      .split(", ")
+                      .map((language, index) => (
+                        <option key={index} value={language}>
+                          {language}
+                        </option>
+                      ))}
+                  </select>
+                  <span>
+                    Progress:
+                    {dummyUserInfo.progressByLanguage.find(
+                      (lang) => lang.language === selectedLanguage
+                    )?.progress || 0}
+                    %
+                  </span>
                 </div>
               </div>
               <div className="row">
@@ -127,7 +149,7 @@ const UserInfo = () => {
                   <span>Sentences learned:</span>
                 </div>
                 <div className="info-card">
-                  <span>125</span>
+                  <span>{dummyUserInfo.sentencesLearned}</span>
                 </div>
               </div>
             </div>
@@ -136,12 +158,22 @@ const UserInfo = () => {
           <div
             className={activeTab === 3 ? "content active-content" : "content"}
           >
-            <ul>
-              <li>
+            <div className="column">
+              <div className="info-card">
                 <FontAwesomeIcon icon={faComments} className="fa-icon" />
                 <span>Profile comments:</span>
-              </li>
-            </ul>
+              </div>
+              <div className="info-card">
+                {dummyUserInfo.profileComments.map((comment, index) => (
+                  <div key={index}>
+                    <p>
+                      {comment.username} at {comment.time} said:
+                    </p>
+                    <p>{comment.comment}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
