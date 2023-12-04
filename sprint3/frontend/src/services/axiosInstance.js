@@ -40,7 +40,8 @@ authInstance.interceptors.response.use(
   async function (error) {
     console.log('Interceptor error:', error);
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    const token = localStorage.getItem("access_token");
+    if (error.response.status === 401 && !originalRequest._retry && token) {
       console.log('401 status code detected, attempting to refresh token...');
       originalRequest._retry = true;
       const access_token = await refreshToken();
