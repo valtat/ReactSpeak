@@ -20,6 +20,8 @@ import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 import AdminPage from "./pages/AdminPage/index.jsx";
+import UserInfoPage from "./pages/UserInfoPage/index.jsx";
+import ChatComponent from "./components/Chat/ChatComponent.jsx";
 
 // import "./assets/css/Country.css";
 import "./App.css";
@@ -31,11 +33,13 @@ const router = createBrowserRouter(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
       <Route index element={<WelcomePage />} />
+      <Route path="/chat" element={<ChatComponent />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
+      {/* <Route element={<ProtectedRoute />}> */}
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/user-info" element={<UserInfoPage />} />
+      {/* </Route> */}
       <Route path="/countries" element={<CountriesPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
