@@ -29,7 +29,7 @@
   color: black;
 }
 
-img {
+.welcomebox img {
   width: auto;
   height: 350px;
   align-self: center;
@@ -62,6 +62,11 @@ img {
   background-color: #f7af68;
   border-radius: 10px;
   width: 23%;
+}
+
+.fa-icon {
+  font-size: 1.5rem;
+  rotate: -45deg;
 }
 
 .course:hover {
