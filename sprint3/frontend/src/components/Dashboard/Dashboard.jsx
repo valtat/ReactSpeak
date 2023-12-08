@@ -12,11 +12,19 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Dashboard.css";
+<<<<<<< Updated upstream
+=======
+import Courses from "./Courses";
+import WelcomeBox from "./WelcomeBox";
+import LatestResults from "./LatestResults";
+import TimeSpent from "./TimeSpent";
+>>>>>>> Stashed changes
 
 export const Dashboard = () => {
   const { username, email } = useContext(AuthContext);
 
   return (
+<<<<<<< Updated upstream
     <div className="parent-container">
       <div className="dashboard-container">
         <div className="user-info">
@@ -104,6 +112,15 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
+=======
+    <div className="dashboard-container">
+      <WelcomeBox />
+      <div className="middle-section">
+        <LatestResults />
+        <TimeSpent />
+      </div>
+      <Courses />
+>>>>>>> Stashed changes
     </div>
   );
 };
