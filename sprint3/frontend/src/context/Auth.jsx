@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import authService from "../services/authService";
 import { jwtDecode } from "jwt-decode";
 
-
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -17,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        
         const token = localStorage.getItem("access_token");
         console.log("Access token is ", token);
         if (token) {
@@ -35,8 +33,6 @@ export const AuthProvider = ({ children }) => {
           setEmail("");
           setRole("");
         }
-
-        
       } catch (error) {
         console.error(error);
       } finally {
@@ -46,7 +42,6 @@ export const AuthProvider = ({ children }) => {
 
     checkToken();
   }, []);
-
 
   const login = async (user) => {
     setLoading(true);
@@ -61,8 +56,8 @@ export const AuthProvider = ({ children }) => {
         setEmail(decodedToken.email);
         setRole(decodedToken.role);
       }
-    // } catch (error) {
-    //   console.error(error);
+      // } catch (error) {
+      //   console.error(error);
     } finally {
       setLoading(false);
     }
@@ -76,7 +71,6 @@ export const AuthProvider = ({ children }) => {
     setEmail("");
     setRole("");
   };
-
 
   return (
     <AuthContext.Provider

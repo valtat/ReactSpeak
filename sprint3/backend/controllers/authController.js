@@ -1,8 +1,11 @@
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../utils/keys");
-const { JWT_REFRESH_SECRET } = require("../utils/keys");
+const {
+  JWT_SECRET,
+  JWT_REFRESH_SECRET,
+  JWT_CHAT_SECRET,
+} = require("../utils/keys");
 const { redisClient } = require("../utils/db");
 
 const registerUser = async (req, res, next) => {
@@ -36,23 +39,8 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res) => {
   const user = req.user;
 
-  const payload = {
-    id: user.id,
-    username: user.username,
-    role: user.role,
-  };
-
-  const accessToken = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: "15m",
-  });
-
-  const expiry = req.body.rememberMe ? 7 : 1;
-
-  const refreshToken = jwt.sign({ id: user._id }, JWT_REFRESH_SECRET, {
-    expiresIn: `${expiry}d`,
-  });
-
-  redisClient.set(refreshToken, user.id, "EX", expiry * 24 * 60 * 60);
+  const accessToken = generateAccessToken(user);
+  const refreshToken = generateRefreshToken(user, req.body.rememberMe);
 
   res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
@@ -78,9 +66,7 @@ const logoutUser = (req, res) => {
 };
 
 const refreshAccessToken = async (req, res) => {
-  console.log('refreshAccessToken called');
   const refresh_token = req.cookies.refresh_token;
-
   try {
     const userId = await redisClient.get(refresh_token);
 
@@ -114,9 +100,52 @@ const refreshAccessToken = async (req, res) => {
   }
 };
 
+const generateChatToken = (req, res) => {
+  const user = req.user;
+  console.log(user);
+
+  const payload = {
+    id: user.id,
+    username: user.username,
+  };
+
+  const chatToken = jwt.sign(payload, JWT_CHAT_SECRET, {
+    expiresIn: "12h",
+  });
+
+  console.log(`Generated Token: ${chatToken}`);
+
+  res.status(200).json({
+    chat_token: chatToken,
+  });
+};
+
+const generateAccessToken = (user) => {
+  const payload = {
+    id: user.id,
+    username: user.username,
+    role: user.role,
+  };
+
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+};
+
+const generateRefreshToken = (user, rememberMe) => {
+  const expiry = rememberMe ? 7 : 1;
+
+  const refreshToken = jwt.sign({ id: user._id }, JWT_REFRESH_SECRET, {
+    expiresIn: `${expiry}d`,
+  });
+
+  redisClient.set(refreshToken, user.id, "EX", expiry * 24 * 60 * 60);
+
+  return refreshToken;
+};
+
 module.exports = {
   registerUser,
   loginUser,
   refreshAccessToken,
   logoutUser,
+  generateChatToken,
 };

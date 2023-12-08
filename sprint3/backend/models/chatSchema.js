@@ -10,11 +10,12 @@ const MessageSchema = new Schema({
 const ChatSchema = new Schema(
   {
     users: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    language1: String,
-    language2: String,
+    spokenLanguage: String,
+    learningLanguage: String,
     messages: [MessageSchema],
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
+
 module.exports = mongoose.model("Chat", ChatSchema);

@@ -1,64 +1,45 @@
-import { useEffect, useState, useRef } from "react";
-import io from "socket.io-client";
+import { useState, useEffect, useRef } from "react";
+import { initializeSocket } from "./socket";
+import authService from "../../services/authService";
 
 const ChatComponent = () => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  const [roomId, setRoomId] = useState(null);
   const spokenLanguage = "English";
   const learningLanguage = "Spanish";
   const socketRef = useRef();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
+    const createChatToken = async () => {
+      console.log("Creating chat token");
+      const response = await authService.createChatToken();
+      if (response.status === 200) {
+        const chatToken = response.data.chat_token;
+        localStorage.setItem("chat_token", chatToken);
+        console.log("Chat token is ", localStorage.chat_token);
+        socketRef.current = initializeSocket(spokenLanguage, learningLanguage);
 
-    socketRef.current = io("localhost:3012/chat", {
-      extraHeaders: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      query: {
-        spokenLanguage,
-        learningLanguage,
-      },
-    });
-
-    socketRef.current.on("connect", () => {
-      console.log("Connected to the server");
-    });
-
-    socketRef.current.on("chat message", (msg) => {
-      console.log(msg);
-      setChat((prevChat) => [...prevChat, msg]);
-    });
-
-    socketRef.current.on("joined room", (roomId) => {
-      console.log("Joined room", roomId);
-      setRoomId(roomId);
-    });
-
-    socketRef.current.on("connect_error", (err) => {
-      console.log(err.message);
-    });
-
-    socketRef.current.on("token expired", async () => {
-      try {
-        const response = await fetch("/api/refresh_token", {
-          method: "POST",
-          credentials: "include",
+        socketRef.current.on("connect", () => {
+          console.log("Connected to the server");
         });
 
-        if (!response.ok) {
-          throw new Error("Refresh token failed");
-        }
+        socketRef.current.on("chat message", (msg) => {
+          console.log(msg);
+          let message = msg.timestamp + " : " + msg.sender + " : " + msg.text;
+          setChat((prevChat) => [...prevChat, message]);
+        });
 
-        const data = await response.json();
-        localStorage.setItem("access_token", data.accessToken);
+        socketRef.current.on("connect_error", (err) => {
+          console.log(err.message);
+        });
 
-        socketRef.current.connect();
-      } catch (err) {
-        console.error(err);
+        socketRef.current.on("joined room", (roomId) => {
+          console.log("Joined room", roomId);
+        });
       }
-    });
+    };
+
+    createChatToken();
 
     return () => {
       console.log("Disconnecting from the server");
@@ -68,21 +49,21 @@ const ChatComponent = () => {
 
   const sendMessage = (event) => {
     event.preventDefault();
-    console.log(socketRef.current.id);
     socketRef.current.emit("chat message", message);
     setMessage("");
   };
 
   return (
     <div>
-      <div>
+      <ul id="messages">
         {chat.map((msg, index) => (
-          <p key={index}>{msg}</p>
+          <li key={index}>{msg}</li>
         ))}
-      </div>
+      </ul>
       <form onSubmit={sendMessage}>
         <input
-          type="text"
+          id="m"
+          autoComplete="off"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />

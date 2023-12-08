@@ -24,7 +24,10 @@ authInstance.interceptors.request.use(
 const refreshToken = async () => {
   try {
     const response = await authInstance.post("/refresh-token");
-    console.log("REfresh token from axiosInstance: ", response.data.access_token);
+    console.log(
+      "REfresh token from axiosInstance: ",
+      response.data.access_token
+    );
 
     return response.data.access_token;
   } catch (error) {
@@ -38,14 +41,20 @@ authInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.log('Interceptor error:', error);
+    console.log("Interceptor error:", error);
     const originalRequest = error.config;
     const token = localStorage.getItem("access_token");
-    if (error.response.status === 401 && !originalRequest._retry && token) {
-      console.log('401 status code detected, attempting to refresh token...');
+
+    if (
+      error.response.status === 401 &&
+      !originalRequest._retry &&
+      token &&
+      !originalRequest.url.includes("/refresh-token")
+    ) {
+      console.log("401 status code detected, attempting to refresh token...");
       originalRequest._retry = true;
       const access_token = await refreshToken();
-      
+
       console.log("Token refreshed:", access_token);
       localStorage.setItem("access_token", access_token);
       authInstance.defaults.headers.common["Authorization"] =
