@@ -39,14 +39,16 @@ const StudyView = () => {
     ) {
       return;
     }
-    if (translationSelected === correctTranslation) {
-      console.log("Correct");
-      setScore((s) => s + 1);
-    } else {
-      console.log("Incorrect");
-    }
-    setActiveWord((a) => a + 1);
-    setTranslationSelected("");
+    setTimeout(() => {
+      if (translationSelected === correctTranslation) {
+        console.log("Correct");
+        setScore((s) => s + 1);
+      } else {
+        console.log("Incorrect");
+      }
+      setActiveWord((a) => a + 1);
+      setTranslationSelected("");
+    }, 1500);
   }, [correctTranslation, translationSelected, activeSession]);
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const StudyView = () => {
           setCorrectTranslation={setCorrectTranslation}
           setTranslationSelected={setTranslationSelected}
           progress={progress}
+          translationSelected={translationSelected}
         />
       )}
       <p className={classes.p}>Score: {score}</p>
