@@ -19,8 +19,7 @@
   
   .Navbar li a {
     text-decoration: none;
-    color: #0f5259;
-    font-family: Inter;
+    color: #3F485B;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -29,30 +28,29 @@
   }
   
   .Navbar a:hover {
-    color: #167373;
+    color: #5a6783;
   }
 
   .Navbar button {
     width: 143px;
     height: 3rem;
     margin-left: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid #167373;
-    border-bottom: 2.5px solid #167373;
+    border-radius: 10px;
     transition: all 0.3s ease;
-    background-color: #9fd3cb;
-    text-shadow: none;
+    background-color: #C4D3F2;
     font-size: 1.2rem;
     font-weight: 400;
-    color: #0f5259;
+    color: #3F485B;
     text-align: center;
     letter-spacing: 0.1rem;
-    font-family: 'Roboto', sans-serif;
+    border: none;
   }
 
   .Navbar button:hover {
-    background-color: #17A597;
-    color: #fff;
+    background-color: #F2C4D3;
+    color: #3F485B;
+    border: none;
+    cursor: pointer;
   }
   
 
@@ -77,7 +75,7 @@
         right: 5%;
         font-size: 40px;
         cursor: pointer;
-        color: #0f5259;
+        color: #3F485B;
       }
 
       .Navbar nav ul {
@@ -87,8 +85,8 @@
         top: 100px;
         right: 0;
         width: 100%;
-        background: #9fd3cb;
-        border-top: 2px solid #167373;
+        background: #fff;
+        border-top: 2px solid #3F485B;
         z-index: 1000;
       }
 

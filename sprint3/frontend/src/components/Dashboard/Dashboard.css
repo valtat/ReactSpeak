@@ -1,171 +1,75 @@
-.parent-container {
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  align-items: center;
-  justify-content: space-around;
-}
-
 .dashboard-container {
   display: flex;
-  padding: 2rem;
-  font-size: 1.8rem;
   flex-direction: column;
-  text-align: left;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F5F5F5;
+  height: calc(100vh - 160px);
+  width: 100vw;
+}
+
+.welcomebox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f7e868;
+  height: 20vh;
+  width: 80%;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
   color: black;
-  background-color: white;
-  border-radius: 10px;
-  margin: 0.5rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.dashboard-button {
-  background-color: #9fd3cb;
-  color: white;
-  border-radius: 10px;
-  padding: 0.5rem;
-  margin: 0.8rem;
-  border: none;
-  font-size: 1.5rem;
-  font-family: sans-serif;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.dashboard-button:hover {
-  background-color: #104f45;
-  transition: all 0.2s ease-in-out;
+.welcomebox img {
+  width: auto;
+  height: 350px;
+  align-self: center;
+  margin-right: 1rem;
+  margin-top: 0;
 }
 
 .courses-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: left;
-  flex-wrap: wrap;
-  padding: 1rem;
-  background-color: #9fd3cb;
-  color: white;
-  border-radius: 10px;
-  margin: 0.5rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  width: 80%;
+  height: 15vh;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+
+.courses {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .course {
-  color: black;
-  background-color: #fcf3ef;
-  border-radius: 10px;
-  padding: 1rem;
-  margin: 0.5rem;
   display: flex;
-  width: 33%;
-  justify-content: center;
-  flex-direction: column;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  transition: all 0.5s ease-in-out;
+  padding: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f7af68;
+  border-radius: 10px;
+  width: 23%;
+}
+
+.fa-icon {
+  font-size: 1.5rem;
+  rotate: -45deg;
 }
 
 .course:hover {
   transform: scale(1.05);
-  transition: all 0.5s ease-in-out;
   cursor: pointer;
-}
-
-.activity-container {
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  color: black;
-  background-color: white;
-  border-radius: 10px;
-  padding: 2rem;
-  margin: 0.5rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.inline-row ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  list-style-type: none;
-  padding: 0.5rem;
-}
-
-.inline-row ul li {
-  margin: 0 1rem;
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.icon-text {
-  display: flex;
-  align-items: center;
-}
-
-.fa-icon {
-  margin-right: 1rem;
-}
-
-.weekdays,
-.activities {
-  display: flex;
-  justify-content: space-around;
-  padding: 0.5rem;
-}
-
-.weekdays span {
-  margin-right: 1.2rem;
-}
-
-@media (max-width: 900px) {
-  .parent-container {
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
-  .dashboard-container {
-    font-size: 1.4rem;
-  }
-  .courses-container,
-  .course {
-    font-size: 1rem;
-    padding: 1rem;
-    margin: 1rem;
-  }
-  .dashboard-button {
-    font-size: 1.4rem;
-  }
-  .activity-container {
-    flex-direction: column;
-  }
-  .inline-row ul {
-    flex-direction: column;
-    text-align: left;
-  }
-  .weekdays,
-  .activities {
-    flex-direction: column;
-    text-align: left;
-  }
 }

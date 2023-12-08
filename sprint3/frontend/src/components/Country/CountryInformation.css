@@ -29,10 +29,8 @@
 }
 
 .title {
-  color: #0f5259;
+  color: #3F485B;
   text-align: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: Roboto;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -60,7 +58,6 @@
 .subtitle {
   color: #0f5259;
   text-align: center;
-  font-family: Roboto;
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
@@ -71,7 +68,6 @@
 .text {
   color: #0f5259;
   text-align: center;
-  font-family: Roboto;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -131,7 +127,6 @@
 .language-footer {
   color: #0f5259;
   text-align: center;
-  font-family: Roboto;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
