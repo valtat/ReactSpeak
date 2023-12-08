@@ -23,9 +23,7 @@ import AdminPage from "./pages/AdminPage/index.jsx";
 import UserInfoPage from "./pages/UserInfoPage/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
 
-// import "./assets/css/Country.css";
 import "./App.css";
-// import "./assets/css/Login.css";
 import { AuthProvider } from "./context/Auth.jsx";
 
 const router = createBrowserRouter(
@@ -55,6 +53,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
+
   return (
     <AuthProvider>
       <RouterProvider router={router} />
