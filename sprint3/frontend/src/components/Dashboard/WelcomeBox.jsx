@@ -3,8 +3,7 @@ import AuthContext from "../../context/Auth";
 import img from "../../assets/images/woman.png";
 
 const WelcomeBox = () => {
-  //const { username } = useContext(AuthContext);
-  const username = "User";
+  const { username } = useContext(AuthContext);
   return (
     <div className="welcomebox">
       <div className="welcome-text">
