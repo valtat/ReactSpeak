@@ -8,12 +8,12 @@ const TestLayout = () => {
   const navigate = useNavigate();
   const { isLogged } = useContext(AuthContext);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (isLogged) 
       navigate("/dashboard");
     else
       navigate("/login");
-  }, []);
+  }, []); */
 
   return (
     <div>
