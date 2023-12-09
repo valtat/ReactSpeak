@@ -19,7 +19,7 @@ import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
-import UserInfoPage from "./pages/UserInfoPage/index.jsx";
+import ProfilePage from "./pages/ProfilePage/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
 
 import "./App.css";
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<Register />} />
       {/* <Route element={<ProtectedRoute />}> */}
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/user-info" element={<UserInfoPage />} />
+      {<Route path="/profile" element={<ProfilePage />} />}
       {/* </Route> */}
       <Route path="/countries" element={<CountriesPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -51,7 +51,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-
   return (
     <AuthProvider>
       <RouterProvider router={router} />

@@ -11,13 +11,13 @@ import {
   faFlag,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import "./UserInfo.css";
-import { dummyUserInfo } from "../../../../backend/dummyData/dummyUserInfo";
+import "./Profile.css";
+import { dummyProfile } from "../../../../backend/dummyData/dummyProfile";
 
-const UserInfo = () => {
+const Profile = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [selectedLanguage, setSelectedLanguage] = useState(
-    dummyUserInfo.progressByLanguage[0].language
+    dummyProfile.progressByLanguage[0].language
   );
 
   const toggleTab = (index) => {
@@ -58,7 +58,7 @@ const UserInfo = () => {
                   <span>Username:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.username}</span>
+                  <span>{dummyProfile.username}</span>
                 </div>
               </div>
               <div className="row">
@@ -67,7 +67,7 @@ const UserInfo = () => {
                   <span>Email:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.email}</span>
+                  <span>{dummyProfile.email}</span>
                 </div>
               </div>
               <div className="row">
@@ -76,7 +76,7 @@ const UserInfo = () => {
                   <span>Registration date:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.registrationDate}</span>
+                  <span>{dummyProfile.registrationDate}</span>
                 </div>
               </div>
               <div className="row">
@@ -85,7 +85,7 @@ const UserInfo = () => {
                   <span>Last login:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.lastLogin}</span>
+                  <span>{dummyProfile.lastLogin}</span>
                 </div>
               </div>
               <div className="column">
@@ -104,7 +104,7 @@ const UserInfo = () => {
                   <span>Default Language:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.defaultLanguage}</span>
+                  <span>{dummyProfile.defaultLanguage}</span>
                 </div>
               </div>
               <div className="row">
@@ -113,7 +113,7 @@ const UserInfo = () => {
                   <span>Languages studied:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.languagesStudied}</span>
+                  <span>{dummyProfile.languagesStudied}</span>
                 </div>
               </div>
               <div className="row">
@@ -126,7 +126,7 @@ const UserInfo = () => {
                     value={selectedLanguage}
                     onChange={(e) => setSelectedLanguage(e.target.value)}
                   >
-                    {dummyUserInfo.languagesStudied[0]
+                    {dummyProfile.languagesStudied[0]
                       .split(", ")
                       .map((language, index) => (
                         <option key={index} value={language}>
@@ -136,7 +136,7 @@ const UserInfo = () => {
                   </select>
                   <span>
                     Progress:
-                    {dummyUserInfo.progressByLanguage.find(
+                    {dummyProfile.progressByLanguage.find(
                       (lang) => lang.language === selectedLanguage
                     )?.progress || 0}
                     %
@@ -149,7 +149,7 @@ const UserInfo = () => {
                   <span>Sentences learned:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyUserInfo.sentencesLearned}</span>
+                  <span>{dummyProfile.sentencesLearned}</span>
                 </div>
               </div>
             </div>
@@ -164,7 +164,7 @@ const UserInfo = () => {
                 <span>Profile comments:</span>
               </div>
               <div className="info-card">
-                {dummyUserInfo.profileComments.map((comment, index) => (
+                {dummyProfile.profileComments.map((comment, index) => (
                   <div key={index}>
                     <p>
                       {comment.username} at {comment.time} said:
@@ -181,4 +181,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default Profile;
