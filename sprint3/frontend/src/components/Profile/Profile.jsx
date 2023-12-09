@@ -13,16 +13,90 @@ import {
 import { useState } from "react";
 import "./Profile.css";
 import { dummyProfile } from "../../../../backend/dummyData/dummyProfile";
+import Modal from "react-modal";
+import userService2 from "../../services/userService2";
+import { useNavigate } from "react-router-dom";
+
+Modal.setAppElement("#root");
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [selectedLanguage, setSelectedLanguage] = useState(
     dummyProfile.progressByLanguage[0].language
   );
+  const [changePasswordModalIsOpen, setChangePasswordModalIsOpen] =
+    useState(false);
+  const [deleteAccountModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const Navigate = useNavigate();
+
+  const MODAL_TYPE = {
+    CHANGE_PASSWORD: "CHANGE_PASSWORD",
+    DELETE_ACCOUNT: "DELETE_ACCOUNT",
+  };
+
+  function openModal(modalType) {
+    switch (modalType) {
+      case MODAL_TYPE.CHANGE_PASSWORD:
+        setChangePasswordModalIsOpen(true);
+        break;
+      case MODAL_TYPE.DELETE_ACCOUNT:
+        setDeleteModalIsOpen(true);
+        break;
+      default:
+        break;
+    }
+  }
+
+  function closeModal(modalType) {
+    switch (modalType) {
+      case MODAL_TYPE.CHANGE_PASSWORD:
+        setChangePasswordModalIsOpen(false);
+        break;
+      case MODAL_TYPE.DELETE_ACCOUNT:
+        setDeleteModalIsOpen(false);
+        break;
+      default:
+        break;
+    }
+  }
 
   const toggleTab = (index) => {
     setActiveTab(index);
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setErrorMessage("");
+
+    if (newPassword !== confirmNewPassword) {
+      setErrorMessage(
+        "The new password and confirm password fields do not match."
+      );
+      return;
+    }
+    userService2.changePassword(oldPassword, newPassword).then((res) => {
+      if (res.status === 200) {
+        closeModal(MODAL_TYPE.CHANGE_PASSWORD);
+      } else {
+        setErrorMessage(res.data.message);
+      }
+    });
+  }
+
+  function handleDeleteAccount(e) {
+    e.preventDefault();
+    userService2.deleteUser().then((res) => {
+      if (res.status === 200) {
+        Navigate("/login");
+      } else {
+        setErrorMessage(res.data.message);
+      }
+    });
+  }
 
   return (
     <div className="parent-container">
@@ -89,8 +163,73 @@ const Profile = () => {
                 </div>
               </div>
               <div className="column">
-                <button className="button">Change Password</button>
-                <button className="button">Delete Account</button>
+                <Modal
+                  className="modal"
+                  isOpen={changePasswordModalIsOpen}
+                  onRequestClose={() => closeModal(MODAL_TYPE.CHANGE_PASSWORD)}
+                >
+                  <form onSubmit={handleSubmit}>
+                    <h1>Change Password</h1>
+                    <input
+                      type="password"
+                      placeholder="Old Password"
+                      value={oldPassword}
+                      onChange={(e) => setOldPassword(e.target.value)}
+                    />
+                    <input
+                      type="password"
+                      placeholder="New Password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      value={confirmNewPassword}
+                      onChange={(e) => setConfirmNewPassword(e.target.value)}
+                    />
+                    {errorMessage && <p>{errorMessage}</p>}
+                    <button type="submit" className="button">
+                      Submit
+                    </button>
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => closeModal(MODAL_TYPE.CHANGE_PASSWORD)}
+                    >
+                      Close
+                    </button>
+                  </form>
+                </Modal>
+                <Modal
+                  className="modal"
+                  isOpen={deleteAccountModalIsOpen}
+                  onRequestClose={() => closeModal(MODAL_TYPE.DELETE_ACCOUNT)}
+                >
+                  <h1>Delete Account</h1>
+                  <p>Are you sure you want to delete your account?</p>
+                  <button className="button" onClick={handleDeleteAccount}>
+                    Yes, delete my account
+                  </button>
+                  <button
+                    className="button"
+                    onClick={() => closeModal(MODAL_TYPE.DELETE_ACCOUNT)}
+                  >
+                    No, keep my account
+                  </button>
+                </Modal>
+                <button
+                  className="button"
+                  onClick={() => openModal(MODAL_TYPE.CHANGE_PASSWORD)}
+                >
+                  Change Password
+                </button>
+                <button
+                  className="button"
+                  onClick={() => openModal(MODAL_TYPE.DELETE_ACCOUNT)}
+                >
+                  Delete Account
+                </button>
               </div>
             </div>
           </div>
