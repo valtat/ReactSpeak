@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import { useContext } from "react";
-import AuthContext from "../../context/Auth";
+import { AuthContext } from "../../context/AuthContext";
 
 const PageLinks = (props) => {
   const { isLogged, logout, username, role } = useContext(AuthContext);
@@ -19,18 +19,29 @@ const PageLinks = (props) => {
       </li>
       {isLogged ? (
         <>
-          <li onClick={() => {props.isMobile && props.closeMobileMenu(); logout()}}>
-            
-              <Button name="Log out" />
-            
+          <li
+            onClick={() => {
+              props.isMobile && props.closeMobileMenu();
+              logout();
+            }}
+          >
+            <Button name="Log out" />
           </li>
-          <li onClick={() => {props.isMobile && props.closeMobileMenu()}}>
+          <li
+            onClick={() => {
+              props.isMobile && props.closeMobileMenu();
+            }}
+          >
             <Link to="/dashboard">
               <Button name={`Hi, ${username}!`} />
             </Link>
           </li>
           {role === "admin" && (
-            <li onClick={() => {props.isMobile && props.closeMobileMenu()}}>
+            <li
+              onClick={() => {
+                props.isMobile && props.closeMobileMenu();
+              }}
+            >
               <Link to="/">
                 <Button name="Admin tools" />
               </Link>
@@ -51,7 +62,6 @@ const PageLinks = (props) => {
           </li>
         </>
       )}
-      
     </ul>
   );
 };

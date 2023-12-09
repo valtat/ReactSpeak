@@ -24,7 +24,7 @@ import ChatComponent from "./components/Chat/ChatComponent.jsx";
 // import "./assets/css/Country.css";
 import "./App.css";
 // import "./assets/css/Login.css";
-import { AuthProvider } from "./context/Auth.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

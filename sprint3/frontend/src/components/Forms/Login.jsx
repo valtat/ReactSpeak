@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import AuthContext from "../../context/Auth";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
 
 export const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -32,19 +33,16 @@ export const Login = () => {
       navigate("/dashboard");
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('No Server Response');
-    } else if (err.response?.status === 400) {
-        setErrMsg('Missing Username or Password');
-    } else if (err.response?.status === 401) {
-        setErrMsg('Unauthorized');
-    } else if (err.response?.status === 404) {
-        setErrMsg('User Not Found');
-    }
-    else {
-        setErrMsg('Login Failed');
-    }
-    } finally {
-      setLoading(false);
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else if (err.response?.status === 404) {
+        setErrMsg("User Not Found");
+      } else {
+        setErrMsg("Login Failed");
+      }
     }
     errRef.current.focus();
   };
