@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import AuthContext from "../../context/Auth";
 import { useAuth } from "../../hooks/useAuth";
+import { AuthStateContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
@@ -10,7 +10,7 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { loading } = useContext(AuthStateContext);
 
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -26,7 +26,6 @@ export const Login = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    setLoading(true);
     try {
       const userLogin = { email, password };
       await login(userLogin);

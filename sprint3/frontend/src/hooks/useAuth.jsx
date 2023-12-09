@@ -1,10 +1,12 @@
-import { useReducer, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+import { AuthDispatchContext } from "../context/AuthContext";
 import authService from "../services/authService";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
-  const { state, dispatch } = useContext(AuthContext);
+  const dispatch = useContext(AuthDispatchContext);
+  const navigate = useNavigate();
 
   const login = async (userLogin) => {
     dispatch({ type: "LOADING" });
@@ -15,14 +17,10 @@ export const useAuth = () => {
       localStorage.setItem("access_token", access_token);
       dispatch({
         type: "LOGIN",
-        username: decodedToken.username,
-        email: decodedToken.email,
-        role: decodedToken.role,
+        payload: decodedToken,
       });
     } catch (error) {
-      dispatch({ type: "ERROR", error: response.error });
-    } finally {
-      dispatch({ type: "DONE_LOADING" });
+      dispatch({ type: "ERROR", error });
     }
   };
 
@@ -30,7 +28,8 @@ export const useAuth = () => {
     localStorage.clear();
     await authService.logout();
     dispatch({ type: "LOGOUT" });
+    navigate("/login");
   };
 
-  return { state, login, logout };
+  return { login, logout };
 };

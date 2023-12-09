@@ -16,9 +16,9 @@ function reducer(state, action) {
       return {
         ...state,
         isLogged: true,
-        username: action.username,
-        email: action.email,
-        role: action.role,
+        username: action.payload.username,
+        email: action.payload.email,
+        role: action.payload.role,
         loading: false,
         error: null,
       };
@@ -29,31 +29,31 @@ function reducer(state, action) {
     case "DONE_LOADING":
       return { ...state, loading: false };
     case "ERROR":
-      return { ...state, error: action.error };
+      return { ...state, loading: false, error: action.error };
     default:
       throw new Error();
   }
 }
 
-export const AuthContext = createContext(initialState);
+export const AuthStateContext = createContext(initialState);
+
+export const AuthDispatchContext = createContext(() => {
+  throw new Error("AuthDispatchContext must be used within an AuthProvider");
+});
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("state", state);
 
   useEffect(() => {
     const checkToken = async () => {
       dispatch({ type: "LOADING" });
       try {
         const token = localStorage.getItem("access_token");
-        console.log("Access token is ", token);
         if (token) {
           const decodedToken = jwtDecode(token);
           dispatch({
             type: "LOGIN",
-            username: decodedToken.username,
-            email: decodedToken.email,
-            role: decodedToken.role,
+            payload: decodedToken,
           });
           await authService.verifyToken();
         } else {
@@ -70,8 +70,10 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthStateContext.Provider value={state}>
+      <AuthDispatchContext.Provider value={dispatch}>
+        {children}
+      </AuthDispatchContext.Provider>
+    </AuthStateContext.Provider>
   );
 };

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthStateContext } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 
 const PageLinks = (props) => {
-  const { isLogged, logout, username, role } = useContext(AuthContext);
+  const { isLogged, username, role } = useContext(AuthStateContext);
+  const { logout } = useAuth();
 
   return (
     <ul>

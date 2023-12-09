@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import AuthContext from "../context/Auth";
+import { AuthStateContext } from "../context/AuthContext";
 
 export default function AdminRoute() {
-  let { isLogged, role, loading } = useContext(AuthContext);
+  let { isLogged, role, loading } = useContext(AuthStateContext);
 
   const isAdmin = role === "admin";
 
   if (loading) {
-    return <span class="loader"></span>;
+    return <span className="loader"></span>;
   }
 
   return isLogged && isAdmin ? <Outlet /> : <Navigate to="/login" />;
