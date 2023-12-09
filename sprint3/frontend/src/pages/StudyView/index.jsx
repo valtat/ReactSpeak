@@ -39,7 +39,7 @@ const StudyView = () => {
     ) {
       return;
     }
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       if (translationSelected === correctTranslation) {
         console.log("Correct");
         setScore((s) => s + 1);
@@ -49,11 +49,9 @@ const StudyView = () => {
       setActiveWord((a) => a + 1);
       setTranslationSelected("");
     }, 1500);
-  }, [correctTranslation, translationSelected, activeSession]);
 
-  useEffect(() => {
-    setProgress((activeWord / (useData.length - 1)) * 100);
-  }, [activeWord, useData.length]);
+    return () => clearTimeout(timeoutId);
+  }, [correctTranslation, translationSelected, activeSession]);
 
   useEffect(() => {
     if (!activeSession && startTime) {
