@@ -8,7 +8,7 @@ export default function AdminRoute() {
   const isAdmin = role === "admin";
 
   if (loading) {
-    return <Outlet />;
+    return <span class="loader"></span>;
   }
 
   return isLogged && isAdmin ? <Outlet /> : <Navigate to="/login" />;
