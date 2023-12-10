@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LineChart } from "recharts";
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { ResponsiveContainer } from "recharts";
 
 const data = {
   week1: [
@@ -74,26 +75,28 @@ export const TimeSpent = () => {
           </div>
         </div>
       </div>
-      <LineChart
-        width={730}
-        height={250}
-        data={data[selectedWeek]}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        {languageKeys.map((key, index) => (
-          <Line
-            key={index}
-            type="monotone"
-            dataKey={key}
-            stroke={getColorByLanguage(key)}
-          />
-        ))}
-      </LineChart>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={730}
+          height={250}
+          data={data[selectedWeek]}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {languageKeys.map((key, index) => (
+            <Line
+              key={index}
+              type="monotone"
+              dataKey={key}
+              stroke={getColorByLanguage(key)}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };
