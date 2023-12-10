@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   height: calc(100vh - 160px);
   width: 100vw;
 }
@@ -47,7 +47,6 @@
   margin-bottom: 2rem;
 }
 
-
 .courses {
   display: flex;
   justify-content: space-between;
@@ -72,4 +71,111 @@
 .course:hover {
   transform: scale(1.05);
   cursor: pointer;
+}
+
+.latest-results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  width: 50%;
+}
+
+.time-spent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  width: 50%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: center;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.latest-results-small-container {
+  flex: 1;
+}
+
+
+.latest-results-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.latest-results-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 100%;
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+
+.time-spent-small-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+
+select {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.middle-section {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  width: 80%;
+}
+
+
+.quiz-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-basis: 100%;
+  flex: 1;
+  width: 100%;
 }
