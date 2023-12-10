@@ -14,12 +14,12 @@ const ProfileSchema = new Schema({
     required: true,
   },
   registrationDate: {
-    type: String,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
   lastLogin: {
-    type: String,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
   defaultLanguage: {
     type: String,

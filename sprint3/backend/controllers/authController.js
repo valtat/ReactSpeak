@@ -1,4 +1,5 @@
 const User = require("../models/userSchema");
+const Profile = require("../models/profileSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/keys");
@@ -42,6 +43,12 @@ const loginUser = async (req, res) => {
     role: user.role,
   };
 
+  await Profile.findOneAndUpdate(
+    { user: user.id },
+    { lastLogin: new Date() },
+    { new: true }
+  );
+
   const accessToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "15m",
   });
@@ -78,7 +85,7 @@ const logoutUser = (req, res) => {
 };
 
 const refreshAccessToken = async (req, res) => {
-  console.log('refreshAccessToken called');
+  console.log("refreshAccessToken called");
   const refresh_token = req.cookies.refresh_token;
 
   try {
