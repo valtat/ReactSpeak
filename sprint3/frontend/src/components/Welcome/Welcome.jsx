@@ -14,7 +14,11 @@ const Welcome = () => {
             {...section}
             // className={section.id === 2 ? classes.reverse : ""}
           >
-            {section.id === 3 && <Link to="/countries"><Button name={"Get Started"}/></Link>}
+            {section.id === 3 && (
+              <Link to="/countries">
+                <Button name={"Get Started"} />
+              </Link>
+            )}
           </WelcomeSection>
         );
       })}

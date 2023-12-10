@@ -7,7 +7,8 @@ const initialState = {
   username: "",
   email: "",
   role: "",
-  loading: false,
+  loading: null,
+  error: null,
 };
 
 function reducer(state, action) {
@@ -23,7 +24,7 @@ function reducer(state, action) {
         error: null,
       };
     case "LOGOUT":
-      return { ...initialState };
+      return { ...initialState, loading: false };
     case "LOADING":
       return { ...state, loading: true };
     case "DONE_LOADING":
@@ -61,13 +62,15 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         dispatch({ type: "ERROR", error });
-      } finally {
-        dispatch({ type: "DONE_LOADING" });
       }
     };
 
     checkToken();
   }, []);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <AuthStateContext.Provider value={state}>

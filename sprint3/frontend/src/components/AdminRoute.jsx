@@ -7,7 +7,7 @@ export default function AdminRoute() {
 
   const isAdmin = role === "admin";
 
-  if (loading) {
+  if (loading === null || loading) {
     return <span className="loader"></span>;
   }
 

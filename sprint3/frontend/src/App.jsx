@@ -17,45 +17,47 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
 import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
-import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
+import PublicRoute from "./components/PublicRoute.jsx";
+import FrontPage from "./pages/FrontPage/index.jsx";
 
 // import "./assets/css/Country.css";
 import "./App.css";
 // import "./assets/css/Login.css";
-import { AuthProvider } from "./context/AuthContext.jsx";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
-      <Route errorElement={<ErrorPage />} />
-      <Route index element={<WelcomePage />} />
-      <Route path="/chat" element={<ChatComponent />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
-      <Route path="/countries" element={<CountriesPage />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route
-        path="/study"
-        element={<StudyView />}
-        loader={languageDataLoader}
-      />
-      <Route path="/countries/:countryName" element={<CountryPage />} />
-    </Route>
-  )
-);
 
 function App() {
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
+        <Route errorElement={<ErrorPage />} />
+        <Route index element={<FrontPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/chat" element={<ChatComponent />} />
+        </Route>
+        <Route path="/countries" element={<CountriesPage />} />
+        <Route
+          path="/study"
+          element={<StudyView />}
+          loader={languageDataLoader}
+        />
+        <Route element={<AdminRoute />}>
+          <Route path="/admintest" element={<div>Admin Route</div>} />
+        </Route>
+        <Route path="/countries/:countryName" element={<CountryPage />} />
+      </Route>
+    )
   );
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
