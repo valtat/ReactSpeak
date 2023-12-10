@@ -46,7 +46,7 @@ const router = createBrowserRouter(
         element={<StudyView />}
         loader={languageDataLoader}
       />
-      <Route path="/countries/:countryName" element={<CountryPage />} />
+      <Route path="/countries/:countryName" element={<CountryPage/>} />
       <Route path="/admin" element={<AdminPage />} />
     </Route>
   )
