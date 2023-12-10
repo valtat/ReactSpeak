@@ -3,16 +3,6 @@ const { Schema } = mongoose;
 
 const ProfileSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
   registrationDate: {
     type: Date,
     default: Date.now,

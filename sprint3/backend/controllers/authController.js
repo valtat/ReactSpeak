@@ -21,6 +21,10 @@ const registerUser = async (req, res, next) => {
       password: hash,
     });
 
+    const profile = await Profile.create({
+      user: user._id,
+    });
+
     res.status(201).json({
       message: "User successfully created",
       username: user.username,
