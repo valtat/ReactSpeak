@@ -33,25 +33,29 @@ function App() {
       <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />} />
         <Route index element={<FrontPage />} />
+
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
+
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/chat" element={<ChatComponent />} />
         </Route>
-        <Route path="/countries" element={<CountriesPage />} />
+
+        <Route element={<AdminRoute />}>
+          <Route path="/admintest" element={<div>Admin Route</div>} />
+        </Route>
+
         <Route
           path="/study"
           element={<StudyView />}
           loader={languageDataLoader}
         />
-        <Route element={<AdminRoute />}>
-          <Route path="/admintest" element={<div>Admin Route</div>} />
-        </Route>
+        <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryName" element={<CountryPage />} />
       </Route>
     )
