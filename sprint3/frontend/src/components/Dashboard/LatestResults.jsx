@@ -1,5 +1,6 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import "bootstrap/dist/css/bootstrap.css";
 
 const quizResults = [
   { language: "Italian", result: 20 },
@@ -11,8 +12,8 @@ const quizResults = [
 export const LatestResults = () => {
   return (
     <div className="latest-results-container">
-      <div className="column">
-        <div className="row">
+      <div className="latest-results-column">
+        <div className="latest-results-row">
           <div className="latest-results-small-container">
             <h2>Latest Quiz Results</h2>
           </div>
@@ -27,11 +28,11 @@ export const LatestResults = () => {
             variant = "danger";
           }
           return (
-            <div className="row" key={index}>
-              <div className="latest-results-small-small-container">
+            <div className="latest-results-row" key={index}>
+              <div className="latest-results-small-container">
                 <h4>{quiz.language}</h4>
               </div>
-              <div className="latest-results-small-small-container">
+              <div className="latest-results-small-container">
                 <ProgressBar
                   now={quiz.result}
                   label={`${quiz.result}%`}
