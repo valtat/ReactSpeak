@@ -78,11 +78,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-radius: 10px;
   padding: 1rem;
-  margin: 1rem;
-  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  width: 50%;
 }
 
 .time-spent-container {
@@ -90,12 +92,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-radius: 10px;
   padding: 1rem;
-  margin: 1rem;
-  gap: 3rem;
-  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  width: 50%;
 }
 
 .column {
@@ -109,23 +112,46 @@
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-self: center;
   width: 100%;
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .latest-results-small-container {
   flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
+}
+
+
+.latest-results-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
   padding: 1rem;
   margin: 1rem;
 }
+
+.latest-results-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 100%;
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+}
+
 
 .time-spent-small-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  
 }
 
 select {
@@ -139,6 +165,17 @@ select {
 
 .middle-section {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  width: 82%;
+  width: 80%;
+}
+
+
+.quiz-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-basis: 100%;
+  flex: 1;
+  width: 100%;
 }
