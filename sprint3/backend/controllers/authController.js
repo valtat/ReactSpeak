@@ -1,6 +1,7 @@
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 const {
   JWT_SECRET,
   JWT_REFRESH_SECRET,
@@ -11,34 +12,34 @@ const { redisClient } = require("../utils/db");
 const registerUser = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    if (password.length < 8) {
-      return res
-        .status(400)
-        .json({ message: "Password less than 8 characters" });
-    }
-    const user = await User.create({
+
+    validateUsername(username);
+
+    await validateExisting(username, email);
+
+    validatePassword(password);
+
+    validateEmail(email);
+
+    await User.create({
       username,
       email,
-      password,
+      password, // Password is hashed in presave
     });
 
     res.status(201).json({
       message: "User successfully created",
-      username: user.username,
-      role: user.role,
     });
   } catch (error) {
-    res.status(400).json({
-      message: "User not successfully created",
-      error: error.message,
-    });
+    next(error);
   }
 };
 
 const loginUser = async (req, res) => {
   const user = req.user;
+  console.log(user);
 
-  const accessToken = generateAccessToken(user);
+  const accessToken = generateAccessToken(user, "15m");
   const refreshToken = generateRefreshToken(user, req.body.rememberMe);
 
   res.cookie("refresh_token", refreshToken, {
@@ -79,15 +80,7 @@ const refreshAccessToken = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const payload = {
-      id: user.id,
-      username: user.username,
-      role: user.role,
-    };
-
-    const accessToken = jwt.sign(payload, JWT_SECRET, {
-      expiresIn: "15m",
-    });
+    const accessToken = generateAccessToken(user, "15m");
 
     res.status(200).json({
       message: "Access token refreshed",
@@ -119,14 +112,14 @@ const generateChatToken = (req, res) => {
   });
 };
 
-const generateAccessToken = (user) => {
+const generateAccessToken = (user, duration) => {
   const payload = {
     id: user.id,
     username: user.username,
     role: user.role,
   };
 
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: duration });
 };
 
 const generateRefreshToken = (user, rememberMe) => {
@@ -139,6 +132,67 @@ const generateRefreshToken = (user, rememberMe) => {
   redisClient.set(refreshToken, user.id, "EX", expiry * 24 * 60 * 60);
 
   return refreshToken;
+};
+
+const validateUsername = (username) => {
+  if (
+    !validator.isAlphanumeric(username) ||
+    !validator.isLength(username, { min: 3, max: 30 })
+  ) {
+    const error = new Error(
+      "Username must be 3-30 characters long and contain only letters and numbers"
+    );
+    error.statusCode = 400;
+    throw error;
+  }
+};
+
+const validateExisting = async (username, email) => {
+  const existingUserByUsername = await User.findOne({ username });
+  if (existingUserByUsername) {
+    const error = new Error("Username already in use");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const existingUserByEmail = await User.findOne({ email });
+  if (existingUserByEmail) {
+    const error = new Error("Email already in use");
+    error.statusCode = 400;
+    throw error;
+  }
+};
+
+const validatePassword = (password) => {
+  if (!validator.isLength(password, { min: 8 })) {
+    const error = new Error("Password must be at least 8 characters long");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (
+    !validator.isStrongPassword(password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+  ) {
+    const error = new Error(
+      "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character"
+    );
+    error.statusCode = 400;
+    throw error;
+  }
+};
+
+const validateEmail = (email) => {
+  if (!validator.isEmail(email)) {
+    const error = new Error("Invalid email");
+    error.statusCode = 400;
+    throw error;
+  }
 };
 
 module.exports = {
