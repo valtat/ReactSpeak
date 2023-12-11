@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Language from "./Language";
-import { countries } from "../../data";
+// import { countries } from "../../data";
 import CountryInformation from "./CountryInformation";
 import "./CountryInformation.css";
+import { CountryContext } from "../../context/CountryContext";
 
 function Languages() {
   useEffect(() => {
@@ -11,6 +12,10 @@ function Languages() {
   }, []);
 
   const { countryName } = useParams();
+  const { countries } = useContext(CountryContext);
+  console.log(countries);
+  const imageUrl = `http://localhost:3001/images/`
+
   const country = countries.find(
     (country) => country.name.toLowerCase() === countryName
   );
@@ -22,17 +27,17 @@ function Languages() {
       <div className="languages">
         {country.languages.map((language) => (
           <Language
-            key={language.languageName}
-            icon={language.icon}
-            languageName={language.languageName}
+            key={language.id}
+            flag={imageUrl + language.flag}
+            languageName={language.language}
           />
         ))}
       </div>
       <div className="information">
-        <CountryInformation info={country.info} />
+        <CountryInformation info={country.description} />
       </div>
       </div>
-      <img src={country.map} alt={country.name} className="map-image" />
+      <img src={imageUrl+country.map} alt={country.name} className="map-image" />
     </div>
   );
 }

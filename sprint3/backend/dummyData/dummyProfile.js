@@ -1,4 +1,4 @@
-export const dummyUserInfo = {
+export const dummyProfile = {
   username: "test",
   email: "test@gmail.com",
   registrationDate: "2.12.2023",

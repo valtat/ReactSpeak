@@ -1,96 +1,195 @@
- .Navbar nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center; 
-    padding: 10px;
+.Navbar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 60vw;
+}
+
+.Navbar .pageLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.Navbar .pageLinks li {
+  margin: 1.5vw;
+}
+
+.Navbar .dropdown {
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.Navbar .dropdown:hover {
+  background-color: #c4d3f2;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Navbar .dropdown .dropdownbtn {
+  cursor: pointer;
+  font-family: inherit;
+  margin: 0;
+  text-transform: capitalize;
+  outline: none;
+  background-color: transparent;
+  color: #3f485b;
+  border: none;
+  width: 145px;
+}
+
+.Navbar .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 10vw;
+  z-index: 1;
+}
+
+.Navbar .dropdown.open .dropdownContent {
+  display: block;
+}
+
+.Navbar .dropdownContent button {
+  width: 100%;
+  padding: 0.5rem;
+  text-align: left;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  color: #3f485b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Navbar .dropdownContent button:hover {
+  background-color: #fff;
+  border: 2px solid #c4d3f2;
+}
+
+.Navbar .navbarButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.Navbar .navbarButtons li {
+  margin: 1vw;
+}
+
+.Navbar li a {
+  text-decoration: none;
+  color: #3f485b;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.1rem;
+}
+
+.Navbar a:hover {
+  color: #5a6783;
+  cursor: pointer;
+}
+
+.Navbar .icon {
+  font-size: 14px;
+  color: #3f485b;
+padding: 0 0.5rem 0 0.5rem;
+}
+
+.Navbar .logout {
+  display: flex;
+  align-items: center;
+}
+
+/* .Navbar button {
+  width: 143px;
+  height: 3rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background-color: #c4d3f2;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #3f485b;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  border: none;
+}
+
+.Navbar button:hover {
+  background-color: #f2c4d3;
+  color: #3f485b;
+  border: none;
+  cursor: pointer;
+} */
+
+.Navbar .MobileNavigation {
+  display: none;
+}
+
+@media (max-width: 990px) {
+  .Navbar .Navigation {
+    display: none;
   }
-  
-  .Navbar nav ul {
+
+  .Navbar .MobileNavigation {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+  }
+
+  .Navbar .MobileNavigation .Burger {
+    position: absolute;
+    right: 5%;
+    font-size: 40px;
+    cursor: pointer;
+    color: #3f485b;
+  }
+
+  .Navbar .linkslist {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100px;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid #3f485b;
+    z-index: 1000;
+  }
+
+  .Navbar .linkslist ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .Navbar nav ul li {
-    margin: 1.5vw;
-  }
-  
-  .Navbar li a {
-    text-decoration: none;
-    color: #3F485B;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.1rem;
-  }
-  
-  .Navbar a:hover {
-    color: #5a6783;
-  }
-
-  .Navbar button {
+  /* .Navbar .linkslist button {
     width: 143px;
     height: 3rem;
     margin-left: 1rem;
     border-radius: 10px;
     transition: all 0.3s ease;
-    background-color: #C4D3F2;
+    background-color: #c4d3f2;
     font-size: 1.2rem;
     font-weight: 400;
-    color: #3F485B;
+    color: #3f485b;
     text-align: center;
     letter-spacing: 0.1rem;
     border: none;
+  } */
+
+  .Navbar {
+    opacity: 1;
   }
-
-  .Navbar button:hover {
-    background-color: #F2C4D3;
-    color: #3F485B;
-    border: none;
-    cursor: pointer;
-  }
-  
-
-  .Navbar .MobileNavigation {
-    display: none;
-  }
-
-
-  
-  @media (max-width: 990px) {
-    .Navbar .Navigation {
-      display: none;
-    }
-
-    .Navbar .MobileNavigation{
-        display: flex;
-        align-items: center;
-    }
-
-    .Navbar .MobileNavigation .Burger {
-        position: absolute;
-        right: 5%;
-        font-size: 40px;
-        cursor: pointer;
-        color: #3F485B;
-      }
-
-      .Navbar nav ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100px;
-        right: 0;
-        width: 100%;
-        background: #fff;
-        border-top: 2px solid #3F485B;
-        z-index: 1000;
-      }
-
-      .Navbar {
-        opacity: 1;
-      }
-    }
+}

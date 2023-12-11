@@ -1,4 +1,4 @@
-import finland from "./assets/images/finland.jpg";
+// import finland from "./assets/images/finland.jpg";
 import france from "./assets/images/france.jpg";
 import russia from "./assets/images/russia.jpg";
 import italy from "./assets/images/italy.jpg";
