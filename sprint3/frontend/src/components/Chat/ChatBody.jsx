@@ -12,39 +12,16 @@ const ChatBody = ({chat}) => {
   return (
     <>
       <header className={classes.bodyHeader}>
-        <p>Hangout with Colleagues</p>
+        <p>Hangout with Locals</p>
         <button className={classes.leave} onClick={handleLeaveChat}>
-          LEAVE CHAT
+          Leave chat
         </button>
       </header>
 
-      <div>
+      <div className={classes.messageContainer}>
         {chat.map((msg, index) => (
           <p key={index}>{msg}</p>
         ))}
-      </div>
-
-      {/*This shows messages sent from you*/}
-      <div className="message__container">
-        <div className="message__chats">
-          <p className="sender__name">You</p>
-          <div className="message__sender">
-            <p>Hello there</p>
-          </div>
-        </div>
-
-        {/*This shows messages received by you*/}
-        <div className="message__chats">
-          <p>Other</p>
-          <div className="message__recipient">
-            <p>Hey, I&apos;m good, you?</p>
-          </div>
-        </div>
-
-        {/*This is triggered when a user is typing*/}
-        <div className="message__status">
-          <p>Someone is typing...</p>
-        </div>
       </div>
     </>
   );
