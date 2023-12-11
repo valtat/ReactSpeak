@@ -27,6 +27,7 @@
   margin: 0;
   padding: 0;
   color: #0f5259;
+  text-align: center;
 }
 
 .adminContainer {
@@ -91,6 +92,16 @@
   margin: 1rem;
 }
 
+.paragraph {
+  text-align: left;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  color: #0f5259;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  flex-basis: content;
+}
+
 label {
   text-align: left;
   font-size: 1.5rem;
@@ -150,6 +161,37 @@ input[type="text"] {
   background-color: #104f45;
   transition: all 0.2s ease-in-out;
 }
+
+.modalContent {
+  all: unset;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%; 
+  width: auto;
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem;
+  text-align: center;
+}
+
+.modalsButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 0 0;
+}
+
 
 @media screen and (max-width: 900px) {
   .adminContainer {
