@@ -1,9 +1,10 @@
+import classes from './Chat.module.css';
 
 const ChatFooter = ({sendMessage, message, setMessage}) => {
 
   return (
-    <div className="chat__footer">
-      <form className="form" onSubmit={sendMessage}>
+    <div className={classes.ChatFooter}>
+      <form className={classes.form} onSubmit={sendMessage}>
         <input
           type="text"
           placeholder="Write message"

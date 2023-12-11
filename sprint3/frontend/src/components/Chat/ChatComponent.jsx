@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
-import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+import classes from "./Chat.module.css";
 
 const ChatComponent = () => {
   const [message, setMessage] = useState("");
@@ -77,13 +77,12 @@ const ChatComponent = () => {
   };
 
   return (
-    <div className="chat">
-    <ChatBar />
-    <div className="chat__main">
+  
+    <div className={classes.Chat}>
       <ChatBody chat={chat}/>
       <ChatFooter sendMessage={sendMessage} message={message} setMessage={setMessage}/>
     </div>
-  </div>
+  
 
       /* <div>
         {chat.map((msg, index) => (

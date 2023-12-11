@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import AuthContext from "../../context/Auth";
 import classes from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,11 +12,27 @@ const NavbarButtons = (props) => {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <ul className={classes.navbarButtons}>
       {isLogged ? (
         <>
           <div
+          ref={dropdownRef}
             className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}
             onClick={toggleOpen}
           >
