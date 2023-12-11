@@ -1,47 +1,56 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./Admin.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const apiUrl = "http://localhost:5000/";
 
 const AdminAddLanguage = () => {
-  const [sentence, setSentence] = useState({
+  const [phrase, setPhrase] = useState({
     language: "English",
     original: "",
     translation: "",
   });
 
+  const [addSaved, setAddSaved] = useState(false);
+
   const handleChange = (e) => {
-    setSentence({
-      ...sentence,
+    setPhrase({
+      ...phrase,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(sentence);
+    console.log(phrase);
 
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(sentence),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // const response = await fetch(apiUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(phrase),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Success:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
-    setSentence({
+    setAddSaved(true);
+    setTimeout(() => {
+      setAddSaved(false);
+    }, 2000);
+
+    setPhrase({
       language: "English",
       original: "",
       translation: "",
@@ -50,7 +59,7 @@ const AdminAddLanguage = () => {
 
   return (
     <div>
-      <h2 className={styles.subtitle}>Add a new sentence</h2>
+      <h2 className={styles.subtitle}>Add a new phrase</h2>
       <div className={styles.tools}>
         <form action="">
           <div className={styles.formGroup}>
@@ -58,7 +67,7 @@ const AdminAddLanguage = () => {
             <select
               name="language"
               id="language"
-              value={sentence.language}
+              value={phrase.language}
               onChange={handleChange}
             >
               <option value="English">English</option>
@@ -71,7 +80,7 @@ const AdminAddLanguage = () => {
               type="text"
               name="original"
               id="original"
-              value={sentence.original}
+              value={phrase.original}
               onChange={handleChange}
             />
           </div>
@@ -81,14 +90,15 @@ const AdminAddLanguage = () => {
               type="text"
               name="translation"
               id="translation"
-              value={sentence.translation}
+              value={phrase.translation}
               onChange={handleChange}
             />
           </div>
         </form>
         <button className={styles.adminButton} onClick={handleSubmit}>
-          Add sentence
+          Add phrase
         </button>
+        {addSaved && <p className={styles.paragraph}>Phrase added! <FontAwesomeIcon icon={faCheck} /></p> }
       </div>
     </div>
   );
