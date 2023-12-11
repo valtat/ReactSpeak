@@ -1,17 +1,21 @@
 import React from "react";
 import styles from "./Admin.module.css";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const AdminEditLanguage = () => {
-  const [sentence, setSentence] = useState({
+  const [phrase, setPhrase] = useState({
     language: "English",
     original: "",
     translation: "",
   });
 
+  const [editSaved, setEditSaved] = useState(false);
+
   const handleChange = (e) => {
-    setSentence({
-      ...sentence,
+    setPhrase({
+      ...phrase,
       [e.target.name]: e.target.value,
     });
   };
@@ -19,20 +23,25 @@ const AdminEditLanguage = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
     console.log("Edit");
-    console.log(sentence);
+    console.log(phrase);
 
     // const response = await fetch(apiUrl, {
     //   method: "PUT",
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
-    //   body: JSON.stringify(sentence),
+    //   body: JSON.stringify(phrase),
     // });
+
+    setEditSaved(true);
+    setTimeout(() => {
+      setEditSaved(false);
+    }, 2000);
   };
 
   return (
     <div>
-      <h2 className={styles.subtitle}>Edit a sentence</h2>
+      <h2 className={styles.subtitle}>Edit a phrase</h2>
       <div className={styles.tools}>
         <form action="">
           <div className={styles.formGroup}>
@@ -40,7 +49,7 @@ const AdminEditLanguage = () => {
             <select
               name="language"
               id="language"
-              value={sentence.language}
+              value={phrase.language}
               onChange={handleChange}
             >
               <option value="English">English</option>
@@ -53,13 +62,13 @@ const AdminEditLanguage = () => {
               type="text"
               name="original"
               id="original"
-              value={sentence.original}
+              value={phrase.original}
               onChange={handleChange}
             />
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="current-translation">Current translation: </label>
-            <div name="current-translation" id="current-translation">
+            <div name="current-translation" id="current-translation" className={styles.paragraph}>
               This is the current translation
             </div>
           </div>
@@ -69,7 +78,7 @@ const AdminEditLanguage = () => {
               type="text"
               name="translation"
               id="translation"
-              value={sentence.translation}
+              value={phrase.translation}
               onChange={handleChange}
             />
           </div>
@@ -77,6 +86,7 @@ const AdminEditLanguage = () => {
         <button className={styles.adminButton} onClick={handleEdit}>
           Save edits
         </button>
+        {editSaved && <p className={styles.paragraph}>Edits saved! <FontAwesomeIcon icon={faCheck} /></p> }
       </div>
     </div>
   );
