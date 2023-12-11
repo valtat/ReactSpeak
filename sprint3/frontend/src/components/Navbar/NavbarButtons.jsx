@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/Auth";
 import classes from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const NavbarButtons = (props) => {
   const { isLogged, logout, username, role } = useContext(AuthContext);
@@ -21,16 +20,19 @@ const NavbarButtons = (props) => {
             className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}
             onClick={toggleOpen}
           >
-            <Button name={`hi, ${username}`} className={classes.dropdownbtn}/>
-            <FontAwesomeIcon icon={faCaretDown} className={classes.icon} />
+            <button className={classes.dropdownbtn}>
+              {`hi, ${username}`}
+              <FontAwesomeIcon icon={faCaretDown} className={classes.icon} />
+            </button>
+
             <div className={classes.dropdownContent}>
-            <li
+              <li
                 onClick={() => {
                   props.isMobile && props.closeMobileMenu();
                 }}
               >
                 <Link to="/dashboard">
-                  <Button name="Profile" />
+                  <button>Profile</button>
                 </Link>
               </li>
               <li
@@ -39,10 +41,10 @@ const NavbarButtons = (props) => {
                 }}
               >
                 <Link to="/dashboard">
-                  <Button name="Dashboard" />
+                  <button>Dashboard</button>
                 </Link>
               </li>
-              
+
               {role === "admin" && (
                 <li
                   onClick={() => {
@@ -50,21 +52,24 @@ const NavbarButtons = (props) => {
                   }}
                 >
                   <Link to="/">
-                    <Button name="Admin tools" />
+                    <button>Admin tools</button>
                   </Link>
                 </li>
               )}
-               <li
-               className={classes.logout}
+              <li
+                className={classes.logout}
                 onClick={() => {
                   props.isMobile && props.closeMobileMenu();
-                  logout()
-                  
+                  logout();
                 }}
               >
-                 <FontAwesomeIcon icon={faSignOutAlt} className={classes.icon} />
-                <Button name="Log out" />
-               
+                <button>
+                  <FontAwesomeIcon
+                    icon={faSignOutAlt}
+                    className={classes.icon}
+                  />
+                  Log out
+                </button>
               </li>
             </div>
           </div>
@@ -73,12 +78,12 @@ const NavbarButtons = (props) => {
         <>
           <li onClick={() => props.isMobile && props.closeMobileMenu()}>
             <Link to="/login">
-              <Button name="Log in" />
+              <button>Log in</button>
             </Link>
           </li>
           <li onClick={() => props.isMobile && props.closeMobileMenu()}>
             <Link to="/register">
-              <Button name="Register" />
+              <button>Register</button>
             </Link>
           </li>
         </>
