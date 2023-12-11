@@ -2,7 +2,10 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
+import axios from "axios";
 import "./CountryInformation.css";
+
+Modal.setAppElement("#root");
 
 function Language({ icon, languageName }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -11,6 +14,17 @@ function Language({ icon, languageName }) {
   const handleOpenModal = useCallback(() => {
     setModalIsOpen(true);
   }, []);
+
+  const handleStart = useCallback(async () => {
+    try {
+      await axios.put("/api/profile/defaultLanguage", {
+        language: languageName,
+      });
+      navigate("/study");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, [languageName, navigate]);
 
   return (
     <div className="language-card">
@@ -29,7 +43,7 @@ function Language({ icon, languageName }) {
       >
         <h2>Start studying {languageName}?</h2>
         <p>By clicking Start, you will be redirected to the study session.</p>
-        <button onClick={() => navigate("/study")}>Start</button>
+        <button onClick={handleStart}>Start</button>
         <button onClick={() => setModalIsOpen(false)}>Close</button>
       </Modal>
     </div>
