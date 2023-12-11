@@ -30,7 +30,7 @@ export const LatestResults = () => {
           return (
             <div className="latest-results-row" key={index}>
               <div className="latest-results-small-container">
-                <h4>{quiz.language}</h4>
+                <p>{quiz.language}</p>
               </div>
               <div className="latest-results-small-container">
                 <ProgressBar

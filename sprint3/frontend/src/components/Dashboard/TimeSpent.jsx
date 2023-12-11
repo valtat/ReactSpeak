@@ -54,16 +54,16 @@ export const TimeSpent = () => {
   );
   return (
     <div className="time-spent-container">
-      <div className="column">
-        <div className="row">
-          <div className="small-container">
+      <div className="time-spent-column">
+        <div className="time-spent-row">
+          <div className="time-spent-small-container">
             <h2>Time Spent</h2>
           </div>
-          <div className="small-container">
-            <div className="row">
+          <div className="time-spent-small-container">
+            <div className="time-spent-row">
               <p>Week</p>
               <select
-                className="select"
+                className="time-spent-select"
                 value={selectedWeek}
                 onChange={(e) => setSelectedWeek(e.target.value)}
               >
@@ -80,7 +80,7 @@ export const TimeSpent = () => {
           width={730}
           height={250}
           data={data[selectedWeek]}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 5, right: 70, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
