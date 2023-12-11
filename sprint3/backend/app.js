@@ -3,10 +3,12 @@ const cors = require("cors");
 const authRouter = require("./routes/authRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
+const adminRouter = require("./routes/adminRoutes");
 const { connectMongo, connectToRedis } = require("./utils/db");
 const cookieParser = require("cookie-parser");
 var morgan = require("morgan");
 const http = require("http");
+const errorMiddleware = require("./middleware/errorMiddleware");
 
 const passport = require("passport");
 require("./utils/passport-config")(passport);
@@ -35,5 +37,9 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/countries", countryRouter);
 
 app.use("/api/v1/languages", languageRouter);
+
+app.use("/api/v1/admin", adminRouter);
+
+app.use(errorMiddleware);
 
 module.exports = server;
