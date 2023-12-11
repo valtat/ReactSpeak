@@ -20,7 +20,7 @@ import CountryPage from "./pages/CountryPage/index.jsx";
 import WelcomePage from "./pages/WelcomePage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
 import AdminPage from "./pages/AdminPage/index.jsx";
-import UserInfoPage from "./pages/UserInfoPage/index.jsx";
+
 import ProfilePage from "./pages/ProfilePage/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
 
