@@ -8,8 +8,12 @@ const languageSchema = new mongoose.Schema({
     unique: true,
   },
   phrases: [phraseSchema],
+  flag: {
+    type: String,
+    required: true,
+  },
 });
 
-const Language = mongoose.model("Language", languageSchema);
+// const Language = mongoose.model("Language", languageSchema);
 
-module.exports = Language;
+module.exports = languageSchema;

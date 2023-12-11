@@ -1,3 +1,5 @@
+
+import MobileNavbarButtons from "./MobileNavbarButtons";
 import classes from "./Navbar.module.css";
 import PageLinks from "./PageLinks";
 import { useState } from "react";
@@ -24,7 +26,12 @@ const MobileNavigation = () => {
     <nav className={classes.MobileNavigation}>
       {open ? closeIcon : burgerIcon}
 
-      {open && <PageLinks isMobile={true} closeMobileMenu={closeMobileMenu} />}
+      {open && 
+      <div className={classes.linkslist}>
+      <PageLinks isMobile={true} closeMobileMenu={closeMobileMenu} />
+      <MobileNavbarButtons isMobile={true} closeMobileMenu={closeMobileMenu} />
+      </div>
+      }
     </nav>
   );
 };

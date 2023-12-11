@@ -26,3 +26,24 @@ body {
 main {
   min-height: calc(100vh - 100px - 60px);
 }
+
+button {
+  width: 143px;
+  height: 3rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background-color: #c4d3f2;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #3f485b;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  border: none;
+}
+
+button:hover {
+  background-color: #f2c4d3;
+  color: #3f485b;
+  border: none;
+  cursor: pointer;
+}

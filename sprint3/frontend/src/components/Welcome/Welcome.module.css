@@ -50,27 +50,7 @@
 }
 
 .text button {
-  margin-top: 30px;
-  width: 143px;
-  height: 3rem;
-  margin-left: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #167373;
-  border-bottom: 2.5px solid #167373;
-  transition: all 0.3s ease;
-  background-color: #9fd3cb;
-  text-shadow: none;
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #0f5259;
-  text-align: center;
-  letter-spacing: 0.1rem;
-  font-family: 'Roboto', sans-serif;
-}
-
-.text button:hover {
-  background-color: #17A597;
-  color: #fff;
+  margin-top: 40px;
 }
 
 @media (max-width: 990px) {
