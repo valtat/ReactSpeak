@@ -114,12 +114,12 @@ const Profile = () => {
           >
             Language Info
           </div>
-          <div
+          {/* <div
             className={activeTab === 3 ? "tabs active-tabs" : "tabs"}
             onClick={() => toggleTab(3)}
           >
             Comments
-          </div>
+          </div> */}
         </div>
         <div className="content-container">
           <div
@@ -262,6 +262,7 @@ const Profile = () => {
                 </div>
                 <div className="info-card">
                   <select
+                    className="profile-select"
                     value={selectedLanguage}
                     onChange={(e) => setSelectedLanguage(e.target.value)}
                   >
