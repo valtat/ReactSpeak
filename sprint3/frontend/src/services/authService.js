@@ -11,6 +11,7 @@ const verifyToken = async () => {
 };
 
 const register = async (userRegister) => {
+  console.log("register", userRegister);
   const response = await axios.post("/register", userRegister, {
     withCredentials: true,
   });

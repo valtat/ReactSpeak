@@ -41,7 +41,7 @@ authInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.log("Interceptor error:", error);
+    //console.log("Interceptor error:", error);
     const originalRequest = error.config;
     const token = localStorage.getItem("access_token");
 

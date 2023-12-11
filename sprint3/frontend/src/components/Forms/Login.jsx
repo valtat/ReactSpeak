@@ -10,7 +10,7 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const { loading } = useContext(AuthStateContext);
+  const { loading, error } = useContext(AuthStateContext);
 
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -26,24 +26,13 @@ export const Login = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    try {
-      const userLogin = { email, password };
-      await login(userLogin);
+    const userLogin = { email, password };
+    const success = await login(userLogin);
+    if (success) {
       navigate("/dashboard");
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else if (err.response?.status === 404) {
-        setErrMsg("User Not Found");
-      } else {
-        setErrMsg("Login Failed");
-      }
+    } else if (error) {
+      setErrMsg(error);
     }
-    errRef.current.focus();
   };
 
   return (

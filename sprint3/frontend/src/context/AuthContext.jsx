@@ -30,7 +30,7 @@ function reducer(state, action) {
     case "DONE_LOADING":
       return { ...state, loading: false };
     case "ERROR":
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error.message };
     default:
       throw new Error();
   }
@@ -51,12 +51,12 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = localStorage.getItem("access_token");
         if (token) {
+          await authService.verifyToken();
           const decodedToken = jwtDecode(token);
           dispatch({
             type: "LOGIN",
             payload: decodedToken,
           });
-          await authService.verifyToken();
         } else {
           dispatch({ type: "LOGOUT" });
         }

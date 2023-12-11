@@ -1,17 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import authService from "../../services/authService";
 import "./Login.css";
+import { useRegister } from "../../hooks/useRegister";
 
 export const Register = () => {
-  const { register } = authService;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { handleRegister, error, loading } = useRegister();
 
   const navigate = useNavigate();
   const usernameRef = useRef();
@@ -28,28 +27,14 @@ export const Register = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (password !== confirmPassword) {
-      setErrMsg("Passwords do not match");
-      return;
-    }
+    const userRegister = { username, email, password, confirmPassword };
+    const error = await handleRegister(userRegister);
 
-    setLoading(true);
-
-    try {
-      const userRegister = { username, email, password };
-      await register(userRegister);
+    if (error) {
+      setErrMsg(error);
+    } else {
       navigate("/login");
-    } catch (err) {
-      if (err.response && err.response.status === 400 ) {
-        setErrMsg('User already exists');
-      } else {
-        setErrMsg("Something went wrong. Please try again later.");
-      }
-      
-    } finally {
-      setLoading(false);
     }
-    errRef.current.focus();
   };
 
   return (
@@ -103,13 +88,13 @@ export const Register = () => {
           <button className="submit-button" type="submit" disabled={loading}>
             Register
           </button>
-          <p
+          <div
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"} // hide error message when empty
             aria-live="assertive" // announce changes to error message
           >
-            {errMsg}
-          </p>
+            {loading ? <p>Loading...</p> : errMsg && <p>{errMsg}</p>}
+          </div>
         </form>
         <Link to="/login" className="link-btn">
           Already have an account? Login!
