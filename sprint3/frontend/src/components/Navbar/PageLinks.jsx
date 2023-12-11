@@ -12,7 +12,7 @@ const PageLinks = (props) => {
         <Link to="/countries">Countries</Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
-        <Link to="/chat">Chat</Link>
+        <Link to="/chat-home">Chat</Link>
       </li>
     </ul>
   );

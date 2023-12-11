@@ -25,6 +25,7 @@ import ChatComponent from "./components/Chat/ChatComponent.jsx";
 import "./App.css";
 import { AuthProvider } from "./context/Auth.jsx";
 import { CountryProvider } from "./context/CountryContext.jsx";
+import ChatHome from "./components/Chat/ChatHome.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route errorElement={<ErrorPage />} />
       <Route index element={<WelcomePage />} />
       <Route path="/chat" element={<ChatComponent />} />
+      <Route path="/chat-home" element={<ChatHome />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       {/* <Route element={<ProtectedRoute />}> */}

@@ -107,10 +107,9 @@ padding: 0 0.5rem 0 0.5rem;
   align-items: center;
 }
 
-.Navbar button {
+/* .Navbar button {
   width: 143px;
   height: 3rem;
-  /* margin-left: 1rem; */
   border-radius: 10px;
   transition: all 0.3s ease;
   background-color: #c4d3f2;
@@ -127,7 +126,7 @@ padding: 0 0.5rem 0 0.5rem;
   color: #3f485b;
   border: none;
   cursor: pointer;
-}
+} */
 
 .Navbar .MobileNavigation {
   display: none;
