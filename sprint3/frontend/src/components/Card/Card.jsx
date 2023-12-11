@@ -9,6 +9,7 @@ const Card = ({
   setTranslationSelected,
   progress,
   translationSelected,
+  stopQuiz,
 }) => {
   const [shuffledTranslations, setShuffledTranslations] = useState([]);
 
@@ -27,7 +28,8 @@ const Card = ({
   return (
     <div className={classes.Card}>
       <div className={classes.progressContainer}>
-        <i className={`fas fa-times ${classes.close}`}></i>
+        <i className={`fas fa-times ${classes.close}`}
+        onClick={stopQuiz}></i>
         <div className={classes.progressBar}>
           <div
             className={classes.activeProgress}

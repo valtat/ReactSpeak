@@ -25,9 +25,9 @@ const ChatHome = () => {
       ) : (
         <div className={classes.container}>
           <h1>Ready to chat, {username}?</h1>
-          <h2>
+          <h3>
           Boost your language skills by chatting with locals! Pick your language and start your learning journey.
-          </h2>
+          </h3>
         <section className={classes.languages}>
           <label>
             Your language
@@ -39,7 +39,7 @@ const ChatHome = () => {
             </select>
           </label>
           <label>
-            Language to boost:
+            Language to boost
             <select
               value={learningLanguage}
               onChange={(e) => setLearningLanguage(e.target.value)}

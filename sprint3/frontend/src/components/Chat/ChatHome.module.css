@@ -24,9 +24,10 @@
     padding-top: 40px;
 }
 
-.ChatHome h2 {
+.ChatHome h3 {
     text-align: center;
     padding: 0 40px;
+    font-size: 24px;
 }
 
 .ChatHome .languages {
