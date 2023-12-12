@@ -52,7 +52,14 @@ const Course = (props) => {
           By clicking Continue, you will be redirected to the study session.
         </p>
         <button onClick={handleStart}>Continue</button>
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setModalIsOpen(false);
+          }}
+        >
+          Close
+        </button>
       </Modal>
     </div>
   );
