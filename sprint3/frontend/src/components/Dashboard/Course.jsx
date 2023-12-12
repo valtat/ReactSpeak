@@ -15,9 +15,20 @@ const Course = (props) => {
 
   const handleStart = useCallback(async () => {
     try {
-      await axios.put("/api/profile/defaultLanguage", {
-        language: props.language,
-      });
+      const token = localStorage.getItem("access_token");
+      await axios.post(
+        "/api/v1/profile/defaultLanguage",
+        {
+          language: props.language,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      //localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
       console.error("Error:", error);

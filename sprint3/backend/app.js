@@ -4,6 +4,7 @@ const authRouter = require("./routes/authRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
 const userRouter = require("./routes/userRoutes");
+const profileRouter = require("./routes/profileRoutes");
 const adminRouter = require("./routes/adminRoutes");
 const { connectMongo, connectToRedis } = require("./utils/db");
 const cookieParser = require("cookie-parser");
@@ -40,6 +41,8 @@ app.use("/api/v1/countries", countryRouter);
 app.use("/api/v1/languages", languageRouter);
 
 app.use("/api/v1/user", userRouter);
+
+app.use("/api/v1/profile", profileRouter);
 
 app.use("/api/v1/admin", adminRouter);
 

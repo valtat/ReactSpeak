@@ -6,14 +6,17 @@ import classes from "./StudyView.module.css";
 import QuizResults from "../../components/Card/QuizResults";
 
 export const loader = async () => {
-  const languageData = await languageService.getLanguage("vietnamese");
+  const defaultLanguage = localStorage.getItem("defaultLanguage");
+  const languageData = await languageService.getLanguage(
+    defaultLanguage.toLowerCase()
+  );
   return { languageData };
 };
 
 const StudyView = () => {
   const { languageData } = useLoaderData();
   const useData = languageData.data.languages;
- 
+
   const [activeWord, setActiveWord] = useState(0);
   const [correctTranslation, setCorrectTranslation] = useState("");
   const [translationSelected, setTranslationSelected] = useState("");
@@ -76,26 +79,31 @@ const StudyView = () => {
 
   const stopQuiz = () => {
     setActiveSession(false);
-  }
+  };
 
   return (
     <div className={classes.StudyView}>
       {activeSession && (
         <>
-        <Card
-          {...useData[activeWord]}
-          setCorrectTranslation={setCorrectTranslation}
-          setTranslationSelected={setTranslationSelected}
-          progress={progress}
-          translationSelected={translationSelected}
-          stopQuiz={stopQuiz}
-        />
-        <p className={classes.p}>Score: {score}</p>
+          <Card
+            {...useData[activeWord]}
+            setCorrectTranslation={setCorrectTranslation}
+            setTranslationSelected={setTranslationSelected}
+            progress={progress}
+            translationSelected={translationSelected}
+            stopQuiz={stopQuiz}
+          />
+          <p className={classes.p}>Score: {score}</p>
         </>
       )}
-      
+
       {!activeSession && (
-        <QuizResults score={score} duration={duration} target={useData.length} restart={resetQuiz}/>
+        <QuizResults
+          score={score}
+          duration={duration}
+          target={useData.length}
+          restart={resetQuiz}
+        />
       )}
     </div>
   );
