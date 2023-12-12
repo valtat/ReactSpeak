@@ -13,19 +13,35 @@ const AdminAddLanguage = () => {
   const [addSaved, setAddSaved] = useState(false);
   const [addFailed, setAddFailed] = useState(false);
 
+  const [message, setMessage] = useState("An error occurred while adding the phrase");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Sanitize input
+    let processedValue = value.replace(/[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
     if (name === "englishMeaning") {
-      setEnglishMeaning(value);
+      setEnglishMeaning(processedValue);
     } else if (name === "language") {
-      setLanguage(value);
+      setLanguage(processedValue);
     } else if (name === "translation") {
-      setTranslation(value);
+      setTranslation(processedValue);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate input
+    if (!englishMeaning || !language || !translation) {
+      console.error("All fields are required");
+      setMessage("All fields are required");
+      setAddFailed(true);
+      setTimeout(() => {
+        setAddFailed(false);
+      }, 3000);
+      return;
+    }
 
     const payload = {
       englishMeaning: englishMeaning,
@@ -48,13 +64,13 @@ const AdminAddLanguage = () => {
         setEnglishMeaning("");
         setLanguage("");
         setTranslation("");
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error("An error occurred while adding the phrase", error);
       setAddFailed(true);
       setTimeout(() => {
         setAddFailed(false);
-      }, 2000);
+      }, 3000);
     }
   };
 
@@ -98,7 +114,7 @@ const AdminAddLanguage = () => {
           Add phrase
         </button>
         {addFailed && (
-          <p className={styles.paragraph}>Phrase not added. Try again.</p>
+          <p className={styles.paragraph}>{message}</p>
         )}
         {addSaved && (
           <p className={styles.paragraph}>

@@ -10,24 +10,48 @@ const AdminEditLanguage = () => {
   const [isFound, setIsFound] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [englishMeaning, setEnglishMeaning] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("Spanish");
   const [translation, setTranslation] = useState("");
   const [newTranslation, setNewTranslation] = useState("");
+  const [message, setMessage] = useState(
+    "An error occurred while adding the phrase"
+  );
+  const [editClicked, setEditClicked] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Sanitize input
+    let processedValue = value.replace(
+      /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
+      ""
+    );
+
     if (name === "englishMeaning") {
-      setEnglishMeaning(value);
+      setEnglishMeaning(processedValue);
     } else if (name === "language") {
-      setLanguage(value);
+      setLanguage(processedValue);
+    } else if (name === "translation") {
+      setTranslation(processedValue);
     } else if (name === "newTranslation") {
-      setNewTranslation(value);
+      setNewTranslation(processedValue);
     }
   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     console.log("Search");
+
+    // Validate input
+    if (!englishMeaning || !language) {
+      console.error("All fields are required");
+      setMessage("All fields are required");
+
+      setSearchPerformed(true);
+      setTimeout(() => {
+        setSearchPerformed(false);
+      }, 3000);
+      return;
+    }
 
     try {
       const data = await adminService.getTranslationInLanguage(
@@ -40,6 +64,11 @@ const AdminEditLanguage = () => {
       setIsFound(true);
     } catch (error) {
       console.error("An error occurred while searching for the phrase", error);
+      setMessage("An error occurred while searching for the phrase");
+      setSearchPerformed(true);
+      setTimeout(() => {
+        setSearchPerformed(false);
+      }, 3000);
     }
     setSearchPerformed(true);
   };
@@ -47,6 +76,18 @@ const AdminEditLanguage = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
     console.log("Edit");
+
+    // Validate input
+    if (!englishMeaning || !language || !newTranslation) {
+      setMessage("All fields are required");
+      setEditClicked(true);
+      setEditSaved(false);
+      setTimeout(() => {
+        setEditSaved(false);
+        setEditClicked(false);
+      }, 3000);
+      return;
+    }
 
     const payload = {
       englishMeaning: englishMeaning,
@@ -61,6 +102,13 @@ const AdminEditLanguage = () => {
       console.log("Phrase edited successfully:", data);
     } catch (error) {
       console.error("An error occurred while editing the phrase", error);
+      setMessage("An error occurred while editing the phrase");
+      setEditClicked(true);
+      setEditSaved(false);
+      setTimeout(() => {
+        setEditSaved(false);
+        setEditClicked(false);
+      }, 3000);
     }
     setEditSaved(true);
     setIsFound(false);
@@ -68,8 +116,10 @@ const AdminEditLanguage = () => {
     setTimeout(() => {
       setEditSaved(false);
       setEnglishMeaning("");
-      setLanguage("");
+      setLanguage("Spanish");
       setTranslation("");
+      setNewTranslation("");
+      setEditClicked(false);
     }, 2000);
   };
 
@@ -86,7 +136,6 @@ const AdminEditLanguage = () => {
               value={language}
               onChange={handleChange}
             >
-              <option value="English">English</option>
               <option value="Spanish">Spanish</option>
               <option value="French">French</option>
               <option value="Finnish">Finnish</option>
@@ -111,7 +160,7 @@ const AdminEditLanguage = () => {
         {/* show this if phrase is not found */}
 
         {searchPerformed && !isFound && (
-          <p className={styles.paragraph}>Phrase not found. Try again.</p>
+          <p className={styles.paragraph}>{message}</p>
         )}
 
         {/* show this if phrase is found */}
@@ -143,10 +192,18 @@ const AdminEditLanguage = () => {
             </button>
           </form>
         )}
+
+        {/* show this if edits are saved */}
         {editSaved && (
           <p className={styles.paragraph}>
             Edits saved! <FontAwesomeIcon icon={faCheck} />
           </p>
+        )}
+
+        {/* show this if edit is unsuccessfull*/}
+
+        {searchPerformed && !editSaved && editClicked && (
+          <p className={styles.paragraph}>{message}</p>
         )}
       </div>
     </div>
