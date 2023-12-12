@@ -16,7 +16,7 @@ const register = async (userRegister) => {
   });
   console.log("register", response);
   return response;
-}
+};
 
 const login = async (userLogin) => {
   const response = await axios.post("/login", userLogin, {
@@ -30,6 +30,6 @@ const logout = async () => {
   const response = await axios.post("/logout");
   console.log("logout", response);
   return response;
-}
+};
 
 export default { verifyToken, login, logout, register };

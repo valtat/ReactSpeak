@@ -62,7 +62,7 @@ module.exports = (passport) => {
           if (!isMatch) {
             return done(null, false, { message: "Password incorrect" });
           }
-
+          console.log("user", user);
           return done(null, user);
         } catch (err) {
           return done(err);
