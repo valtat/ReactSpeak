@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 var morgan = require("morgan");
 const http = require("http");
 const errorMiddleware = require("./middleware/errorMiddleware");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./swagger.json");
 
 const passport = require("passport");
 require("./utils/passport-config")(passport);
@@ -42,6 +44,8 @@ app.use("/api/v1/languages", languageRouter);
 app.use("/api/v1/user", userRouter);
 
 app.use("/api/v1/admin", adminRouter);
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(errorMiddleware);
 
