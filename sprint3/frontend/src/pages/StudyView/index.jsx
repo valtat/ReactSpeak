@@ -66,6 +66,11 @@ const StudyView = () => {
     }
   }, [activeSession, startTime]);
 
+  useEffect(() => {
+    const newProgress = (activeWord / useData.length) * 100;
+    setProgress(newProgress);
+  }, [activeWord, useData.length]);
+
   const resetQuiz = () => {
     setActiveWord(0);
     setCorrectTranslation("");

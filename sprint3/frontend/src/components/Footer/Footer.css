@@ -33,6 +33,7 @@
   @media  (max-width: 990px) {
    
     .footer-container {
+      margin-top: auto;
       flex-direction: column;
       height: auto;
       justify-content: center;
