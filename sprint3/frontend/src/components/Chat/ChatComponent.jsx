@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { initializeSocket } from "./socket";
-import authService from "../../services/authService";
+import { useEffect, useState, useRef } from "react";
+import io from "socket.io-client";
+import ChatBody from "./ChatBody";
+import ChatFooter from "./ChatFooter";
+import classes from "./Chat.module.css";
 
 const ChatComponent = () => {
   const [message, setMessage] = useState("");
@@ -54,8 +56,16 @@ const ChatComponent = () => {
   };
 
   return (
-    <div>
-      <ul id="messages">
+    <div className={classes.Chat}>
+      <ChatBody chat={chat} />
+      <ChatFooter
+        sendMessage={sendMessage}
+        message={message}
+        setMessage={setMessage}
+      />
+    </div>
+
+    /* <div>
         {chat.map((msg, index) => (
           <li key={index}>{msg}</li>
         ))}
@@ -68,8 +78,7 @@ const ChatComponent = () => {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button type="submit">Send</button>
-      </form>
-    </div>
+      </form> */
   );
 };
 

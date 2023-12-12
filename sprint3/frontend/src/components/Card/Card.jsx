@@ -8,6 +8,8 @@ const Card = ({
   setCorrectTranslation,
   setTranslationSelected,
   progress,
+  translationSelected,
+  stopQuiz,
 }) => {
   const [shuffledTranslations, setShuffledTranslations] = useState([]);
 
@@ -26,7 +28,8 @@ const Card = ({
   return (
     <div className={classes.Card}>
       <div className={classes.progressContainer}>
-        <i className={`fas fa-times ${classes.close}`}></i>
+        <i className={`fas fa-times ${classes.close}`}
+        onClick={stopQuiz}></i>
         <div className={classes.progressBar}>
           <div
             className={classes.activeProgress}
@@ -38,17 +41,29 @@ const Card = ({
       <div className={classes.phrasebox}>
         <h2>{phrase}</h2>
         <div className={classes.choices}>
-          {shuffledTranslations.map((translation, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                handleTranslationSelected(translation);
-                // increaseProgress();
-              }}
-            >
-              {translation}
-            </button>
-          ))}
+          {shuffledTranslations.map((translation, index) => {
+            let buttonClass = "";
+            if (translationSelected) {
+              if (translation === translationSelected) {
+                buttonClass =
+                  translation === correctTranslation
+                    ? classes.correct
+                    : classes.incorrect;
+              } else if (translation === correctTranslation) {
+                buttonClass = classes.correct;
+              }
+            }
+
+            return (
+              <button
+                key={index}
+                onClick={() => handleTranslationSelected(translation)}
+                className={buttonClass}
+              >
+                {translation}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

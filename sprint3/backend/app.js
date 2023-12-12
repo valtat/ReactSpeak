@@ -10,6 +10,7 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 const authRouter = require("./routes/authRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
+const userRouter = require("./routes/userRoutes");
 const adminRouter = require("./routes/adminRoutes");
 
 require("./utils/db");
@@ -36,6 +37,8 @@ app.use("/api/v1/countries", countryRouter);
 app.use("/api/v1/languages", languageRouter);
 
 app.use("/api/v1/admin", adminRouter);
+
+app.use("/api/v1/user", userRouter);
 
 app.use(errorMiddleware);
 

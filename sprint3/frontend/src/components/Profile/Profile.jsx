@@ -16,7 +16,6 @@ import { dummyProfile } from "../../../../backend/dummyData/dummyProfile";
 import Modal from "react-modal";
 import userService2 from "../../services/userService2";
 import { useNavigate } from "react-router-dom";
-import 
 
 Modal.setAppElement("#root");
 
@@ -88,20 +87,16 @@ const Profile = () => {
     });
   }
 
-  const handleDeleteAccount = async (e) => {
+  function handleDeleteAccount(e) {
     e.preventDefault();
-    try {
-      const res = await userService2.deleteUser();
+    userService2.deleteUser().then((res) => {
       if (res.status === 200) {
-        await authService.logout();
         Navigate("/login");
       } else {
         setErrorMessage(res.data.message);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    });
+  }
 
   return (
     <div className="parent-container">
@@ -119,12 +114,12 @@ const Profile = () => {
           >
             Language Info
           </div>
-          <div
+          {/* <div
             className={activeTab === 3 ? "tabs active-tabs" : "tabs"}
             onClick={() => toggleTab(3)}
           >
             Comments
-          </div>
+          </div> */}
         </div>
         <div className="content-container">
           <div
@@ -267,6 +262,7 @@ const Profile = () => {
                 </div>
                 <div className="info-card">
                   <select
+                    className="profile-select"
                     value={selectedLanguage}
                     onChange={(e) => setSelectedLanguage(e.target.value)}
                   >

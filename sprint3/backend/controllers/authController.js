@@ -1,4 +1,5 @@
 const User = require("../models/userSchema");
+const Profile = require("../models/profileSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
@@ -21,10 +22,14 @@ const registerUser = async (req, res, next) => {
 
     validateEmail(email);
 
-    await User.create({
+    const user = await User.create({
       username,
       email,
       password, // Password is hashed in presave
+    });
+
+    await Profile.create({
+      user: user._id,
     });
 
     res.status(201).json({
@@ -37,6 +42,18 @@ const registerUser = async (req, res, next) => {
 
 const loginUser = async (req, res) => {
   const user = req.user;
+
+  const payload = {
+    id: user.id,
+    username: user.username,
+    role: user.role,
+  };
+
+  await Profile.findOneAndUpdate(
+    { user: user.id },
+    { lastLogin: new Date() },
+    { new: true }
+  );
   console.log(user);
 
   const accessToken = generateAccessToken(user, "15m");

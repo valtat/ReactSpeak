@@ -1,28 +1,44 @@
-const countryModel = require("../models/dummyCountryModel");
+// const countryModel = require("../models/dummyCountryModel");
+const Country = require("../models/countrySchema");
 
-const returnSingleCountry = (req, res) => {
-  const country = countryModel.returnSingleCountry(req.params.country);
-  if (country) {
-    res.status(200).json({
-      status: "success",
-      data: {
-        country,
-      },
-    });
-  } else {
-    res.status(404).json({
-      status: "fail",
-      message: "Country not found",
-    });
+const returnSingleCountry = async (req, res) => {
+  try {
+    const country = await Country.findById(req.params.id);
+    if (country == null) {
+      return res.status(404).json({ message: "Cannot find country" });
+    }
+    res.json(country);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
 };
 
-const returnAllCountries = (req, res) => {
-  const countries = countryModel.returnAllCountries();
-  res.status(200).json(countries);
+const returnAllCountries = async (req, res) => {
+  try {
+    const countries = await Country.find();
+    res.json(countries);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const addNewCountry = async (req, res) => {
+  const country = new Country({
+    name: req.body.name,
+    languages: req.body.languages,
+    description: req.body.description,
+    map: req.body.map,
+  });
+  try {
+    const newCountry = await country.save();
+    res.status(201).json(newCountry);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 module.exports = {
   returnAllCountries,
   returnSingleCountry,
+  addNewCountry,
 };

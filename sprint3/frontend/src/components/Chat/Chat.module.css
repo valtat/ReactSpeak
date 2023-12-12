@@ -1,0 +1,43 @@
+.Chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 10px;
+    height: 60vh;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 50%;
+    padding: 2%;
+    overflow: auto;
+}
+
+.Chat .bodyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.Chat .messageContainer {
+    width: 100%;
+    height: 80vh;
+    background-color: #f6fdb3;
+    padding: 20px;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
+.ChatFooter {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.Chat .form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

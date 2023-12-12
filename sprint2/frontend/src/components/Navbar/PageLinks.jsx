@@ -15,12 +15,12 @@ const PageLinks = (props) => {
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
         <Link to="/login">
-          <Button name="Log in" />
+          <button name="Log in" />
         </Link>
       </li>
       <li onClick={() => props.isMobile && props.closeMobileMenu()}>
         <Link to="/register">
-          <Button name="Register" />
+          <button name="Register" />
         </Link>
       </li>
     </ul>

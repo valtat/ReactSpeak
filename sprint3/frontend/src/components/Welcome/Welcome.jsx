@@ -1,6 +1,5 @@
 import classes from "./Welcome.module.css";
 import { welcomeSection } from "../../data";
-import Button from "../Navbar/Button";
 import WelcomeSection from "./WelcomeSection";
 import { Link } from "react-router-dom";
 
@@ -16,7 +15,7 @@ const Welcome = () => {
           >
             {section.id === 3 && (
               <Link to="/countries">
-                <Button name={"Get Started"} />
+                <button>Get Started</button>
               </Link>
             )}
           </WelcomeSection>

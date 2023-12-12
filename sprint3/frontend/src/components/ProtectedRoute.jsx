@@ -6,10 +6,9 @@ export default function ProtectedRoute() {
   console.log("ProtectedRoute");
   let { isLogged, loading } = useContext(AuthStateContext);
 
-  return (
-    <>
-      {loading === null || loading}
-      {isLogged ? <Outlet /> : <Navigate to="/login" />}
-    </>
-  );
+  if (loading === null || loading) {
+    return <Outlet />;
+  }
+
+  return isLogged ? <Outlet /> : <Navigate to="/login" />;
 }

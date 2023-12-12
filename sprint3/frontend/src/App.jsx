@@ -13,19 +13,22 @@ import { ResetPassword } from "./components/Forms/ResetPassword.jsx";
 import StudyView, {
   loader as languageDataLoader,
 } from "./pages/StudyView/index.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
+// import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import CountriesPage from "./pages/CountriesPage/index.jsx";
 import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
+import ProfilePage from "./pages/ProfilePage/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 import FrontPage from "./pages/FrontPage/index.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-// import "./assets/css/Country.css";
 import "./App.css";
-// import "./assets/css/Login.css";
+import { AuthProvider } from "./context/Auth.jsx";
+import { CountryProvider } from "./context/CountryContext.jsx";
+import ChatHome from "./components/Chat/ChatHome.jsx";
 
 function App() {
   const router = createBrowserRouter(
@@ -61,7 +64,11 @@ function App() {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <CountryProvider>
+      <RouterProvider router={router} />
+    </CountryProvider>
+  );
 }
 
 export default App;

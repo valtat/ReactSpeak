@@ -6,7 +6,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 1rem;
-    overflow: hidden;  
+    overflow: hidden;
 }
 
 .progressContainer {
@@ -20,6 +20,11 @@
     font-size: 1.5rem;
     margin-right: 1rem;
     color: #0F5259;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: #b36f6f;
 }
 
 .progressBar {
@@ -58,19 +63,17 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    font-family: 'Roboto', sans-serif;
 }
 
 .Card h2 {
     font-size: 1.5rem;
     font-weight: 400;
     padding-bottom: 1.5rem;
-    
+
     color: #000;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    font-family: 'Roboto', sans-serif;
 }
 
 .choices {
@@ -97,7 +100,6 @@
     color: #000;
     text-align: center;
     letter-spacing: 0.1rem;
-    font-family: 'Roboto', sans-serif;
 }
 
 .Card button:hover {
@@ -106,6 +108,13 @@
     cursor: pointer;
 }
 
+.Card button.correct {
+    background-color: #6fb36d;
+}
+
+.Card button.incorrect {
+    background-color: #b36f6f;
+}
 
 
 @media screen and (max-width: 990px) {
@@ -116,18 +125,21 @@
     .Card h2 {
         padding-top: 1rem;
     }
+
     .choices {
         justify-content: space-around;
         flex-wrap: wrap;
     }
+
     .phrasebox {
         height: auto;
         min-height: 60%;
     }
+
     .Card button {
         margin-bottom: 1rem;
         margin-left: 0;
-    }  
+    }
 }
 
 @media (max-height: 800px) {
@@ -139,7 +151,8 @@
     .progressBar {
         margin-bottom: 1rem;
     }
-    .Card button{
+
+    .Card button {
         height: 2rem;
     }
 
