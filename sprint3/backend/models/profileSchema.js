@@ -23,9 +23,7 @@ const ProfileSchema = new Schema({
   sentencesLearned: {
     type: Number,
   },
-  /* profileComments: {
-    type: Array,
-  }, */
+  quizResults: { type: Schema.Types.ObjectId, ref: "Quiz" },
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);
