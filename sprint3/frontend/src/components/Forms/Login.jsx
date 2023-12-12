@@ -32,17 +32,16 @@ export const Login = () => {
       navigate("/dashboard");
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('No Server Response');
-    } else if (err.response?.status === 400) {
-        setErrMsg('Missing Username or Password');
-    } else if (err.response?.status === 401) {
-        setErrMsg('Unauthorized');
-    } else if (err.response?.status === 404) {
-        setErrMsg('User Not Found');
-    }
-    else {
-        setErrMsg('Login Failed');
-    }
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else if (err.response?.status === 404) {
+        setErrMsg("User Not Found");
+      } else {
+        setErrMsg("Login Failed");
+      }
     } finally {
       setLoading(false);
     }
