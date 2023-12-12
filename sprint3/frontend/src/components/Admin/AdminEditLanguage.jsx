@@ -3,81 +3,73 @@ import styles from "./Admin.module.css";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import adminService from "../../services/adminService";
 
 const AdminEditLanguage = () => {
   const [editSaved, setEditSaved] = useState(false);
   const [isFound, setIsFound] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
+  const [englishMeaning, setEnglishMeaning] = useState("");
+  const [language, setLanguage] = useState("");
+  const [translation, setTranslation] = useState("");
+  const [newTranslation, setNewTranslation] = useState("");
 
-  const [phrase, setPhrase] = useState({
-    language: "English",
-    original: "",
-    translation: "",
-  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "englishMeaning") {
+      setEnglishMeaning(value);
+    } else if (name === "language") {
+      setLanguage(value);
+    } else if (name === "newTranslation") {
+      setNewTranslation(value);
+    }
+  };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     console.log("Search");
 
-    // const apiUrl = `http://localhost:5173/api/get-translation/${phrase.original}/${phrase.language.toLowerCase()}`;
+    try {
+      const data = await adminService.getTranslationInLanguage(
+        englishMeaning,
+        language.toLowerCase()
+      );
 
-    // try {
-    //   const response = await fetch(apiUrl);
-
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    //   }
-
-    //   const data = await response.json();
-
-    //   if (data[phrase.original]) {
-    //     setPhrase((prevPhrase) => ({
-    //       ...prevPhrase,
-    //       translation: data[phrase.original],
-    //     }));
-    //     setIsFound(true);
-    //   } else {
-    //     setIsFound(false);
-    //   }
-    // } catch (error) {
-    //   console.error("An error occurred while searching for the phrase", error);
-    // }
-
-    setIsFound(true);
+      console.log("Phrase found:", data);
+      setTranslation(data[englishMeaning]);
+      setIsFound(true);
+    } catch (error) {
+      console.error("An error occurred while searching for the phrase", error);
+    }
     setSearchPerformed(true);
   };
 
-  const handleChange = (e) => {
-    setPhrase({
-      ...phrase,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleEdit = async (e) => {
-    // e.preventDefault();
-    // console.log("Edit");
-    // console.log(phrase);
+    e.preventDefault();
+    console.log("Edit");
 
-    // const apiUrl = `http://localhost:5173/api/update-translation`;
+    const payload = {
+      englishMeaning: englishMeaning,
+      translations: {
+        [language.toLowerCase()]: newTranslation,
+      },
+    };
 
-    // const response = await fetch(apiUrl, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(phrase),
-    // });
-    
-    // const data = await response.json();
-
-    // console.log(data);
-
+    try {
+      const data = await adminService.addOrUpdatePhrase(payload);
+      // Handle the response data as needed
+      console.log("Phrase edited successfully:", data);
+    } catch (error) {
+      console.error("An error occurred while editing the phrase", error);
+    }
     setEditSaved(true);
     setIsFound(false);
     setSearchPerformed(false);
     setTimeout(() => {
       setEditSaved(false);
+      setEnglishMeaning("");
+      setLanguage("");
+      setTranslation("");
     }, 2000);
   };
 
@@ -91,20 +83,23 @@ const AdminEditLanguage = () => {
             <select
               name="language"
               id="language"
-              value={phrase.language}
+              value={language}
               onChange={handleChange}
             >
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
+              <option value="French">French</option>
+              <option value="Finnish">Finnish</option>
+              <option value="Swedish">Swedish</option>
             </select>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="original-language">Phrase in English: </label>
+            <label htmlFor="englishMeaning-language">Phrase in English: </label>
             <input
               type="text"
-              name="original"
-              id="original"
-              value={phrase.original}
+              name="englishMeaning"
+              id="englishMeaning"
+              value={englishMeaning}
               onChange={handleChange}
             />
           </div>
@@ -130,16 +125,16 @@ const AdminEditLanguage = () => {
                 id="current-translation"
                 className={styles.paragraph}
               >
-                {phrase.translation}
+                {translation}
               </div>
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="translation">New translation: </label>
+              <label htmlFor="newTranslation">New translation: </label>
               <input
                 type="text"
-                name="translation"
-                id="translation"
-                value={phrase.translation}
+                name="newTranslation"
+                id="newTranslation"
+                value={newTranslation}
                 onChange={handleChange}
               />
             </div>
