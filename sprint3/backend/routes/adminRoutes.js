@@ -9,6 +9,7 @@ const {
   deletePhrase,
   getAllTranslations,
   getTranslationInLanguage,
+  addOrUpdatePhrase,
 } = require("../controllers/adminController");
 
 const {
@@ -18,6 +19,8 @@ const {
   adminAuth,
 } = require("../middleware/authMiddleware");
 const { get } = require("../models/phraseSchema");
+
+router.post("/add-or-update-phrase", addOrUpdatePhrase);
 
 router.get("/get-translation", getTranslationInLanguage);
 
