@@ -1,13 +1,9 @@
 import React from "react";
-import { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-import axios from "axios";
 import "./CountryInformation.css";
 
 Modal.setAppElement("#root");
 
-function Language({ icon, languageName }) {
+function Language({ flag, languageName }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +26,7 @@ function Language({ icon, languageName }) {
     <div className="language-card">
       <div onClick={handleOpenModal} className="language-link">
         <div className="language-image-container">
-          <img src={icon} alt={languageName} />
+          <img src={flag} alt={languageName} />
         </div>
         <div className="language-footer">
           <h3>{languageName}</h3>

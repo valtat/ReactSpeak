@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
+import ChatBody from "./ChatBody";
+import ChatFooter from "./ChatFooter";
+import classes from "./Chat.module.css";
 
 const ChatComponent = () => {
   const [message, setMessage] = useState("");
@@ -74,8 +77,14 @@ const ChatComponent = () => {
   };
 
   return (
-    <div>
-      <div>
+  
+    <div className={classes.Chat}>
+      <ChatBody chat={chat}/>
+      <ChatFooter sendMessage={sendMessage} message={message} setMessage={setMessage}/>
+    </div>
+  
+
+      /* <div>
         {chat.map((msg, index) => (
           <p key={index}>{msg}</p>
         ))}
@@ -87,8 +96,8 @@ const ChatComponent = () => {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button type="submit">Send</button>
-      </form>
-    </div>
+      </form> */
+   
   );
 };
 
