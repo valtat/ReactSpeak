@@ -14,11 +14,11 @@ const registerUser = async (req, res, next) => {
         .status(400)
         .json({ message: "Password less than 8 characters" });
     }
-    const hash = await bcrypt.hash(password, 10);
+
     const user = await User.create({
       username,
       email,
-      password: hash,
+      password,
     });
 
     const profile = await Profile.create({
