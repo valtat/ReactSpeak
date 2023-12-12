@@ -5,18 +5,43 @@ import { useState } from "react";
 const AdminDelete = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [translation, setTranslation] = useState({
+    englishMeaning: "",
+    language: "",
+  });
+
+  const handleChange = (e) => {
+    setTranslation({
+      ...translation,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleDelete = async (e) => {
     e.preventDefault();
     console.log("Delete");
 
-    // const response = await fetch(apiUrl, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(sentence),
-    // });
+    const apiUrl = "/api/v1/delete-translation";
+
+    try{
+      const response = await fetch(apiUrl, {
+        method : "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(translation),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Success:", data);
+    } catch (error) {
+      console.error("An error occurred while deleting the phrase", error);
+    }
+
     closeModal();
   };
 
@@ -28,22 +53,6 @@ const AdminDelete = () => {
     setIsOpen(false);
   };
 
-  // const handleModal = () => {
-  //   const modal = document.querySelector(".modal");
-  //   modal.style.display = "block";
-
-  //   window.onclick = function (event) {
-  //     if (event.target === modal) {
-  //       modal.style.display = "none";
-  //     }
-  //   };
-
-  //   const span = document.querySelector(".close");
-  //   span.onclick = function () {
-  //     modal.style.display = "none";
-  //   };
-  // };
-
   return (
     <div>
       <h2 className={styles.subtitle}>Delete</h2>
@@ -51,7 +60,7 @@ const AdminDelete = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <select name="language" id="language">
+            <select name="language" id="language" onChange = {handleChange}>
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
             </select>
@@ -60,8 +69,9 @@ const AdminDelete = () => {
             <label htmlFor="original-language">Phrase in English: </label>
             <input
               type="text"
-              name="original-language"
-              id="original-language"
+              name="englishMeaning"
+              id="englishMeaning"
+              onChange = {handleChange}
             />
           </div>
         </form>

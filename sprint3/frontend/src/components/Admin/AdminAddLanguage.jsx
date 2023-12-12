@@ -1,19 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./Admin.module.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
-const apiUrl = "http://localhost:5000/";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const AdminAddLanguage = () => {
   const [phrase, setPhrase] = useState({
     language: "English",
-    original: "",
+    englishMeaning: "",
     translation: "",
   });
 
   const [addSaved, setAddSaved] = useState(false);
+  const [addFailed, setAddFailed] = useState(false);
 
   const handleChange = (e) => {
     setPhrase({
@@ -24,37 +23,52 @@ const AdminAddLanguage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(phrase);
 
-    // const response = await fetch(apiUrl, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(phrase),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    const apiUrl = "http://localhost:5173/api/v1/add-phrase";
 
-    // const data = await response.json();
+    phrase.language = phrase.language.toLowerCase();
 
-    // console.log(data);
+    const newPhrase = {
+      englishMeaning: phrase.englishMeaning,
+      translations: {
+        [phrase.language]: phrase.translation,
+      },
+    };
 
-    setAddSaved(true);
-    setTimeout(() => {
-      setAddSaved(false);
-    }, 2000);
+    console.log(newPhrase), console.log(JSON.stringify(newPhrase));
 
-    setPhrase({
-      language: "English",
-      original: "",
-      translation: "",
-    });
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPhrase),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      if (response.status !== 204) { // 204 means No Content
+        const data = await response.json();
+        console.log("Success:", data);
+      }
+
+      setAddSaved(true);
+      setTimeout(() => {
+        setAddSaved(false);
+      }, 2000);
+
+      setPhrase({
+        language: "English",
+        englishMeaning: "",
+        translation: "",
+      });
+    } catch (error) {
+      console.error("An error occurred while adding the phrase", error);
+      setAddFailed(true);
+    }
   };
 
   return (
@@ -75,12 +89,12 @@ const AdminAddLanguage = () => {
             </select>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="original-language">Phrase in English: </label>
+            <label htmlFor="englishMeaning-language">Phrase in English: </label>
             <input
               type="text"
-              name="original"
-              id="original"
-              value={phrase.original}
+              name="englishMeaning"
+              id="englishMeaning"
+              value={phrase.englishMeaning}
               onChange={handleChange}
             />
           </div>
@@ -98,7 +112,14 @@ const AdminAddLanguage = () => {
         <button className={styles.adminButton} onClick={handleSubmit}>
           Add phrase
         </button>
-        {addSaved && <p className={styles.paragraph}>Phrase added! <FontAwesomeIcon icon={faCheck} /></p> }
+        {addFailed && (
+          <p className={styles.paragraph}>Phrase not added. Try again.</p>
+        )}
+        {addSaved && (
+          <p className={styles.paragraph}>
+            Phrase added! <FontAwesomeIcon icon={faCheck} />
+          </p>
+        )}
       </div>
     </div>
   );

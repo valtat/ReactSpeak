@@ -19,7 +19,7 @@ const {
 } = require("../middleware/authMiddleware");
 const { get } = require("../models/phraseSchema");
 
-router.get("/get-translation", getTranslationInLanguage);
+router.get("/get-translation/:englishMeaning/:language", getTranslationInLanguage);
 
 router.get("/get-phrase", getAllTranslations);
 

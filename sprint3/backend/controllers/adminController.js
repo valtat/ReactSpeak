@@ -22,7 +22,8 @@ const getAllTranslations = async (req, res, next) => {
 
 // Gets a translation (key-value pair) in a specific language
 const getTranslationInLanguage = async (req, res, next) => {
-  const { englishMeaning, language } = req.body;
+
+  const { englishMeaning, language } = req.params;
   try {
     const phrase = await Phrase.findOne({ englishMeaning });
     if (!phrase) {
