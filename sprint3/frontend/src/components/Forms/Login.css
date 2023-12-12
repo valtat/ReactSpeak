@@ -65,6 +65,11 @@ input {
   margin: 0.5rem 0;
 }
 
+.submit-button:hover {
+  background-color: #1a9494;
+  color: #fff;
+}
+
 .link-btn {
   all: unset;
   background: none;
