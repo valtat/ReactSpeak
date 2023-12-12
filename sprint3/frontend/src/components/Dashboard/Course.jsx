@@ -28,7 +28,7 @@ const Course = (props) => {
           },
         }
       );
-      //localStorage.setItem("defaultLanguage", languageName);
+      localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
       console.error("Error:", error);
@@ -52,7 +52,14 @@ const Course = (props) => {
           By clicking Continue, you will be redirected to the study session.
         </p>
         <button onClick={handleStart}>Continue</button>
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setModalIsOpen(false);
+          }}
+        >
+          Close
+        </button>
       </Modal>
     </div>
   );

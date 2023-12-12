@@ -17,8 +17,8 @@ const MobileNavbarButtons = (props) => {
               props.isMobile && props.closeMobileMenu();
             }}
           >
-            <Link to="/dashboard">
-              <button>Profile</button> 
+            <Link to="/profile">
+              <button>Profile</button>
             </Link>
           </li>
           <li
@@ -48,10 +48,10 @@ const MobileNavbarButtons = (props) => {
               logout();
             }}
           >
-            
             <button>
-            <FontAwesomeIcon icon={faSignOutAlt} className={classes.icon} />
-                Log out</button>
+              <FontAwesomeIcon icon={faSignOutAlt} className={classes.icon} />
+              Log out
+            </button>
           </li>
         </>
       ) : (
