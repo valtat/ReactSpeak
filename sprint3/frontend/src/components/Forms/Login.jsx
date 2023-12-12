@@ -38,7 +38,7 @@ export const Login = () => {
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else if (err.response?.status === 404) {
-        setErrMsg("User Not Found");
+        setErrMsg("Incorrect Email or Password ");
       } else {
         setErrMsg("Login Failed");
       }
