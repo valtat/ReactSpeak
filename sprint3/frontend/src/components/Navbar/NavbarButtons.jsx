@@ -32,7 +32,7 @@ const NavbarButtons = (props) => {
       {isLogged ? (
         <>
           <div
-          ref={dropdownRef}
+            ref={dropdownRef}
             className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}
             onClick={toggleOpen}
           >
@@ -47,7 +47,7 @@ const NavbarButtons = (props) => {
                   props.isMobile && props.closeMobileMenu();
                 }}
               >
-                <Link to="/dashboard">
+                <Link to="/profile">
                   <button>Profile</button>
                 </Link>
               </li>
