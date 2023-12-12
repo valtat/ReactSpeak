@@ -5,13 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const AdminEditLanguage = () => {
+
+  
+  const [editSaved, setEditSaved] = useState(false);
+  const [isFound, setIsFound] = useState(false);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
   const [phrase, setPhrase] = useState({
     language: "English",
     original: "",
     translation: "",
   });
 
-  const [editSaved, setEditSaved] = useState(false);
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    console.log("Search");
+    setSearchPerformed(true);
+  };
 
   const handleChange = (e) => {
     setPhrase({
@@ -34,6 +44,7 @@ const AdminEditLanguage = () => {
     // });
 
     setEditSaved(true);
+    setIsFound(false);
     setTimeout(() => {
       setEditSaved(false);
     }, 2000);
@@ -66,6 +77,16 @@ const AdminEditLanguage = () => {
               onChange={handleChange}
             />
           </div>
+          <button className={styles.adminButton} onClick = {handleSearch}>Search</button> </form>
+
+          {/* show this if phrase is not found */}
+
+          {searchPerformed && !isFound && (<p className={styles.paragraph}>Phrase not found. Try again.</p>)}
+
+          {/* show this if phrase is found */}
+
+          {isFound && ( 
+            <form>
           <div className={styles.formGroup}>
             <label htmlFor="current-translation">Current translation: </label>
             <div name="current-translation" id="current-translation" className={styles.paragraph}>
@@ -82,12 +103,12 @@ const AdminEditLanguage = () => {
               onChange={handleChange}
             />
           </div>
-        </form>
         <button className={styles.adminButton} onClick={handleEdit}>
           Save edits
         </button>
+        </form>)}
         {editSaved && <p className={styles.paragraph}>Edits saved! <FontAwesomeIcon icon={faCheck} /></p> }
-      </div>
+        </div>
     </div>
   );
 };
