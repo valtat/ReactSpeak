@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/Auth";
-import classes from "./Chat.module.css";
+import classes from "./ChatHome.module.css";
 
 const ChatHome = () => {
   const navigate = useNavigate();
   const { username, isLogged } = useContext(AuthContext);
 
-  const [motherTongue, setMotherTongue] = useState("");
-  const [languageToBoost, setLanguageToBoost] = useState("");
+  const [spokenLanguage, setSpokenLanguage] = useState("");
+  const [learningLanguage, setLearningLanguage] = useState("");
 
   const handleClick = (e) => {
     e.preventDefault();
     navigate("/chat");
   };
+  
   return (
     <div className={classes.ChatHome}>
       {!isLogged ? (
@@ -24,24 +25,24 @@ const ChatHome = () => {
       ) : (
         <div className={classes.container}>
           <h1>Ready to chat, {username}?</h1>
-          <h2>
+          <h3>
           Boost your language skills by chatting with locals! Pick your language and start your learning journey.
-          </h2>
+          </h3>
         <section className={classes.languages}>
           <label>
             Your language
             <select
-              value={motherTongue}
-              onChange={(e) => setMotherTongue(e.target.value)}
+              value={spokenLanguage}
+              onChange={(e) => setSpokenLanguage(e.target.value)}
             >
               <option value="english">English</option>
             </select>
           </label>
           <label>
-            Language to boost:
+            Language to boost
             <select
-              value={languageToBoost}
-              onChange={(e) => setLanguageToBoost(e.target.value)}
+              value={learningLanguage}
+              onChange={(e) => setLearningLanguage(e.target.value)}
             >
               <option value="finnish">Finnish</option>
               <option value="swedish">Swedish</option>
