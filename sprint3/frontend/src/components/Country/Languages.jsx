@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Language from "./Language";
-// import { countries } from "../../data";
 import CountryInformation from "./CountryInformation";
 import "./CountryInformation.css";
 import { CountryContext } from "../../context/CountryContext";
@@ -14,7 +13,7 @@ function Languages() {
   const { countryName } = useParams();
   const { countries } = useContext(CountryContext);
   console.log(countries);
-  const imageUrl = `http://localhost:3001/images/`
+  const imageUrl = `/images/`
 
   const country = countries.find(
     (country) => country.name.toLowerCase() === countryName

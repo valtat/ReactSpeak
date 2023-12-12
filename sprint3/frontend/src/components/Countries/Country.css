@@ -1,14 +1,39 @@
 :root {
-  --gradient1: linear-gradient(116deg, #F76979 0%, #F7A069 100%);
-  --gradient2: linear-gradient(116deg, #F7A069 0%, #F7E769 100%);
-  --gradient3: linear-gradient(116deg, #F7E769 0%, #CBF785 100%);
-  --gradient4: linear-gradient(116deg, #F76979 0%, #B56AD9 100%);
-  --gradient5: linear-gradient(116deg, #B185F7 0%, #69F7E7 100%);
-  --gradient6: linear-gradient(116deg, #69F7E7 0%, #CBF785 100%);
+  --gradient1: linear-gradient(116deg, #f76979 0%, #f7a069 100%);
+  --gradient2: linear-gradient(116deg, #f7a069 0%, #f7e769 100%);
+  --gradient3: linear-gradient(116deg, #f7e769 0%, #cbf785 100%);
+  --gradient4: linear-gradient(116deg, #f76979 0%, #b56ad9 100%);
+  --gradient5: linear-gradient(116deg, #b185f7 0%, #69f7e7 100%);
+  --gradient6: linear-gradient(116deg, #69f7e7 0%, #cbf785 100%);
+}
+
+.countries-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.countries-container::before {
+  content: "";
+  position: absolute;
+  background-image: url("/images/airplane.png");
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  width: 300px;
+  height: 300px;
+}
+
+.countries-container::before {
+  top: 0;
+  left: 0;
+  transform: scaleX(-1); /* Flip the image horizontally */
 }
 
 .title {
-  color: #3F485B;
+  color: #3f485b;
   text-align: center;
   font-size: 40px;
   font-style: normal;
@@ -53,7 +78,6 @@
 
 .country-image-container {
   height: 100%;
-
 }
 
 .country-img {
@@ -111,5 +135,4 @@
   .country-card:hover {
     transform: none;
   }
-
 }
