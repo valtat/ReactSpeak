@@ -1,73 +1,60 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import adminService from "../../services/adminService";
 
 const AdminAddLanguage = () => {
-  const [phrase, setPhrase] = useState({
-    language: "English",
-    englishMeaning: "",
-    translation: "",
-  });
+  const [englishMeaning, setEnglishMeaning] = useState("");
+  const [language, setLanguage] = useState("");
+  const [translation, setTranslation] = useState("");
 
   const [addSaved, setAddSaved] = useState(false);
   const [addFailed, setAddFailed] = useState(false);
 
   const handleChange = (e) => {
-    setPhrase({
-      ...phrase,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "englishMeaning") {
+      setEnglishMeaning(value);
+    } else if (name === "language") {
+      setLanguage(value);
+    } else if (name === "translation") {
+      setTranslation(value);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = "http://localhost:5173/api/v1/add-phrase";
-
-    phrase.language = phrase.language.toLowerCase();
-
-    const newPhrase = {
-      englishMeaning: phrase.englishMeaning,
+    const payload = {
+      englishMeaning: englishMeaning,
       translations: {
-        [phrase.language]: phrase.translation,
+        [language.toLowerCase()]: translation,
       },
     };
 
-    console.log(newPhrase), console.log(JSON.stringify(newPhrase));
+    console.log("Payload:", payload);
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPhrase),
-      });
+      const data = await adminService.addOrUpdatePhrase(payload);
+      // Handle the response data as needed
+      console.log("Phrase added successfully:", data);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      if (response.status !== 204) { // 204 means No Content
-        const data = await response.json();
-        console.log("Success:", data);
-      }
-
+      // Reset form and show success message
       setAddSaved(true);
       setTimeout(() => {
         setAddSaved(false);
+        setEnglishMeaning("");
+        setLanguage("");
+        setTranslation("");
       }, 2000);
-
-      setPhrase({
-        language: "English",
-        englishMeaning: "",
-        translation: "",
-      });
     } catch (error) {
       console.error("An error occurred while adding the phrase", error);
       setAddFailed(true);
+      setTimeout(() => {
+        setAddFailed(false);
+      }, 2000);
     }
   };
 
@@ -78,15 +65,13 @@ const AdminAddLanguage = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <select
+            <input
+              type="text"
               name="language"
               id="language"
-              value={phrase.language}
+              value={language}
               onChange={handleChange}
-            >
-              <option value="English">English</option>
-              <option value="Spanish">Spanish</option>
-            </select>
+            />
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="englishMeaning-language">Phrase in English: </label>
@@ -94,7 +79,7 @@ const AdminAddLanguage = () => {
               type="text"
               name="englishMeaning"
               id="englishMeaning"
-              value={phrase.englishMeaning}
+              value={englishMeaning}
               onChange={handleChange}
             />
           </div>
@@ -104,7 +89,7 @@ const AdminAddLanguage = () => {
               type="text"
               name="translation"
               id="translation"
-              value={phrase.translation}
+              value={translation}
               onChange={handleChange}
             />
           </div>
