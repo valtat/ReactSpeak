@@ -1,5 +1,6 @@
 const Phrase = require("../models/realLanguageSchema");
 
+//Adds a new phrase with potential translations (key-value pairs) or updates an existing phrase
 const addOrUpdatePhrase = async (req, res, next) => {
   const { englishMeaning, translations } = req.body;
   try {
