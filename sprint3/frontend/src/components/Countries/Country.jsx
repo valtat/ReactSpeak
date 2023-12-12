@@ -10,9 +10,11 @@ function Country({ /*image,*/ name, index }) {
         
           {/* <div className="country-image-container"> */}
             {/* <img src={image} className="country-img" alt={name} /> */}
+            
             <div className="country-footer">
             <h3>{name}</h3>
           </div>
+
           {/* </div> */}
           
         
