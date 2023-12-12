@@ -179,20 +179,9 @@ padding: 0 0.5rem 0 0.5rem;
     height: 100%;
   }
 
-  /* .Navbar .linkslist button {
-    width: 143px;
-    height: 3rem;
-    margin-left: 1rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    background-color: #c4d3f2;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #3f485b;
-    text-align: center;
-    letter-spacing: 0.1rem;
-    border: none;
-  } */
+  .Navbar .linkslist button {
+   white-space: nowrap;
+  }
 
   .Navbar {
     opacity: 1;

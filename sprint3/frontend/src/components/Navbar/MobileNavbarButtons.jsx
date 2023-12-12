@@ -36,7 +36,7 @@ const MobileNavbarButtons = (props) => {
                 props.isMobile && props.closeMobileMenu();
               }}
             >
-              <Link to="/">
+              <Link to="/admin">
                 <button>Admin tools</button>
               </Link>
             </li>
