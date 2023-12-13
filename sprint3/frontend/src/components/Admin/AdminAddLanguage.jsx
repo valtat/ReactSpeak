@@ -4,11 +4,14 @@ import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import adminService from "../../services/adminService";
+import countryService from "../../services/countryService";
+import CreatableSelect from "react-select/creatable";
 
 const AdminAddLanguage = () => {
   const [englishMeaning, setEnglishMeaning] = useState("");
   const [language, setLanguage] = useState("");
   const [translation, setTranslation] = useState("");
+  const [languagesList, setLanguagesList] = useState([]);
 
   const [addSaved, setAddSaved] = useState(false);
   const [addFailed, setAddFailed] = useState(false);
@@ -16,6 +19,20 @@ const AdminAddLanguage = () => {
   const [message, setMessage] = useState(
     "An error occurred while adding the phrase"
   );
+
+  // Get list of languages
+
+  useEffect(() => {
+    const getLanguages = async () => {
+      try {
+        const data = await countryService.getUniqueLanguages();
+        setLanguagesList(data);
+      } catch (error) {
+        console.error("An error occurred while fetching languages", error);
+      }
+    };
+    getLanguages();
+  }, []);
 
   //Handle change in the input fields
 
@@ -90,13 +107,44 @@ const AdminAddLanguage = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <input
+            <div style = {{width: '100%'}}>
+            <CreatableSelect
+              isClearable
               type="text"
               name="language"
               id="language"
-              value={language}
-              onChange={handleChange}
+              className={styles.select}
+              value={language ? { label: language, value: language } : null}
+              onChange={(language) => {
+                setLanguage(language ? language.value : "");
+              }}
+              options={languagesList.map((language) => ({
+                label: language,
+                value: language,
+              }))}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  width: '100%',
+                  padding: '1rem',
+                  border: '1px solid #0f5259',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  backgroundColor: 'white',
+                }),
+                option: (provided) => ({
+                  ...provided,
+                  textAlign: 'center',
+                  fontSize: '1rem',
+                  fontFamily: 'sans-serif',
+                  color: 'black',
+                  backgroundColor: 'white',
+                  padding: '1rem',
+                }),
+              }}
+              placeholder="Type or select a language"
             />
+            </div>
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="englishMeaning-language">Phrase in English: </label>
