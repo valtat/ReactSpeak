@@ -90,6 +90,19 @@ const StudyView = () => {
           },
         }
       );
+      await axios.put(
+        "/api/v1/profile/progress",
+        {
+          language: defaultLanguage,
+          sentencesLearned: score,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.error(`HTTP error! status: ${error.response.status}`);
     }
