@@ -13,12 +13,19 @@ const AdminAddLanguage = () => {
   const [addSaved, setAddSaved] = useState(false);
   const [addFailed, setAddFailed] = useState(false);
 
-  const [message, setMessage] = useState("An error occurred while adding the phrase");
+  const [message, setMessage] = useState(
+    "An error occurred while adding the phrase"
+  );
+
+  //Handle change in the input fields
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Sanitize input
-    let processedValue = value.replace(/[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    // Sanitise input
+    let processedValue = value.replace(
+      /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
+      ""
+    );
 
     if (name === "englishMeaning") {
       setEnglishMeaning(processedValue);
@@ -29,12 +36,13 @@ const AdminAddLanguage = () => {
     }
   };
 
+  //Add the phrase to the database
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate input
     if (!englishMeaning || !language || !translation) {
-      console.error("All fields are required");
       setMessage("All fields are required");
       setAddFailed(true);
       setTimeout(() => {
@@ -43,6 +51,8 @@ const AdminAddLanguage = () => {
       return;
     }
 
+    // Create payload
+
     const payload = {
       englishMeaning: englishMeaning,
       translations: {
@@ -50,12 +60,10 @@ const AdminAddLanguage = () => {
       },
     };
 
-    console.log("Payload:", payload);
+    // Send payload to backend
 
     try {
       const data = await adminService.addOrUpdatePhrase(payload);
-      // Handle the response data as needed
-      console.log("Phrase added successfully:", data);
 
       // Reset form and show success message
       setAddSaved(true);
@@ -67,6 +75,7 @@ const AdminAddLanguage = () => {
       }, 3000);
     } catch (error) {
       console.error("An error occurred while adding the phrase", error);
+      setMessage("An error occurred while adding the phrase");
       setAddFailed(true);
       setTimeout(() => {
         setAddFailed(false);
@@ -113,9 +122,11 @@ const AdminAddLanguage = () => {
         <button className={styles.adminButton} onClick={handleSubmit}>
           Add phrase
         </button>
-        {addFailed && (
-          <p className={styles.paragraph}>{message}</p>
-        )}
+
+        {/* show this if phrase is not added */}
+        {addFailed && <p className={styles.paragraph}>{message}</p>}
+
+        {/* show this if phrase is added */}
         {addSaved && (
           <p className={styles.paragraph}>
             Phrase added! <FontAwesomeIcon icon={faCheck} />
