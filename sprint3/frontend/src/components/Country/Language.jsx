@@ -53,7 +53,14 @@ function Language({ flag, languageName }) {
         <h2>Start studying {languageName}?</h2>
         <p>By clicking Start, you will be redirected to the study session.</p>
         <button onClick={handleStart}>Start</button>
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setModalIsOpen(false);
+          }}
+        >
+          Close
+        </button>
       </Modal>
     </div>
   );

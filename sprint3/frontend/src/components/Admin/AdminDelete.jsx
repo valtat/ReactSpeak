@@ -9,46 +9,77 @@ const AdminDelete = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteSuccessfull, setDeleteSuccessfull] = useState(false);
   const [deleteFailed, setDeleteFailed] = useState(false);
+  const [englishMeaning, setEnglishMeaning] = useState("");
+  const [language, setLanguage] = useState("Spanish");
+  const [message, setMessage] = useState(
+    "An error occurred while deleting the phrase"
+  );
 
-  const [translation, setTranslation] = useState({
-    englishMeaning: "",
-    language: "",
-  });
+  //Handle change in the input fields
 
   const handleChange = (e) => {
-    let value = e.target.value;
-    if (e.target.name === "language") {
-      value = value.toLowerCase();
+    let { name, value } = e.target;
+    // Sanitise input
+    let processedValue = value.replace(
+      /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
+      ""
+    );
+
+    if (name === "englishMeaning") {
+      setEnglishMeaning(processedValue);
     }
-    setTranslation({
-      ...translation,
-      [e.target.name]: value,
-    });
+    if (name === "language") {
+      setLanguage(processedValue);
+    }
   };
+
+  //Delete the phrase from the database
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("Delete");
-    console.log("Translation:", translation);
+
+    // Validate input
+    if (!englishMeaning || !language) {
+      console.error("All fields are required");
+      setDeleteFailed(true);
+      closeModal();
+      setMessage("All fields are required");
+      setTimeout(() => {
+        setDeleteFailed(false);
+      }, 3000);
+      return;
+    }
+
+    // Create payload
+
+    const payload = {
+      englishMeaning,
+      language: language.toLowerCase(),
+    };
+
+    // Delete the phrase
 
     try {
-      const data = await adminService.deleteTranslation(translation);
+      const data = await adminService.deleteTranslation(payload);
       console.log("Phrase deleted successfully:", data);
       setDeleteSuccessfull(true);
-      setTimeout(() => {
-        setDeleteSuccessfull(false);
-        setTranslation({
-          englishMeaning: "",
-          language: "",
-        });
-      }, 2000);
     } catch (error) {
       console.error("An error occurred while deleting the phrase", error);
+      if (error.response.status === 404) {
+        setMessage("Phrase not found");
+      } else setMessage("An error occurred while deleting the phrase");
       setDeleteFailed(true);
       setTimeout(() => {
         setDeleteFailed(false);
+        setEnglishMeaning("");
+        setLanguage("Spanish");
       }, 2000);
     }
+    setEnglishMeaning("");
+    setLanguage("Spanish");
+    setTimeout(() => {
+      setDeleteSuccessfull(false);
+    }, 3000);
     closeModal();
   };
 
@@ -67,7 +98,12 @@ const AdminDelete = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <select name="language" id="language" onChange={handleChange}>
+            <select
+              name="language"
+              id="language"
+              value={language}
+              onChange={handleChange}
+            >
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
               <option value="French">French</option>
@@ -79,6 +115,7 @@ const AdminDelete = () => {
               type="text"
               name="englishMeaning"
               id="englishMeaning"
+              value={englishMeaning}
               onChange={handleChange}
             />
           </div>
@@ -86,6 +123,8 @@ const AdminDelete = () => {
         <button className={styles.adminButton} onClick={openModal}>
           Delete
         </button>
+
+        {/* Modal */}
 
         {isOpen && (
           <div className={styles.modalContent}>
@@ -103,9 +142,11 @@ const AdminDelete = () => {
           </div>
         )}
 
-        {deleteFailed && (
-          <p className={styles.paragraph}>Phrase not deleted. Try again.</p>
-        )}
+        {/* show this if phrase is not found */}
+
+        {deleteFailed && <p className={styles.paragraph}>{message}</p>}
+
+        {/* show this if phrase is deleted */}
 
         {deleteSuccessfull && (
           <p className={styles.paragraph}>
