@@ -31,7 +31,7 @@ const addOrUpdatePhrase = async (req, res, next) => {
 
 // Gets all translations (key-value pairs) of a specific phrase
 const getAllTranslations = async (req, res, next) => {
-  const { englishMeaning } = req.body;
+  const { englishMeaning } = req.query;
   try {
     const phrase = await Phrase.findOne({ englishMeaning });
     if (!phrase) {
@@ -51,7 +51,6 @@ const getAllTranslations = async (req, res, next) => {
 
 // Gets a translation (key-value pair) in a specific language
 const getTranslationInLanguage = async (req, res, next) => {
-
   const { englishMeaning, language } = req.params;
   try {
     const phrase = await Phrase.findOne({ englishMeaning });

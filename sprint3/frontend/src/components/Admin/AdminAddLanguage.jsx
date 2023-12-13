@@ -1,9 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import adminService from "../../services/adminService";
+import SanitisedCreatableSelect from "./SanitisedCreatableSelect";
+import EnglishMeaningInput from "./EnglishMeaningInput";
+import useLanguages from "../../hooks/useLanguages";
 
 const AdminAddLanguage = () => {
   const [englishMeaning, setEnglishMeaning] = useState("");
@@ -16,6 +19,9 @@ const AdminAddLanguage = () => {
   const [message, setMessage] = useState(
     "An error occurred while adding the phrase"
   );
+
+  // Custom hook to get list of languages
+  const languagesList = useLanguages();
 
   //Handle change in the input fields
 
@@ -90,20 +96,17 @@ const AdminAddLanguage = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <input
-              type="text"
-              name="language"
-              id="language"
-              value={language}
-              onChange={handleChange}
-            />
+            <div style={{ width: "100%" }}>
+              <SanitisedCreatableSelect
+                value={language}
+                options={languagesList}
+                onChange={setLanguage}
+              />
+            </div>
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="englishMeaning-language">Phrase in English: </label>
-            <input
-              type="text"
-              name="englishMeaning"
-              id="englishMeaning"
+            <EnglishMeaningInput
               value={englishMeaning}
               onChange={handleChange}
             />
