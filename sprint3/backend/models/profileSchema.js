@@ -18,10 +18,12 @@ const ProfileSchema = new Schema({
     type: [String],
   },
   progressByLanguage: {
-    type: Array,
+    type: Map,
+    of: Number,
   },
   sentencesLearned: {
     type: Number,
+    default: 0,
   },
 });
 
