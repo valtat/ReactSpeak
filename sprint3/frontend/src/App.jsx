@@ -29,8 +29,6 @@ import { AuthProvider } from "./context/Auth.jsx";
 import { CountryProvider } from "./context/CountryContext.jsx";
 import ChatHome from "./components/Chat/ChatHome.jsx";
 
-import TestComponent from "./components/TestComponent.jsx";
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<TestLayout />} errorElement={<ErrorPage />}>
@@ -54,7 +52,6 @@ const router = createBrowserRouter(
       />
       <Route path="/countries/:countryName" element={<CountryPage />} />
       <Route path="/admin" element={<AdminPage />} />
-      <Route path="/test" element={<TestComponent />} />
     </Route>
   )
 );
