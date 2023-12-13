@@ -8,7 +8,7 @@ export default function Countries() {
   const { countries } = useContext(CountryContext);
 
   return (
-    <div>
+    <div className="countries-container">
       <h1 className="title"> Choose a country </h1>
       <div className="countries">
         {countries.map((country, index) => {

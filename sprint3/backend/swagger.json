@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "User API",
+      "version": "1.0.0",
+      "description": "API for managing user data"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3001/api/v1",
+        "variables": {}
+      }
+    ],
+    "paths": {
+      "/auth/register": {
+        "post": {
+          "tags": [
+            "Auth"
+        ],
+          "summary": "Register a new user",
+          "operationId": "createUser",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "username": "John Doe",
+                  "email": "john@gmail.com",
+                  "password": "12345678"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": []
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": [
+            "Auth"
+        ],
+          "summary": "Login User",
+          "operationId": "LoginUser",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                },
+                "example": {
+                  "email": "susan@gmail.com",
+                  "password": "secret"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": []
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          }
+        },
+        "UserInput": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "httpBearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    },
+    "security": [
+      {
+        "httpBearer": []
+      }
+    ],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": ""
+      },
+      {
+        "name": "Languages",
+        "description": ""
+      }
+    ]
+  }

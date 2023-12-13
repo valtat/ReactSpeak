@@ -1,7 +1,5 @@
-import React from "react";
-import "./CountryInformation.css";
-import { useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import axios from "axios";
 
@@ -17,9 +15,32 @@ function Language({ flag, languageName }) {
 
   const handleStart = useCallback(async () => {
     try {
-      await axios.put("/api/profile/defaultLanguage", {
-        language: languageName,
-      });
+      const token = localStorage.getItem("access_token");
+      await axios.post(
+        "/api/v1/profile/defaultLanguage",
+        {
+          language: languageName,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      await axios.post(
+        "/api/v1/profile/addLanguage",
+        {
+          language: languageName,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
       console.error("Error:", error);
@@ -43,8 +64,22 @@ function Language({ flag, languageName }) {
       >
         <h2>Start studying {languageName}?</h2>
         <p>By clicking Start, you will be redirected to the study session.</p>
-        <button onClick={handleStart}>Start</button>
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            handleStart();
+          }}
+        >
+          Start
+        </button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setModalIsOpen(false);
+          }}
+        >
+          Close
+        </button>
       </Modal>
     </div>
   );

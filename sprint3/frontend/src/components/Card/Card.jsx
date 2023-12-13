@@ -12,10 +12,16 @@ const Card = ({
   stopQuiz,
 }) => {
   const [shuffledTranslations, setShuffledTranslations] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleTranslationSelected = (translation) => {
+    setIsButtonDisabled(true);
     setTranslationSelected(translation);
     // increaseProgress();
+
+    setTimeout(() => {
+      setIsButtonDisabled(false); // Re-enable the button after a delay
+    }, 1500);
   };
 
   useEffect(() => {
@@ -59,6 +65,7 @@ const Card = ({
                 key={index}
                 onClick={() => handleTranslationSelected(translation)}
                 className={buttonClass}
+                disabled={isButtonDisabled}
               >
                 {translation}
               </button>

@@ -1,8 +1,37 @@
 const Phrase = require("../models/realLanguageSchema");
 
+//Adds a new phrase with potential translations (key-value pairs) or updates an existing phrase
+const addOrUpdatePhrase = async (req, res, next) => {
+  const { englishMeaning, translations } = req.body;
+  try {
+    if (!englishMeaning || !translations) {
+      const error = new Error("Input cannot be empty");
+      error.statusCode = 400;
+      throw error;
+    }
+
+    let phrase = await Phrase.findOne({ englishMeaning });
+    if (phrase) {
+      phrase.translations = new Map([
+        ...phrase.translations,
+        ...Object.entries(translations),
+      ]);
+    } else {
+      phrase = new Phrase({
+        englishMeaning,
+        translations,
+      });
+    }
+    await phrase.save();
+    res.status(201).json({ message: "Phrase added/updated successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Gets all translations (key-value pairs) of a specific phrase
 const getAllTranslations = async (req, res, next) => {
-  const { englishMeaning } = req.body;
+  const { englishMeaning } = req.query;
   try {
     const phrase = await Phrase.findOne({ englishMeaning });
     if (!phrase) {
@@ -22,7 +51,7 @@ const getAllTranslations = async (req, res, next) => {
 
 // Gets a translation (key-value pair) in a specific language
 const getTranslationInLanguage = async (req, res, next) => {
-  const { englishMeaning, language } = req.body;
+  const { englishMeaning, language } = req.params;
   try {
     const phrase = await Phrase.findOne({ englishMeaning });
     if (!phrase) {
@@ -166,4 +195,5 @@ module.exports = {
   deletePhrase,
   getAllTranslations,
   getTranslationInLanguage,
+  addOrUpdatePhrase,
 };

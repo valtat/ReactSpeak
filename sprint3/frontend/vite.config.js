@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       "/api": `http://localhost:${process.env.PORT}`,
       "/socket.io": `http://localhost:${process.env.PORT}`,
+      "/images": `http://localhost:${process.env.PORT}`,
     },
   },
 });

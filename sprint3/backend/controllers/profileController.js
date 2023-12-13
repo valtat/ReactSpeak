@@ -1,16 +1,22 @@
 const Profile = require("../models/profileSchema");
+const mongoose = require("mongoose");
 
 const returnProfile = async (req, res) => {
-  const { userId } = req.params;
-  const profile = await Profile.findOne({ user: userId });
+  const user = req.user;
+  const profile = await Profile.findOne({
+    user: user._id,
+  });
   res.status(200).json(profile);
 };
 
 const updateDefaultLanguage = async (req, res) => {
-  const { userId, language } = req.body;
+  const user = req.user;
+  const { language } = req.body;
 
   try {
-    const profile = await Profile.findOne({ user: userId });
+    const profile = await Profile.findOne({
+      user: user._id,
+    });
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" });
     }
@@ -20,25 +26,35 @@ const updateDefaultLanguage = async (req, res) => {
 
     res.status(200).json({ message: "Default language updated successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-const addQuizResult = async (req, res) => {
-  const userId = req.user.id;
-  const { quizResult } = req.body;
+const addLanguageStudied = async (req, res) => {
+  const user = req.user;
+  const { language } = req.body;
 
   try {
-    const profile = await Profile.findOne({ user: userId });
+    const profile = await Profile.findOne({
+      user: user._id,
+    });
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" });
     }
 
-    profile.quizzes.push(quizResult);
-    await profile.save();
+    if (!profile.languagesStudied.includes(language)) {
+      profile.languagesStudied = [
+        ...new Set([...profile.languagesStudied, language]),
+      ];
+      await profile.save();
+    }
 
-    res.status(200).json({ message: "Quiz result added successfully" });
+    res
+      .status(200)
+      .json({ message: "Language added to studied languages successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -92,6 +108,26 @@ const getWeeklyQuizResults = async (req, res) => {
 
     res.status(200).json(data);
   } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const addQuizResult = async (req, res) => {
+  const userId = req.user.id;
+  const { quizResult } = req.body;
+
+  try {
+    const profile = await Profile.findOne({ user: userId });
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    profile.quizzes.push(quizResult);
+    await profile.save();
+
+    res.status(200).json({ message: "Quiz result added successfully" });
+  } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -101,4 +137,5 @@ module.exports = {
   updateDefaultLanguage,
   addQuizResult,
   getWeeklyQuizResults,
+  addLanguageStudied,
 };

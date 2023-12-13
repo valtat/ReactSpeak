@@ -15,9 +15,32 @@ const Course = (props) => {
 
   const handleStart = useCallback(async () => {
     try {
-      await axios.put("/api/profile/defaultLanguage", {
-        language: props.language,
-      });
+      const token = localStorage.getItem("access_token");
+      await axios.post(
+        "/api/v1/profile/defaultLanguage",
+        {
+          language: props.language,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      await axios.post(
+        "/api/v1/profile/addLanguage",
+        {
+          language: languageName,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
       console.error("Error:", error);
@@ -41,7 +64,14 @@ const Course = (props) => {
           By clicking Continue, you will be redirected to the study session.
         </p>
         <button onClick={handleStart}>Continue</button>
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setModalIsOpen(false);
+          }}
+        >
+          Close
+        </button>
       </Modal>
     </div>
   );

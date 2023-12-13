@@ -15,8 +15,10 @@
 }
 
 .errmsg {
-  color: red;
-  font-size: 1.5rem;
+  color: #b36f6f;
+  font-size: 1rem;
+  word-wrap: break-word;
+  max-width: 200px;
 }
 
 .offscreen {
@@ -61,6 +63,11 @@ input {
   border-radius: 10px;
   cursor: pointer;
   margin: 0.5rem 0;
+}
+
+.submit-button:hover {
+  background-color: #1a9494;
+  color: #fff;
 }
 
 .link-btn {

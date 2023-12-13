@@ -11,7 +11,11 @@ const authRouter = require("./routes/authRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const languageRouter = require("./routes/languageRoutes");
 const userRouter = require("./routes/userRoutes");
+const profileRouter = require("./routes/profileRoutes");
+const quizResultRouter = require("./routes/quizResultRoutes");
 const adminRouter = require("./routes/adminRoutes");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./swagger.json");
 
 require("./utils/db");
 require("./utils/passport-config");
@@ -36,9 +40,15 @@ app.use("/api/v1/countries", countryRouter);
 
 app.use("/api/v1/languages", languageRouter);
 
+app.use("/api/v1/profile", profileRouter);
+
+app.use("/api/v1/quizResults", quizResultRouter);
+
 app.use("/api/v1/admin", adminRouter);
 
 app.use("/api/v1/user", userRouter);
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(errorMiddleware);
 

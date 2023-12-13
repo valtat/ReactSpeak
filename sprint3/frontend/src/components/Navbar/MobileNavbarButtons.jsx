@@ -19,7 +19,7 @@ const MobileNavbarButtons = (props) => {
               props.isMobile && props.closeMobileMenu();
             }}
           >
-            <Link to="/dashboard">
+            <Link to="/profile">
               <button>Profile</button>
             </Link>
           </li>
@@ -38,7 +38,7 @@ const MobileNavbarButtons = (props) => {
                 props.isMobile && props.closeMobileMenu();
               }}
             >
-              <Link to="/">
+              <Link to="/admin">
                 <button>Admin tools</button>
               </Link>
             </li>

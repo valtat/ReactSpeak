@@ -18,6 +18,8 @@ import CountriesPage from "./pages/CountriesPage/index.jsx";
 import { Dashboard } from "./components/Dashboard/Dashboard.jsx";
 import CountryPage from "./pages/CountryPage/index.jsx";
 import TestLayout from "./pages/TestLayout/index.jsx";
+import AdminPage from "./pages/AdminPage/index.jsx";
+
 import ProfilePage from "./pages/ProfilePage/index.jsx";
 import ChatComponent from "./components/Chat/ChatComponent.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
@@ -60,6 +62,7 @@ function App() {
         />
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryName" element={<CountryPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Route>
     )
   );

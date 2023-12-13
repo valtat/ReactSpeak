@@ -28,10 +28,10 @@
   box-shadow: 1px 1px 5px 0 #0f5259; */
 }
 
-.title {
+.container .title {
   color: #3F485B;
   text-align: center;
-  font-size: 48px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -142,7 +142,7 @@
   }
 
   .container {
-    width: 80%;
+    width: 90%;
   }
 
   .languages {
