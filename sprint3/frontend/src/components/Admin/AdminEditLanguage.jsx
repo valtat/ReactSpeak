@@ -1,22 +1,38 @@
 import React from "react";
 import styles from "./Admin.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import adminService from "../../services/adminService";
+import countryService from "../../services/countryService";
 
 const AdminEditLanguage = () => {
   const [editSaved, setEditSaved] = useState(false);
   const [isFound, setIsFound] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [englishMeaning, setEnglishMeaning] = useState("");
-  const [language, setLanguage] = useState("Spanish");
+  const [language, setLanguage] = useState("");
+  const [languagesList, setLanguagesList] = useState([]);
   const [translation, setTranslation] = useState("");
   const [newTranslation, setNewTranslation] = useState("");
   const [message, setMessage] = useState(
     "An error occurred while adding the phrase"
   );
   const [editClicked, setEditClicked] = useState(false);
+
+  // Get list of languages
+
+  useEffect(() => {
+    const getLanguages = async () => {
+      try {
+        const data = await countryService.getUniqueLanguages();
+        setLanguagesList(data);
+      } catch (error) {
+        console.error("An error occurred while fetching languages", error);
+      }
+    };
+    getLanguages();
+  }, []);
 
   //Handle change in the input fields
 
@@ -126,7 +142,7 @@ const AdminEditLanguage = () => {
     setTimeout(() => {
       setEditSaved(false);
       setEnglishMeaning("");
-      setLanguage("Spanish");
+      setLanguage("");
       setTranslation("");
       setNewTranslation("");
       setEditClicked(false);
@@ -144,12 +160,15 @@ const AdminEditLanguage = () => {
               name="language"
               id="language"
               value={language}
-              onChange={handleChange}
+              onChange={(e) => {
+                setLanguage(e.target.value);
+              }}
             >
-              <option value="Spanish">Spanish</option>
-              <option value="French">French</option>
-              <option value="Finnish">Finnish</option>
-              <option value="Swedish">Swedish</option>
+              {languagesList.map((language) => (
+                <option key={language} value={language}>
+                  {language}
+                </option>
+              ))}
             </select>
           </div>
           <div className={styles.formGroup}>
