@@ -6,6 +6,7 @@ const LanguageSelect = ({ value, options, onChange }) => {
         value={value}
         onChange={onChange}
       >
+        <option value="">Select a language</option>
         {options.map((language) => (
           <option key={language} value={language}>
             {language}
