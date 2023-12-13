@@ -23,7 +23,6 @@ const ProfileSchema = new Schema({
   sentencesLearned: {
     type: Number,
   },
-  quizResults: { type: Schema.Types.ObjectId, ref: "Quiz" },
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);
