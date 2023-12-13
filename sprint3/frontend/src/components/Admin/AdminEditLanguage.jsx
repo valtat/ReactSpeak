@@ -49,7 +49,6 @@ const AdminEditLanguage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    console.log("Search");
 
     // Validate input
     if (!englishMeaning || !language) {
@@ -114,8 +113,6 @@ const AdminEditLanguage = () => {
     // Send payload to backend
     try {
       const data = await adminService.addOrUpdatePhrase(payload);
-
-      console.log("Phrase edited successfully:", data);
     } catch (error) {
       console.error("An error occurred while editing the phrase", error);
       setMessage("An error occurred while editing the phrase");
