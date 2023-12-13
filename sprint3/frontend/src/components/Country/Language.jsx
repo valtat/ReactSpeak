@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import axios from "axios";
 
@@ -7,7 +8,8 @@ Modal.setAppElement("#root");
 
 function Language({ flag, languageName }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const navigate = useNavigate();
+  const [redirectToStudy, setRedirectToStudy] = useState(false);
+  //const navigate = useNavigate();
 
   const handleOpenModal = useCallback(() => {
     setModalIsOpen(true);
@@ -41,13 +43,16 @@ function Language({ flag, languageName }) {
         }
       );
       localStorage.setItem("defaultLanguage", languageName);
-      navigate("/study");
+      //navigate("/study");
+      setRedirectToStudy(true);
     } catch (error) {
       console.error("Error:", error);
     }
-  }, [languageName, navigate]);
+  }, [languageName]);
 
-  return (
+  return redirectToStudy ? (
+    <Link to="/study">Go to Study</Link>
+  ) : (
     <div className="language-card">
       <div onClick={handleOpenModal} className="language-link">
         <div className="language-image-container">
