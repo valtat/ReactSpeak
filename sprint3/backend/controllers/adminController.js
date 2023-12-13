@@ -51,8 +51,8 @@ const getAllTranslations = async (req, res, next) => {
 
 // Gets a translation (key-value pair) in a specific language
 const getTranslationInLanguage = async (req, res, next) => {
-
-  const { englishMeaning, language } = req.params;
+  const { englishMeaning, language } = req.query;
+  console.log(englishMeaning, language);
   try {
     const phrase = await Phrase.findOne({ englishMeaning });
     if (!phrase) {
@@ -188,6 +188,15 @@ const deletePhrase = async (req, res, next) => {
   }
 };
 
+const getAllPhrases = async (req, res, next) => {
+  try {
+    const phrases = await Phrase.find().populate("translations");
+    res.status(200).json(phrases);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addTranslation,
   addPhrase,
@@ -197,4 +206,5 @@ module.exports = {
   getAllTranslations,
   getTranslationInLanguage,
   addOrUpdatePhrase,
+  getAllPhrases,
 };

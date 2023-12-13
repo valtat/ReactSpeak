@@ -22,7 +22,7 @@ const { get } = require("../models/phraseSchema");
 
 router.post("/add-or-update-phrase", addOrUpdatePhrase);
 
-router.get("/get-translation/:englishMeaning/:language", getTranslationInLanguage);
+router.get("/get-translation/", getTranslationInLanguage);
 
 router.get("/get-phrase", getAllTranslations);
 

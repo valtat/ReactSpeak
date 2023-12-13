@@ -34,9 +34,12 @@ const addOrUpdatePhrase = async (payload) => {
 };
 
 const getTranslationInLanguage = async (englishMeaning, language) => {
-  const response = await axios.get(
-    baseUrl + `/get-translation/${englishMeaning}/${language}`
-  );
+  const response = await axios.get(baseUrl + "/get-translation", {
+    params: {
+      englishMeaning: englishMeaning,
+      language: language,
+    },
+  });
   return response.data;
 };
 
