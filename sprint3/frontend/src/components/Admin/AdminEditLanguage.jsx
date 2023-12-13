@@ -18,9 +18,11 @@ const AdminEditLanguage = () => {
   );
   const [editClicked, setEditClicked] = useState(false);
 
+  //Handle change in the input fields
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Sanitize input
+    // Sanitise input
     let processedValue = value.replace(
       /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
       ""
@@ -36,6 +38,8 @@ const AdminEditLanguage = () => {
       setNewTranslation(processedValue);
     }
   };
+
+  //Search for the phrase in the database
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -53,18 +57,20 @@ const AdminEditLanguage = () => {
       return;
     }
 
+    //Search for the phrase
+
     try {
       const data = await adminService.getTranslationInLanguage(
         englishMeaning,
         language.toLowerCase()
       );
-
-      console.log("Phrase found:", data);
       setTranslation(data[englishMeaning]);
       setIsFound(true);
     } catch (error) {
       console.error("An error occurred while searching for the phrase", error);
-      setMessage("An error occurred while searching for the phrase");
+      if (error.response.status === 404) {
+        setMessage("Phrase not found");
+      } else setMessage("An error occurred while searching for the phrase");
       setSearchPerformed(true);
       setTimeout(() => {
         setSearchPerformed(false);
@@ -73,9 +79,10 @@ const AdminEditLanguage = () => {
     setSearchPerformed(true);
   };
 
+  // Edit the phrase in the database
+
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("Edit");
 
     // Validate input
     if (!englishMeaning || !language || !newTranslation) {
@@ -89,6 +96,8 @@ const AdminEditLanguage = () => {
       return;
     }
 
+    // Create payload
+
     const payload = {
       englishMeaning: englishMeaning,
       translations: {
@@ -96,9 +105,10 @@ const AdminEditLanguage = () => {
       },
     };
 
+    // Send payload to backend
     try {
       const data = await adminService.addOrUpdatePhrase(payload);
-      // Handle the response data as needed
+
       console.log("Phrase edited successfully:", data);
     } catch (error) {
       console.error("An error occurred while editing the phrase", error);

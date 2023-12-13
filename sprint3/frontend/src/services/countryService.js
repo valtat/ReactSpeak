@@ -6,4 +6,9 @@ const getAllCountries = async () => {
   return response.data;
 };
 
-export default { getAllCountries };
+const getUniqueLanguages = async () => {
+  const response = await axios.get(`${baseUrl}/languages`);
+  return response.data;
+};
+
+export default { getAllCountries, getUniqueLanguages };
