@@ -15,7 +15,7 @@ const ProfileSchema = new Schema({
     type: String,
   },
   languagesStudied: {
-    type: Array,
+    type: [String],
   },
   progressByLanguage: {
     type: Array,
