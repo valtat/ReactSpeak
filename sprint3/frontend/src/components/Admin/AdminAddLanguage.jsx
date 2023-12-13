@@ -116,7 +116,11 @@ const AdminAddLanguage = () => {
               className={styles.select}
               value={language ? { label: language, value: language } : null}
               onChange={(language) => {
-                setLanguage(language ? language.value : "");
+                let processedValue = language ? language.value.replace(
+                  /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
+                  ""
+                ) : "";
+                setLanguage(processedValue);
               }}
               options={languagesList.map((language) => ({
                 label: language,
