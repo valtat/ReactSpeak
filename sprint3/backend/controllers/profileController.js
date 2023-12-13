@@ -68,6 +68,10 @@ const updateProgressByLanguage = async (req, res) => {
       return res.status(404).json({ message: "Profile not found" });
     }
 
+    if (!profile.progressByLanguage) {
+      profile.progressByLanguage = new Map();
+    }
+
     const currentProgress = profile.progressByLanguage.get(language) || 0;
     profile.progressByLanguage.set(
       language,
