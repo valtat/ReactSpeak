@@ -10,20 +10,20 @@ import {
   faComments,
   faFlag,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Profile.css";
 import { dummyProfile } from "../../../../backend/dummyData/dummyProfile";
 import Modal from "react-modal";
 import userService2 from "../../services/userService2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 
 const Profile = () => {
+  console.log("Profile component rendered");
   const [activeTab, setActiveTab] = useState(1);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    dummyProfile.progressByLanguage[0].language
-  );
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [changePasswordModalIsOpen, setChangePasswordModalIsOpen] =
     useState(false);
   const [deleteAccountModalIsOpen, setDeleteModalIsOpen] = useState(false);
@@ -31,7 +31,47 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
   const Navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("access_token");
+        const res = await axios.get("/api/v1/profile", {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfile(res.data);
+        setSelectedLanguage(res.data.defaultLanguage);
+
+        const userRes = await axios.get("/api/v1/user/", {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(userRes.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  const getLanguageOptions = () => {
+    return (
+      profile?.languagesStudied.map((language, index) => (
+        <option key={index} value={language}>
+          {language}
+        </option>
+      )) || []
+    );
+  };
 
   const MODAL_TYPE = {
     CHANGE_PASSWORD: "CHANGE_PASSWORD",
@@ -132,7 +172,7 @@ const Profile = () => {
                   <span>Username:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.username}</span>
+                  <span>{user ? user.username : "Loading..."}</span>
                 </div>
               </div>
               <div className="row">
@@ -141,7 +181,7 @@ const Profile = () => {
                   <span>Email:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.email}</span>
+                  <span>{user ? user.email : "Loading..."}</span>
                 </div>
               </div>
               <div className="row">
@@ -150,7 +190,13 @@ const Profile = () => {
                   <span>Registration date:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.registrationDate}</span>
+                  <span>
+                    {profile
+                      ? new Date(profile.registrationDate).toLocaleDateString(
+                          "en-GB"
+                        )
+                      : "Loading..."}
+                  </span>
                 </div>
               </div>
               <div className="row">
@@ -159,7 +205,11 @@ const Profile = () => {
                   <span>Last login:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.lastLogin}</span>
+                  <span>
+                    {profile
+                      ? new Date(profile.lastLogin).toLocaleDateString("en-GB")
+                      : "Loading..."}
+                  </span>
                 </div>
               </div>
               <div className="column">
@@ -243,7 +293,9 @@ const Profile = () => {
                   <span>Default Language:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.defaultLanguage}</span>
+                  <span>
+                    {profile ? profile.defaultLanguage : "Loading..."}
+                  </span>
                 </div>
               </div>
               <div className="row">
@@ -252,7 +304,11 @@ const Profile = () => {
                   <span>Languages studied:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.languagesStudied}</span>
+                  <span>
+                    {profile
+                      ? profile.languagesStudied.join(", ")
+                      : "Loading..."}
+                  </span>
                 </div>
               </div>
               <div className="row">
@@ -266,20 +322,12 @@ const Profile = () => {
                     value={selectedLanguage}
                     onChange={(e) => setSelectedLanguage(e.target.value)}
                   >
-                    {dummyProfile.languagesStudied[0]
-                      .split(", ")
-                      .map((language, index) => (
-                        <option key={index} value={language}>
-                          {language}
-                        </option>
-                      ))}
+                    {getLanguageOptions()}
                   </select>
                   <span>
-                    Progress:
-                    {dummyProfile.progressByLanguage.find(
-                      (lang) => lang.language === selectedLanguage
-                    )?.progress || 0}
-                    %
+                    Progress:{" "}
+                    {profile?.progressByLanguage[selectedLanguage] || 0}{" "}
+                    sentences
                   </span>
                 </div>
               </div>
@@ -289,7 +337,9 @@ const Profile = () => {
                   <span>Sentences learned:</span>
                 </div>
                 <div className="info-card">
-                  <span>{dummyProfile.sentencesLearned}</span>
+                  <span>
+                    {profile ? profile.sentencesLearned : "Loading..."}
+                  </span>
                 </div>
               </div>
             </div>

@@ -3,7 +3,6 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
-
 export const LatestResults = () => {
   const [quizResults, setQuizResults] = useState([]);
 
@@ -17,7 +16,17 @@ export const LatestResults = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setQuizResults(res.data);
+
+        const latestQuizResults = Object.values(
+          res.data.reduce((acc, curr) => {
+            if (!acc[curr.language] || acc[curr.language].date < curr.date) {
+              acc[curr.language] = curr;
+            }
+            return acc;
+          }, {})
+        );
+
+        setQuizResults(latestQuizResults);
       } catch (err) {
         console.error(err);
       }

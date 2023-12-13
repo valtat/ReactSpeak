@@ -1,4 +1,11 @@
 const bcrypt = require("bcrypt");
+const User = require("../models/userSchema");
+const mongoose = require("mongoose");
+
+const returnUser = async (req, res) => {
+  const user = req.user;
+  res.status(200).json(user);
+};
 
 const changePassword = async (req, res) => {
   const user = req.user;
@@ -22,4 +29,4 @@ const deleteUser = async (req, res) => {
   res.status(200).json({ message: "User deleted successfully" });
 };
 
-module.exports = { changePassword, deleteUser };
+module.exports = { getUser: returnUser, changePassword, deleteUser };

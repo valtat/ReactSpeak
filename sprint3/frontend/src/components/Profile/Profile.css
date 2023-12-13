@@ -100,6 +100,7 @@
 }
 
 .profile-select {
+  all: unset;
   background-color: #9fd3cb;
   color: white;
   padding: 0.2rem;
