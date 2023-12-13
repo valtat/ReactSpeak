@@ -30,6 +30,7 @@ const registerUser = async (req, res, next) => {
 
     await Profile.create({
       user: user._id,
+      progressByLanguage: new Map(),
     });
 
     res.status(201).json({
@@ -42,12 +43,6 @@ const registerUser = async (req, res, next) => {
 
 const loginUser = async (req, res) => {
   const user = req.user;
-
-  const payload = {
-    id: user.id,
-    username: user.username,
-    role: user.role,
-  };
 
   await Profile.findOneAndUpdate(
     { user: user.id },

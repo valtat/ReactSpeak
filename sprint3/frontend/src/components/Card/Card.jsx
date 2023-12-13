@@ -25,17 +25,18 @@ const Card = ({
   };
 
   useEffect(() => {
-    setCorrectTranslation(correctTranslation);
-    const shuffled = shuffleTranslations(translations);
-    setShuffledTranslations(shuffled);
-    console.log("Correct translation: ", correctTranslation);
+    if (translations) {
+      setCorrectTranslation(correctTranslation);
+      const shuffled = shuffleTranslations(translations);
+      setShuffledTranslations(shuffled);
+      console.log("Correct translation: ", correctTranslation);
+    }
   }, [translations, correctTranslation, setCorrectTranslation]);
 
   return (
     <div className={classes.Card}>
       <div className={classes.progressContainer}>
-        <i className={`fas fa-times ${classes.close}`}
-        onClick={stopQuiz}></i>
+        <i className={`fas fa-times ${classes.close}`} onClick={stopQuiz}></i>
         <div className={classes.progressBar}>
           <div
             className={classes.activeProgress}

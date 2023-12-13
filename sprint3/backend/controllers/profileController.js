@@ -47,6 +47,7 @@ const addLanguageStudied = async (req, res) => {
       profile.languagesStudied = [
         ...new Set([...profile.languagesStudied, language]),
       ];
+      profile.progressByLanguage.set(language, 0);
       await profile.save();
     }
 

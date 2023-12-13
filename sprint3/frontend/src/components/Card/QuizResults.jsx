@@ -5,16 +5,32 @@ import {
   faFlagCheckered,
 } from "@fortawesome/free-solid-svg-icons";
 import classes from "./quizResults.module.css";
+import quizService from "../../services/quizService";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const QuizResults = ({ score, duration, target, restart }) => {
+  console.log("SCORE " + score);
   const navigate = useNavigate();
   const minutes = Math.floor(duration / 60);
   const seconds = Math.round(duration % 60);
   const scorePercentage = Math.round((score / target) * 100);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const postData = async () => {
+      const defaultLanguage = localStorage.getItem("defaultLanguage");
+      const data = {
+        language: defaultLanguage,
+        score,
+        duration,
+        maxScore: 5,
+        target,
+      };
+      await quizService.postQuizResults(data);
+    };
+
+    postData();
+  }, []);
 
   const handleFinishStudy = () => {
     navigate("/dashboard");

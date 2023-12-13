@@ -1,4 +1,5 @@
-import { authInstance as axios } from "../services/axiosInstance";
+import { authInstance } from "../services/axiosInstance";
+import axios from "axios";
 
 // const refreshToken = async () => {
 //   const response = await axios.post("/refresh-token");
@@ -6,13 +7,13 @@ import { authInstance as axios } from "../services/axiosInstance";
 // };
 
 const verifyToken = async () => {
-  const response = await axios.get("auth/verify-token");
+  const response = await authInstance.get("auth/verify-token");
   return response;
 };
 
 const register = async (userRegister) => {
   console.log("register", userRegister);
-  const response = await axios.post("/register", userRegister, {
+  const response = await axios.post("auth/register", userRegister, {
     withCredentials: true,
   });
   console.log("register", response);
@@ -34,7 +35,7 @@ const logout = async () => {
 };
 
 const createChatToken = async () => {
-  const response = await axios.post("/chat-token");
+  const response = await authInstance.post("/chat-token");
   return response;
 };
 

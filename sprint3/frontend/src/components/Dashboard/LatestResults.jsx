@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import quizService from "../../services/quizService";
 import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
-
 
 export const LatestResults = () => {
   const [quizResults, setQuizResults] = useState([]);
@@ -10,14 +9,12 @@ export const LatestResults = () => {
   useEffect(() => {
     const fetchQuizResults = async () => {
       try {
-        const token = localStorage.getItem("access_token");
-        const res = await axios.get("/api/v1/quizResults", {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setQuizResults(res.data);
+        console.log("Fetching quiz results");
+        const res = await quizService.getLatestQuizResults();
+        console.log("Quiz results: ", res);
+        if (res && res.data) {
+          setQuizResults(res.data);
+        }
       } catch (err) {
         console.error(err);
       }

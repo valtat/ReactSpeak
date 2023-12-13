@@ -33,10 +33,10 @@ function Languages() {
         ))}
       </div>
       <div className="information">
-        <CountryInformation info={country.description} />
+        <CountryInformation info={country.description} image={country.image}/>
       </div>
       </div>
-      <img src={imageUrl+country.map} alt={country.name} className="map-image" />
+      {/* <img src={imageUrl+country.map} alt={country.name} className="map-image" /> */}
     </div>
   );
 }

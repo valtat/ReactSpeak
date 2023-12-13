@@ -48,11 +48,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/chat" element={<ChatComponent />} />
-          <Route
-            path="/study"
-            element={<StudyView />}
-            loader={languageDataLoader}
-          />
         </Route>
 
         <Route element={<AdminRoute />}>
@@ -61,6 +56,11 @@ function App() {
 
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryName" element={<CountryPage />} />
+        <Route
+          path="/study"
+          element={<StudyView />}
+          loader={languageDataLoader}
+        />
       </Route>
     )
   );

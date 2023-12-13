@@ -18,22 +18,41 @@ const {
   localAuthNew,
   adminAuth,
 } = require("../middleware/authMiddleware");
-const { get } = require("../models/phraseSchema");
 
-router.post("/add-or-update-phrase", addOrUpdatePhrase);
+router.post(
+  "/add-or-update-phrase",
+  authJwtAccess,
+  adminAuth,
+  addOrUpdatePhrase
+);
 
-router.get("/get-translation/:englishMeaning/:language", getTranslationInLanguage);
+router.get(
+  "/get-translation/:englishMeaning/:language",
+  authJwtAccess,
+  adminAuth,
+  getTranslationInLanguage
+);
 
-router.get("/get-phrase", getAllTranslations);
+router.get("/get-phrase", authJwtAccess, adminAuth, getAllTranslations);
 
-router.post("/add-phrase", addPhrase);
+router.post("/add-phrase", authJwtAccess, adminAuth, addPhrase);
 
-router.patch("/add-translation", addTranslation);
+router.patch("/add-translation", authJwtAccess, adminAuth, addTranslation);
 
-router.patch("/update-translation", updateTranslation);
+router.patch(
+  "/update-translation",
+  authJwtAccess,
+  adminAuth,
+  updateTranslation
+);
 
-router.patch("/delete-translation", deleteTranslation);
+router.patch(
+  "/delete-translation",
+  authJwtAccess,
+  adminAuth,
+  deleteTranslation
+);
 
-router.delete("/", deletePhrase);
+router.delete("/", authJwtAccess, adminAuth, deletePhrase);
 
 module.exports = router;

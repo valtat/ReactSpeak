@@ -9,9 +9,15 @@ const getNewQuiz = async (number, language) => {
   return response.data;
 };
 
-const sendResults = async ({ quizResult }) => {
+const postQuizResults = async (quizResult) => {
   const response = await authInstance.post(`${baseUrl}/`, quizResult);
   return response.data;
 };
 
-export default { sendResults, getNewQuiz };
+const getLatestQuizResults = async () => {
+  console.log("quizService");
+  const response = await authInstance.get(`${baseUrl}/latest`);
+  return response;
+};
+
+export default { postQuizResults, getNewQuiz, getLatestQuizResults };

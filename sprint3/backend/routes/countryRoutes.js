@@ -1,5 +1,13 @@
 const express = require("express");
 const router = express.Router();
+
+const {
+  authJwtAccess,
+  authJwtRefresh,
+  localAuthNew,
+  adminAuth,
+} = require("../middleware/authMiddleware");
+
 const {
   returnAllCountries,
   returnSingleCountry,
