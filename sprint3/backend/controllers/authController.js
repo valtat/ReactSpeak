@@ -49,9 +49,8 @@ const loginUser = async (req, res) => {
     { lastLogin: new Date() },
     { new: true }
   );
-  console.log(user);
 
-  const accessToken = generateAccessToken(user, "15m");
+  const accessToken = generateAccessToken(user, "30m");
   const refreshToken = generateRefreshToken(user, req.body.rememberMe);
 
   res.cookie("refresh_token", refreshToken, {
@@ -77,22 +76,26 @@ const logoutUser = (req, res) => {
   });
 };
 
-const refreshAccessToken = async (req, res) => {
+const refreshAccessToken = async (req, res, next) => {
   const refresh_token = req.cookies.refresh_token;
   try {
     const userId = await redisClient.get(refresh_token);
 
     if (!userId) {
-      return res.status(403).json({ message: "Invalid refresh token" });
+      const error = new Error("Invalid refresh token");
+      error.statusCode = 403;
+      throw error;
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      const error = new Error("User not found");
+      error.statusCode = 404;
+      throw error;
     }
 
-    const accessToken = generateAccessToken(user, "15m");
+    const accessToken = generateAccessToken(user, "30m");
 
     res.status(200).json({
       message: "Access token refreshed",
@@ -100,7 +103,7 @@ const refreshAccessToken = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error checking refresh token" });
+    next(error);
   }
 };
 

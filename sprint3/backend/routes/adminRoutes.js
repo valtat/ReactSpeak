@@ -17,42 +17,26 @@ const {
   authJwtRefresh,
   localAuthNew,
   adminAuth,
+  jwtAuth,
 } = require("../middleware/authMiddleware");
 
-router.post(
-  "/add-or-update-phrase",
-  authJwtAccess,
-  adminAuth,
-  addOrUpdatePhrase
-);
+router.post("/add-or-update-phrase", addOrUpdatePhrase);
 
 router.get(
   "/get-translation/:englishMeaning/:language",
-  authJwtAccess,
-  adminAuth,
   getTranslationInLanguage
 );
 
-router.get("/get-phrase", authJwtAccess, adminAuth, getAllTranslations);
+router.get("/get-phrase", getAllTranslations);
 
-router.post("/add-phrase", authJwtAccess, adminAuth, addPhrase);
+router.post("/add-phrase", addPhrase);
 
-router.patch("/add-translation", authJwtAccess, adminAuth, addTranslation);
+router.patch("/add-translation", addTranslation);
 
-router.patch(
-  "/update-translation",
-  authJwtAccess,
-  adminAuth,
-  updateTranslation
-);
+router.patch("/update-translation", updateTranslation);
 
-router.patch(
-  "/delete-translation",
-  authJwtAccess,
-  adminAuth,
-  deleteTranslation
-);
+router.patch("/delete-translation", deleteTranslation);
 
-router.delete("/", authJwtAccess, adminAuth, deletePhrase);
+router.delete("/", deletePhrase);
 
 module.exports = router;
