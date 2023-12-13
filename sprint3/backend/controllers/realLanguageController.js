@@ -3,21 +3,23 @@ const _ = require("lodash");
 
 // Gets a random number of phrases and their translations, follows the model setup in the dummy data
 const getRandomPhrases = async (req, res, next) => {
-  const { number, language } = req.body;
+  const { number, language } = req.query;
   try {
-    const phrases = await Phrase.aggregate([
-      { $sample: { size: parseInt(number) } },
-    ]);
     const allPhrases = await Phrase.find();
+    const phrasesWithTranslation = allPhrases.filter(
+      (phrase) => phrase.translations.get(language) !== undefined
+    );
+    const phrases = _.sampleSize(phrasesWithTranslation, parseInt(number));
     const translations = phrases.map((phrase) => {
-      const correctTranslation = phrase.translations[language];
-      const incorrectPhrases = allPhrases.filter(
+      const correctTranslation = phrase.translations.get(language); // Change this line
+      const incorrectPhrases = phrasesWithTranslation.filter(
         (p) => p.englishMeaning !== phrase.englishMeaning
       );
       const sampledIncorrectPhrases = _.sampleSize(incorrectPhrases, 3);
       const incorrectTranslations = sampledIncorrectPhrases.map((p) =>
         p.translations.get(language)
       );
+
       return {
         phrase: phrase.englishMeaning,
         translations: [correctTranslation, ...incorrectTranslations],

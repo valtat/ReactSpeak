@@ -42,7 +42,7 @@ app.use("/api/v1/languages", languageRouter);
 
 app.use("/api/v1/profile", profileRouter);
 
-app.use("/api/v1/quizResults", quizResultRouter);
+app.use("/api/v1/quiz", quizResultRouter);
 
 app.use("/api/v1/admin", adminRouter);
 

@@ -41,7 +41,7 @@ function Language({ flag, languageName }) {
         }
       );
       localStorage.setItem("defaultLanguage", languageName);
-      navigate("/study");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
     }

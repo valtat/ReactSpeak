@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authInstance = axios.create({
-  baseURL: "api/v1/auth",
+  baseURL: "api/v1/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -23,7 +23,7 @@ authInstance.interceptors.request.use(
 
 const refreshToken = async () => {
   try {
-    const response = await authInstance.post("/refresh-token");
+    const response = await authInstance.post("auth/refresh-token");
     console.log(
       "REfresh token from axiosInstance: ",
       response.data.access_token
@@ -49,7 +49,7 @@ authInstance.interceptors.response.use(
       error.response.status === 401 &&
       !originalRequest._retry &&
       token &&
-      !originalRequest.url.includes("/refresh-token")
+      !originalRequest.url.includes("auth/refresh-token")
     ) {
       console.log("401 status code detected, attempting to refresh token...");
       originalRequest._retry = true;

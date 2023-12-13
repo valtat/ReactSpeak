@@ -4,11 +4,16 @@ const {
   returnProfile,
   updateDefaultLanguage,
   addLanguageStudied,
+  updateProgressByLanguage,
 } = require("../controllers/profileController");
-const { jwtAuth } = require("../middleware/authMiddleware");
+const { authJwtAccess } = require("../middleware/authMiddleware");
 
-router.get("/", jwtAuth, returnProfile);
-router.post("/defaultLanguage", jwtAuth, updateDefaultLanguage);
-router.post("/addLanguage", jwtAuth, addLanguageStudied);
+router.get("/", authJwtAccess, returnProfile);
+
+router.post("/defaultLanguage", authJwtAccess, updateDefaultLanguage);
+
+router.post("/addLanguage", authJwtAccess, addLanguageStudied);
+
+router.put("/progress", authJwtAccess, updateProgressByLanguage);
 
 module.exports = router;

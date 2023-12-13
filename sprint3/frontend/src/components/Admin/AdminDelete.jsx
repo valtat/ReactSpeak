@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import adminService from "../../services/adminService";
-import countryService from "../../services/countryService";
+import useLanguages from "../../hooks/useLanguages";
+import LanguageSelect from "./LanguageSelect";
+import EnglishMeaningInput from "./EnglishMeaningInput";
 
 const AdminDelete = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,24 +14,13 @@ const AdminDelete = () => {
   const [deleteFailed, setDeleteFailed] = useState(false);
   const [englishMeaning, setEnglishMeaning] = useState("");
   const [language, setLanguage] = useState("");
-  const [languagesList, setLanguagesList] = useState([]);
   const [message, setMessage] = useState(
     "An error occurred while deleting the phrase"
   );
 
-  // Get list of languages
+  // Custom hook to get list of languages
 
-  useEffect(() => {
-    const getLanguages = async () => {
-      try {
-        const data = await countryService.getUniqueLanguages();
-        setLanguagesList(data);
-      } catch (error) {
-        console.error("An error occurred while fetching languages", error);
-      }
-    };
-    getLanguages();
-  }, []);
+  const languagesList = useLanguages();
 
   //Handle change in the input fields
 
@@ -114,27 +105,15 @@ const AdminDelete = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <select
-              name="language"
-              id="language"
+            <LanguageSelect
               value={language}
-              onChange={(e) => {
-                setLanguage(e.target.value);
-              }}
-            >
-              {languagesList.map((language) => (
-                <option key={language} value={language}>
-                  {language}
-                </option>
-              ))}
-            </select>
+              options={languagesList}
+              onChange={(e) => setLanguage(e.target.value)}
+            />
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="original-language">Phrase in English: </label>
-            <input
-              type="text"
-              name="englishMeaning"
-              id="englishMeaning"
+            <EnglishMeaningInput
               value={englishMeaning}
               onChange={handleChange}
             />

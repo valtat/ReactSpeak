@@ -6,7 +6,7 @@ import { authInstance as axios } from "../services/axiosInstance";
 // };
 
 const verifyToken = async () => {
-  const response = await axios.get("/verify-token");
+  const response = await axios.get("auth/verify-token");
   return response;
 };
 
@@ -20,7 +20,7 @@ const register = async (userRegister) => {
 };
 
 const login = async (userLogin) => {
-  const response = await axios.post("/login", userLogin, {
+  const response = await axios.post("auth/login", userLogin, {
     withCredentials: true,
   });
   console.log("login", response);
@@ -28,7 +28,7 @@ const login = async (userLogin) => {
 };
 
 const logout = async () => {
-  const response = await axios.post("/logout");
+  const response = await axios.post("auth/logout");
   console.log("logout", response);
   return response;
 };

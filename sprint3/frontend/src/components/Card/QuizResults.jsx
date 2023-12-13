@@ -1,52 +1,72 @@
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faRedo, faFlagCheckered } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckCircle,
+  faRedo,
+  faFlagCheckered,
+} from "@fortawesome/free-solid-svg-icons";
 import classes from "./quizResults.module.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const QuizResults = ({score, duration, target, restart}) => {
-    const navigate = useNavigate();
-    const minutes = Math.floor(duration / 60);
-    const seconds = Math.round(duration % 60);
-    const scorePercentage = Math.round((score / target) * 100);
+const QuizResults = ({ score, duration, target, restart }) => {
+  const navigate = useNavigate();
+  const minutes = Math.floor(duration / 60);
+  const seconds = Math.round(duration % 60);
+  const scorePercentage = Math.round((score / target) * 100);
 
-    const handleFinishStudy = () => {
-        navigate("/dashboard");
-    }
+  useEffect(() => {}, []);
+
+  const handleFinishStudy = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className={classes.quizResults}>
-        <div className={classes.info}>
+      <div className={classes.info}>
         <h1>Quiz Results</h1>
-        <FontAwesomeIcon icon={faCheckCircle} size="5x" className={classes.icon}/>
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          size="5x"
+          className={classes.icon}
+        />
         <h3>Good job!</h3>
         <p>You have finished the quiz.</p>
-        </div>
-        <div className={classes.results}>
+      </div>
+      <div className={classes.results}>
         <section>
-            <h4>Your Score</h4>
-            <p><span>{scorePercentage}</span>/100%</p>
+          <h4>Your Score</h4>
+          <p>
+            <span>{scorePercentage}</span>/100%
+          </p>
         </section>
         <section>
-            <h4>Your Points</h4>
-            <p><span>{score}</span>/{target}</p>
+          <h4>Your Points</h4>
+          <p>
+            <span>{score}</span>/{target}
+          </p>
         </section>
         <section>
-            <h4>Time spent</h4>
-            <p><span>{minutes}</span> min <span>{seconds}</span> sec</p>
+          <h4>Time spent</h4>
+          <p>
+            <span>{minutes}</span> min <span>{seconds}</span> sec
+          </p>
         </section>
-        </div>
+      </div>
 
-        <div className={classes.resultsBtn}>
+      <div className={classes.resultsBtn}>
         <button onClick={handleFinishStudy}>
-            <FontAwesomeIcon icon={faFlagCheckered} size="1x" className={classes.icon}/>
+          <FontAwesomeIcon
+            icon={faFlagCheckered}
+            size="1x"
+            className={classes.icon}
+          />
         </button>
         <button onClick={restart}>
-            <FontAwesomeIcon icon={faRedo} size="1x" className={classes.icon}/>
+          <FontAwesomeIcon icon={faRedo} size="1x" className={classes.icon} />
         </button>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuizResults
+export default QuizResults;

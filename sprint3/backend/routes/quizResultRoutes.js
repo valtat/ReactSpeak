@@ -5,10 +5,15 @@ const {
   addQuizResult,
   returnLatestQuizResults,
 } = require("../controllers/quizResultController");
-const { jwtAuth } = require("../middleware/authMiddleware");
+const { getRandomPhrases } = require("../controllers/realLanguageController");
+const { authJwtAccess } = require("../middleware/authMiddleware");
 
-router.get("/", jwtAuth, returnQuizResults);
-router.post("/", jwtAuth, addQuizResult);
-router.get("/latest", jwtAuth, returnLatestQuizResults);
+router.get("/new-quiz", authJwtAccess, getRandomPhrases);
+
+router.get("/", authJwtAccess, returnQuizResults);
+
+router.post("/", authJwtAccess, addQuizResult);
+
+router.get("/latest", authJwtAccess, returnLatestQuizResults);
 
 module.exports = router;

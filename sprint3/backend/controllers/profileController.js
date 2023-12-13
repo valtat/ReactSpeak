@@ -132,10 +132,40 @@ const addQuizResult = async (req, res) => {
   }
 };
 
+const updateProgressByLanguage = async (req, res) => {
+  const { language, sentencesLearned } = req.body;
+
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    if (!profile.progressByLanguage) {
+      profile.progressByLanguage = new Map();
+    }
+
+    const currentProgress = profile.progressByLanguage.get(language) || 0;
+    profile.progressByLanguage.set(
+      language,
+      currentProgress + sentencesLearned
+    );
+    profile.sentencesLearned += sentencesLearned;
+
+    await profile.save();
+
+    res.status(200).json(profile);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   returnProfile,
   updateDefaultLanguage,
   addQuizResult,
   getWeeklyQuizResults,
   addLanguageStudied,
+  updateProgressByLanguage,
 };
