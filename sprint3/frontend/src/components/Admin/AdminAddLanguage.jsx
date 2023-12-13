@@ -1,17 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import adminService from "../../services/adminService";
-import countryService from "../../services/countryService";
-import CreatableSelect from "react-select/creatable";
+import SanitisedCreatableSelect from "./SanitisedCreatableSelect";
+import EnglishMeaningInput from "./EnglishMeaningInput";
+import useLanguages from "../../hooks/useLanguages";
 
 const AdminAddLanguage = () => {
   const [englishMeaning, setEnglishMeaning] = useState("");
   const [language, setLanguage] = useState("");
   const [translation, setTranslation] = useState("");
-  const [languagesList, setLanguagesList] = useState([]);
 
   const [addSaved, setAddSaved] = useState(false);
   const [addFailed, setAddFailed] = useState(false);
@@ -20,19 +20,8 @@ const AdminAddLanguage = () => {
     "An error occurred while adding the phrase"
   );
 
-  // Get list of languages
-
-  useEffect(() => {
-    const getLanguages = async () => {
-      try {
-        const data = await countryService.getUniqueLanguages();
-        setLanguagesList(data);
-      } catch (error) {
-        console.error("An error occurred while fetching languages", error);
-      }
-    };
-    getLanguages();
-  }, []);
+  // Custom hook to get list of languages
+  const languagesList = useLanguages();
 
   //Handle change in the input fields
 
@@ -107,55 +96,17 @@ const AdminAddLanguage = () => {
         <form action="">
           <div className={styles.formGroup}>
             <label htmlFor="language">Language: </label>
-            <div style = {{width: '100%'}}>
-            <CreatableSelect
-              isClearable
-              type="text"
-              name="language"
-              id="language"
-              className={styles.select}
-              value={language ? { label: language, value: language } : null}
-              onChange={(language) => {
-                let processedValue = language ? language.value.replace(
-                  /[`~!@#$%^&*()_|+=?;:'",.<>\{\}\[\]\\\/]/gi,
-                  ""
-                ) : "";
-                setLanguage(processedValue);
-              }}
-              options={languagesList.map((language) => ({
-                label: language,
-                value: language,
-              }))}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  width: '100%',
-                  padding: '1rem',
-                  border: '1px solid #0f5259',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  backgroundColor: 'white',
-                }),
-                option: (provided) => ({
-                  ...provided,
-                  textAlign: 'center',
-                  fontSize: '1rem',
-                  fontFamily: 'sans-serif',
-                  color: 'black',
-                  backgroundColor: 'white',
-                  padding: '1rem',
-                }),
-              }}
-              placeholder="Type or select a language"
-            />
+            <div style={{ width: "100%" }}>
+              <SanitisedCreatableSelect
+                value={language}
+                options={languagesList}
+                onChange={setLanguage}
+              />
             </div>
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="englishMeaning-language">Phrase in English: </label>
-            <input
-              type="text"
-              name="englishMeaning"
-              id="englishMeaning"
+            <EnglishMeaningInput
               value={englishMeaning}
               onChange={handleChange}
             />
