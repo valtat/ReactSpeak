@@ -4,6 +4,7 @@ import languageService from "../../services/languageService";
 import { useLoaderData } from "react-router-dom";
 import classes from "./StudyView.module.css";
 import QuizResults from "../../components/Card/QuizResults";
+import axios from "axios";
 
 export const loader = async () => {
   const defaultLanguage = localStorage.getItem("defaultLanguage");
@@ -71,6 +72,28 @@ const StudyView = () => {
     setProgress(newProgress);
   }, [activeWord, useData.length]);
 
+  const updateQuizResults = async () => {
+    try {
+      const token = localStorage.getItem("access_token");
+      await axios.post(
+        "/api/v1/quizResults",
+        {
+          language: defaultLanguage,
+          maxScore: useData.length,
+          score: score,
+          duration: duration,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.error(`HTTP error! status: ${error.response.status}`);
+    }
+  };
   const resetQuiz = () => {
     setActiveWord(0);
     setCorrectTranslation("");
@@ -80,10 +103,12 @@ const StudyView = () => {
     setProgress(0);
     setStartTime(new Date());
     setDuration(null);
+    updateQuizResults();
   };
 
   const stopQuiz = () => {
     setActiveSession(false);
+    updateQuizResults();
   };
 
   return (

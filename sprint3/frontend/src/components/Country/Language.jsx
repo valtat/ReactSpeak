@@ -28,6 +28,18 @@ function Language({ flag, languageName }) {
           },
         }
       );
+      await axios.post(
+        "/api/v1/profile/addLanguage",
+        {
+          language: languageName,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
@@ -52,7 +64,14 @@ function Language({ flag, languageName }) {
       >
         <h2>Start studying {languageName}?</h2>
         <p>By clicking Start, you will be redirected to the study session.</p>
-        <button onClick={handleStart}>Start</button>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            handleStart();
+          }}
+        >
+          Start
+        </button>
         <button
           onClick={(event) => {
             event.stopPropagation();
