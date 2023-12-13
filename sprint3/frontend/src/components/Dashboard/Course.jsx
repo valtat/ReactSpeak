@@ -28,6 +28,18 @@ const Course = (props) => {
           },
         }
       );
+      await axios.post(
+        "/api/v1/profile/addLanguage",
+        {
+          language: languageName,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       localStorage.setItem("defaultLanguage", languageName);
       navigate("/study");
     } catch (error) {
