@@ -23,6 +23,7 @@ const registerUser = async (req, res, next) => {
 
     const profile = await Profile.create({
       user: user._id,
+      progressByLanguage: new Map(),
     });
 
     res.status(201).json({
