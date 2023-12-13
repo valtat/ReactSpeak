@@ -18,7 +18,7 @@ const Courses = () => {
         });
         const courses = res.data.languagesStudied.map((language) => ({
           language,
-          progress: res.data.progressByLanguage[language] ?? 0,
+          progress: res.data.progressByLanguage[language],
         }));
         setCourses(courses);
         setHasStartedCourses(res.data.languagesStudied.length > 0);
