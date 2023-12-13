@@ -13,8 +13,8 @@ const ChatBody = ({chat}) => {
     <>
       <header className={classes.bodyHeader}>
         <p>Hangout with Locals</p>
-        <button className={classes.leave} onClick={handleLeaveChat}>
-          Leave chat
+        <button className={classes.leaveBtn} onClick={handleLeaveChat}>
+          Leave
         </button>
       </header>
 
