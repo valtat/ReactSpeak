@@ -25,7 +25,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/UserRegister"
                 },
                 "example": {
                   "username": "John Doe",
@@ -59,11 +59,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserInput"
+                  "$ref": "#/components/schemas/UserLogin"
                 },
                 "example": {
-                  "email": "susan@gmail.com",
-                  "password": "secret"
+                  "email": "john@gmail.com",
+                  "password": "12345678"
                 }
               }
             },
@@ -78,11 +78,237 @@
           "deprecated": false,
           "security": []
         }
-      }
+      },
+      "/admin/add-phrase": {
+        "post": {
+          "tags": ["Admin"],
+          "summary": "Add a new phrase with translations",
+          "operationId": "addNewPhrase",
+          "requestBody": {
+            "description": "Phrase and translations to add",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhraseWithTranslations"
+                }
+              }
+            },
+            "security": []
+          },
+          "responses": {
+            "200": {
+              "description": "Phrase added successfully"
+            },
+            "401": {
+              "description": "Error: Unauthorized"
+            }
+          }
+        }
+      },
+        "/admin/add-or-update-phrase": {
+          "post": {
+            "tags": ["Admin"],
+            "summary": "Add or update a phrase with translations",
+            "operationId": "addOrUpdatePhrase",
+            "requestBody": {
+              "description": "Phrase and translations to add or update",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PhraseWithTranslations"
+                  }
+                }
+              },
+              "security": []
+            },
+            "responses": {
+              "200": {
+                "description": "Phrase added or updated successfully"
+              },
+              "401": {
+                "description": "Error: Unauthorized"
+              }
+            }
+          }
+        },
+        "/admin/get-translation/{englishMeaning}/{language}": {
+          "get": {
+            "tags": ["Admin"],
+            "summary": "Get a single translation in a specified language",
+            "operationId": "getSingleTranslation",
+            "security": [],
+            "parameters": [
+              {
+                "name": "englishMeaning",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "language",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Translation retrieved successfully"
+              },
+              "401": {
+                "description": "Error: Unauthorized"
+              }
+            }
+          }
+        },
+        "/admin/get-phrase": {
+          "get": {
+            "tags": ["Admin"],
+            "summary": "Get all translations for a phrase",
+            "operationId": "getTranslations",
+            "security": [],
+            "parameters": [
+              {
+                "name": "englishMeaning",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Translations retrieved successfully"
+              },
+              "401": {
+                "description": "Error: Forbidden"
+              }
+            }
+          }
+        },
+        "/admin/add-translation": {
+          "patch": {
+            "tags": ["Admin"],
+            "summary": "Add a translation to a phrase",
+            "operationId": "addTranslation",
+            "security": [{"httpBearer": []}],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TranslationAddition"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Translation added successfully"
+              },
+              "403": {
+                "description": "Forbidden - User not authorized"
+              }
+            }
+          }
+        },
+        "/admin/update-translation": {
+          "patch": {
+            "tags": ["Admin"],
+            "summary": "Update an existing translation",
+            "operationId": "updateTranslation",
+            "security": [{"httpBearer": []}],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TranslationUpdate"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Translation updated successfully"
+              },
+              "403": {
+                "description": "Forbidden - User not authorized"
+              }
+            }
+          }
+        },
+        "/admin/delete-translation": {
+          "patch": {
+            "tags": ["Admin"],
+            "summary": "Delete a specific translation",
+            "operationId": "deleteTranslation",
+            "security": [{"httpBearer": []}],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TranslationDeletion"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Translation deleted successfully"
+              },
+              "403": {
+                "description": "Forbidden - User not authorized"
+              }
+            }
+          }
+        },
+        "/admin/": {
+          "delete": {
+            "tags": ["Admin"],
+            "summary": "Delete a phrase and its translations",
+            "operationId": "deletePhrase",
+            "security": [{"httpBearer": []}],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PhraseDeletion"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Phrase and its translations deleted successfully"
+              },
+              "403": {
+                "description": "Forbidden - User not authorized"
+              }
+            }
+          }
+        }
+        
+        
+        
+        
+        
+      
+      
+      
     },
     "components": {
       "schemas": {
-        "User": {
+        "UserRegister": {
           "type": "object",
           "properties": {
             "id": {
@@ -102,7 +328,7 @@
             }
           }
         },
-        "UserInput": {
+        "UserLogin": {
           "type": "object",
           "properties": {
             "email": {
@@ -117,6 +343,108 @@
             "role": {
               "type": "string"
             }
+          }
+        },
+        "PhraseWithTranslations": {
+          "type": "object",
+          "properties": {
+            "englishMeaning": {
+              "type": "string",
+              "description": "The phrase in English"
+            },
+            "translations": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Translations of the phrase in different languages"
+            }
+          },
+          "required": ["englishMeaning", "translations"],
+          "example": {
+            "englishMeaning": "Hello",
+            "translations": {
+              "french": "Bonjour",
+              "spanish": "Hola",
+              "german": "Hallo"
+            }
+          }
+        },
+        "TranslationAddition": {
+          "type": "object",
+          "properties": {
+            "englishMeaning": {
+              "type": "string",
+              "description": "The phrase in English"
+            },
+            "translation": {
+              "type": "string",
+              "description": "The translation to add"
+            },
+            "language": {
+              "type": "string",
+              "description": "The language of the translation"
+            }
+          },
+          "required": ["englishMeaning", "translation", "language"],
+          "example": {
+            "englishMeaning": "Hello",
+            "translation": "Bonjour",
+            "language": "french"
+          }
+        },
+        "TranslationUpdate": {
+          "type": "object",
+          "properties": {
+            "englishMeaning": {
+              "type": "string",
+              "description": "The phrase in English"
+            },
+            "translation": {
+              "type": "string",
+              "description": "The translation to add"
+            },
+            "language": {
+              "type": "string",
+              "description": "The language of the translation"
+            }
+          },
+          "required": ["englishMeaning", "translation", "language"],
+          "example": {
+            "englishMeaning": "Hello",
+            "translation": "Bonjour",
+            "language": "french"
+          }
+        },
+        "TranslationDeletion": {
+          "type": "object",
+          "properties": {
+            "englishMeaning": {
+              "type": "string",
+              "description": "The phrase in English"
+            },
+            "language": {
+              "type": "string",
+              "description": "The language of the translation"
+            }
+          },
+          "required": ["englishMeaning", "language"],
+          "example": {
+            "englishMeaning": "Hello",
+            "language": "french"
+          }
+        },
+        "PhraseDeletion": {
+          "type": "object",
+          "properties": {
+            "englishMeaning": {
+              "type": "string",
+              "description": "The phrase in English"
+            }
+          },
+          "required": ["englishMeaning"],
+          "example": {
+            "englishMeaning": "Hello"
           }
         }
       },
@@ -138,7 +466,7 @@
         "description": ""
       },
       {
-        "name": "Languages",
+        "name": "Admin",
         "description": ""
       }
     ]
