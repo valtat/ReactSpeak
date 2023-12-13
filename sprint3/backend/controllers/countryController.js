@@ -1,12 +1,10 @@
 // const countryModel = require("../models/dummyCountryModel");
 const Country = require("../models/countrySchema");
-const Country = require("../models/countrySchema");
 
 const returnSingleCountry = async (req, res) => {
   try {
     const country = await Country.findById(req.params.id);
     if (country == null) {
-      return res.status(404).json({ message: "Cannot find country" });
       return res.status(404).json({ message: "Cannot find country" });
     }
     res.json(country);

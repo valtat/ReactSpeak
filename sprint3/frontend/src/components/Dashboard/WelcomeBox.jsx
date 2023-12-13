@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import AuthContext from "../../context/Auth";
+import { AuthStateContext } from "../../context/AuthContext";
 import img from "../../assets/images/woman.png";
 
 const WelcomeBox = () => {
-  const { username } = useContext(AuthContext);
+  const { username } = useContext(AuthStateContext);
   return (
     <div className="welcomebox">
       <div className="welcome-text">

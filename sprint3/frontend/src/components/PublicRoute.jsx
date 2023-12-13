@@ -6,11 +6,9 @@ export default function PublicRoute() {
   console.log("PublicRoute");
   let { isLogged, loading } = useContext(AuthStateContext);
 
-  return (
-    <>
-      {(loading === null || loading) && <div className="loading-overlay"></div>}
-      <Outlet />
-      {isLogged && <Navigate to="/dashboard" replace />}
-    </>
-  );
+  if (loading === null || loading) {
+    return <Outlet />;
+  }
+
+  return !isLogged ? <Outlet /> : <Navigate to="/" />;
 }

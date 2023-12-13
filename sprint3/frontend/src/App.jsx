@@ -28,9 +28,7 @@ import FrontPage from "./pages/FrontPage/index.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 import "./App.css";
-import { AuthProvider } from "./context/Auth.jsx";
 import { CountryProvider } from "./context/CountryContext.jsx";
-import ChatHome from "./components/Chat/ChatHome.jsx";
 
 function App() {
   const router = createBrowserRouter(
@@ -48,21 +46,21 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/chat" element={<ChatComponent />} />
+          <Route
+            path="/study"
+            element={<StudyView />}
+            loader={languageDataLoader}
+          />
         </Route>
 
         <Route element={<AdminRoute />}>
-          <Route path="/admintest" element={<div>Admin Route</div>} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
 
-        <Route
-          path="/study"
-          element={<StudyView />}
-          loader={languageDataLoader}
-        />
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryName" element={<CountryPage />} />
-        <Route path="/admin" element={<AdminPage />} />
       </Route>
     )
   );
