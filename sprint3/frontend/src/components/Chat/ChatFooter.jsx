@@ -8,11 +8,11 @@ const ChatFooter = ({sendMessage, message, setMessage}) => {
         <input
           type="text"
           placeholder="Write message"
-          className="message"
+          className={classes.message}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button className="sendBtn">SEND</button>
+        <button className={classes.leaveBtn}>SEND</button>
       </form>
     </div>
   );

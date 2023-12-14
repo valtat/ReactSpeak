@@ -7,6 +7,7 @@ import {
 import classes from "./quizResults.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import quizService from "../../services/quizService";
 
 const QuizResults = ({ score, duration, target, restart }) => {
   const navigate = useNavigate();
@@ -14,7 +15,22 @@ const QuizResults = ({ score, duration, target, restart }) => {
   const seconds = Math.round(duration % 60);
   const scorePercentage = Math.round((score / target) * 100);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const postData = async () => {
+      const defaultLanguage = localStorage.getItem("defaultLanguage");
+      const data = {
+        language: defaultLanguage,
+        score,
+        duration,
+        maxScore: 5,
+        target,
+      };
+      console.log("DATA HERE : ", data);
+      await quizService.postQuizResults(data);
+    };
+
+    postData();
+  }, []);
 
   const handleFinishStudy = () => {
     navigate("/dashboard");

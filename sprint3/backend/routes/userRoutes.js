@@ -4,6 +4,8 @@ const userController = require("../controllers/userController");
 
 const { jwtAuth } = require("../middleware/authMiddleware");
 
+router.get("/", jwtAuth, userController.getUser);
+
 router.post("/change-password", jwtAuth, userController.changePassword);
 
 router.delete("/delete-user", jwtAuth, userController.deleteUser);

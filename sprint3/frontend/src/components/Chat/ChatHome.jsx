@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthStateContext } from "../../context/AuthContext";
 import classes from "./ChatHome.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 const ChatHome = () => {
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const ChatHome = () => {
       ) : (
         <div className={classes.container}>
           <h1>Ready to chat, {username}?</h1>
+          <FontAwesomeIcon icon={faComments} size="10x" className={classes.comments}/>
           <h3>
             Boost your language skills by chatting with locals! Pick your
             language and start your learning journey.

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authInstance = axios.create({
-  baseURL: "api/v1/",
+  baseURL: "api/v1/auth",
   headers: {
     "Content-Type": "application/json",
   },

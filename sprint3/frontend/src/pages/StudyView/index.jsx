@@ -29,11 +29,16 @@ const StudyView = () => {
   const [duration, setDuration] = useState(null);
 
   useEffect(() => {
-    setStartTime(new Date());
-  }, []);
+    if (activeSession) {
+      setStartTime(Date.now());
+    }
+  }, [activeSession]);
 
   useEffect(() => {
-    if (activeWord >= useData.length - 1) {
+    if (activeWord > useData.length - 1) {
+      const endTime = new Date();
+      const durationSeconds = (endTime - startTime) / 1000;
+      setDuration(durationSeconds);
       setActiveSession(false);
     }
   }, [activeWord, useData.length]);

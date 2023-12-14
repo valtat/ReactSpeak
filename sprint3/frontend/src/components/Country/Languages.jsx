@@ -1,11 +1,15 @@
 import { useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import Language from "./Language";
 import CountryInformation from "./CountryInformation";
 import "./CountryInformation.css";
 import { CountryContext } from "../../context/CountryContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function Languages() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -19,9 +23,16 @@ function Languages() {
     (country) => country.name.toLowerCase() === countryName
   );
 
+  const handleBack = () => {
+    navigate(-1);
+  }
+
   return (
     <div className="country-page-container">
       <div className="container">
+     
+        <FontAwesomeIcon icon={faArrowLeft} onClick={handleBack} className="back-button"/>
+       
       <h2 className="title">{country.name}</h2>
       <div className="languages">
         {country.languages.map((language) => (
@@ -33,10 +44,10 @@ function Languages() {
         ))}
       </div>
       <div className="information">
-        <CountryInformation info={country.description} />
+        <CountryInformation info={country.description} image={country.image}/>
       </div>
       </div>
-      <img src={imageUrl+country.map} alt={country.name} className="map-image" />
+      {/* <img src={imageUrl+country.map} alt={country.name} className="map-image" /> */}
     </div>
   );
 }

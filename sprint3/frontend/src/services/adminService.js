@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3012/api/v1/admin";
+const baseUrl = "http://localhost:3005/api/v1/admin";
 
 const deletePhrase = async (englishMeaning) => {
   const response = await axios.delete(baseUrl, { data: { englishMeaning } });

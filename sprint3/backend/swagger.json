@@ -138,7 +138,7 @@
           "tags": ["Admin"],
           "summary": "Get a single translation in a specified language",
           "operationId": "getSingleTranslation",
-          "security": [],
+          "security": [{"httpBearer": []}],
           "parameters": [
             {
               "name": "englishMeaning",
@@ -170,29 +170,41 @@
       "/admin/get-phrase": {
         "get": {
           "tags": ["Admin"],
-          "summary": "Get all translations for a phrase",
+          "summary": "Get all translations for a specific phrase",
           "operationId": "getTranslations",
-          "security": [],
+          "security": [{"httpBearer": []}],
           "parameters": [
             {
               "name": "englishMeaning",
-              "in": "path",
+              "in": "query",
               "required": true,
               "schema": {
-                "type": "string"
+                "type": "string",
+                "description": "The English meaning of the phrase to retrieve translations for"
               }
             }
           ],
           "responses": {
             "200": {
-              "description": "Translations retrieved successfully"
+              "description": "Translations retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PhraseWithTranslations"
+                  }
+                }
+              }
             },
-            "401": {
-              "description": "Error: Forbidden"
+            "400": {
+              "description": "Bad Request - Missing or invalid parameters"
+            },
+            "403": {
+              "description": "Forbidden - User not authorized"
             }
           }
         }
       },
+      
       "/admin/add-translation": {
         "patch": {
           "tags": ["Admin"],

@@ -31,7 +31,7 @@ const Course = (props) => {
       await axios.post(
         "/api/v1/profile/addLanguage",
         {
-          language: languageName,
+          language: "French",
         },
         {
           withCredentials: true,
@@ -40,7 +40,7 @@ const Course = (props) => {
           },
         }
       );
-      localStorage.setItem("defaultLanguage", languageName);
+      localStorage.setItem("defaultLanguage", "French");
       navigate("/study");
     } catch (error) {
       console.error("Error:", error);

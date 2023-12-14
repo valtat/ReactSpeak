@@ -12,7 +12,6 @@ const returnQuizResults = async (req, res) => {
 const addQuizResult = async (req, res) => {
   const user = req.user;
   const { language, maxScore, score, duration } = req.body;
-
   try {
     const quizResult = new QuizResult({
       user: user._id,
