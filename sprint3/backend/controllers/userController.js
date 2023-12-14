@@ -1,10 +1,15 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userSchema");
-const mongoose = require("mongoose");
 
-const returnUser = async (req, res) => {
-  const user = req.user;
-  res.status(200).json(user);
+const getUser = async (req, res) => {
+  try {
+    const user = req.user;
+    const { username, email } = await User.findById(user._id);
+
+    res.status(200).json({ username, email });
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving user data" });
+  }
 };
 
 const changePassword = async (req, res) => {
@@ -29,4 +34,4 @@ const deleteUser = async (req, res) => {
   res.status(200).json({ message: "User deleted successfully" });
 };
 
-module.exports = { getUser: returnUser, changePassword, deleteUser };
+module.exports = { getUser, changePassword, deleteUser };

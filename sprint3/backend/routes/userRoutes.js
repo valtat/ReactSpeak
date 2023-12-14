@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 
-const { jwtAuth } = require("../middleware/authMiddleware");
+const { authJwtAccess } = require("../middleware/authMiddleware");
 
-router.get("/", jwtAuth, userController.getUser);
+router.get("/", authJwtAccess, userController.getUser);
 
-router.post("/change-password", jwtAuth, userController.changePassword);
+router.post("/change-password", authJwtAccess, userController.changePassword);
 
-router.delete("/delete-user", jwtAuth, userController.deleteUser);
+router.delete("/delete-user", authJwtAccess, userController.deleteUser);
 
 module.exports = router;
