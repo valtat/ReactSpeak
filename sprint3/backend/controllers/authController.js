@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
   );
   console.log(user);
 
-  const accessToken = generateAccessToken(user, "15m");
+  const accessToken = generateAccessToken(user, "30m");
   const refreshToken = generateRefreshToken(user, req.body.rememberMe);
 
   res.cookie("refresh_token", refreshToken, {
@@ -98,7 +98,7 @@ const refreshAccessToken = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const accessToken = generateAccessToken(user, "15m");
+    const accessToken = generateAccessToken(user, "30m");
 
     res.status(200).json({
       message: "Access token refreshed",
