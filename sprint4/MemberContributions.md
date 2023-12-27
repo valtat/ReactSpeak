@@ -3,13 +3,14 @@
 ## Jonne Karhunen:
 
 - Structure of the backend (inc. middlewares)
-- Authentication and authorization
+- Authentication and authorization (backend)
 - Chat (backend only)
 - Quiz generation
-- Frontend protected routes
+- Role-based routing in the frontend
 - StudyView logic (no styling)
 - Role based routing in the frontend
 - AuthContext
+- useAuth and useRegister custom hooks.
 
 ## Elena Blinova:
 
