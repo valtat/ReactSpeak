@@ -6,7 +6,7 @@
 - Authentication and authorization (backend)
 - Chat (backend only)
 - Quiz generation
-- Frontend role protected routing
+- Role-based routing in the frontend
 - StudyView logic (no styling)
 - Role based routing in the frontend
 - AuthContext
