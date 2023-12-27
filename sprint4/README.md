@@ -8,7 +8,6 @@
 - Quiz generation
 - Role-based routing in the frontend
 - StudyView logic (no styling)
-- Role based routing in the frontend
 - AuthContext
 - useAuth and useRegister custom hooks.
 
