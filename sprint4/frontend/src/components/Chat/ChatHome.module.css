@@ -1,0 +1,93 @@
+
+.ChatHome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 160px);
+    overflow: hidden;
+}
+
+.ChatHome .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+    /* width: 40%; */
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.ChatHome h1 {
+    padding-top: 40px;
+}
+
+.ChatHome .comments {
+    padding: 20px 0;
+    color: #8e6db3;
+}
+
+.ChatHome h3 {
+    text-align: center;
+    padding: 0 40px;
+    font-size: 20px;
+}
+
+.ChatHome .languages {
+    display: flex;
+    flex-direction: row;
+    padding: 0 40px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ChatHome .languages label{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #000;
+}
+
+.ChatHome .languages select{
+    width: 100%;
+    min-width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e5e5e5;
+    color: #000;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.ChatHome .languages select:hover{
+    background-color: #b8b7b7;
+    color: #3f485b;
+    border: none;
+    cursor: pointer;
+}
+
+.ChatHome .languages select:focus{
+    outline: none;
+}
+
+.ChatHome button {
+    white-space: nowrap;
+    width: auto;
+    min-width: 200px;
+    margin: 40px;
+    background-color: #a5a5a5;
+    color: #000;
+}
+
+.ChatHome button:hover {
+    background-color: #8e6db3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

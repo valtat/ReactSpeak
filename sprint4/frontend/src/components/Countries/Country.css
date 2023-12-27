@@ -1,0 +1,148 @@
+:root {
+  --gradient1: linear-gradient(116deg, #f76979 0%, #f7a069 100%);
+  --gradient2: linear-gradient(116deg, #f7a069 0%, #f7e769 100%);
+  --gradient3: linear-gradient(116deg, #f7e769 0%, #cbf785 100%);
+  --gradient4: linear-gradient(116deg, #f76979 0%, #b56ad9 100%);
+  --gradient5: linear-gradient(116deg, #b185f7 0%, #69f7e7 100%);
+  --gradient6: linear-gradient(116deg, #69f7e7 0%, #cbf785 100%);
+}
+
+.countries-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.countries-container::before {
+  content: "";
+  position: absolute;
+  background-image: url("/images/airplane.png");
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  width: 300px;
+  height: 300px;
+}
+
+.countries-container::before {
+  top: 0;
+  left: 0;
+  transform: scaleX(-1); /* Flip the image horizontally */
+}
+
+.countries-container .title {
+  color: #3f485b;
+  text-align: center;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 30px;
+}
+
+.countries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 1170px;
+  width: 200vw;
+  padding: 0 0 10rem;
+}
+
+.country-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.country-card {
+  width: 337px;
+  height: 200px;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
+  border-radius: 14.21px;
+  opacity: 0.8;
+  background: var(--gradient1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.country-image-container {
+  height: 100%;
+}
+
+.country-img {
+  border-radius: 14.21px;
+  border: 1px solid #0f5259;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+  width: 100%;
+  /* Ensure the image takes up the full width of its container */
+}
+
+.country-footer {
+  color: black;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 1px;
+}
+
+.country-card:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.country-link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 990px) {
+  .countries-container::before {
+    display: none;
+  }
+
+  .countries-container {
+    height: auto;
+  }
+
+  .countries {
+    width: 100vw;
+    flex-wrap: wrap;
+  }
+
+  .country-card {
+    width: 300px;
+    height: 170px;
+  }
+
+  .country-footer {
+    font-size: 16px;
+  }
+
+  .countries-container .title {
+    font-size: 32px;
+  }
+
+  .country-img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .country-card:hover {
+    transform: none;
+  }
+}
