@@ -27,7 +27,11 @@ const ChatHome = () => {
       ) : (
         <div className={classes.container}>
           <h1>Ready to chat, {username}?</h1>
-          <FontAwesomeIcon icon={faComments} size="10x" className={classes.comments}/>
+          <FontAwesomeIcon
+            icon={faComments}
+            size="10x"
+            className={classes.comments}
+          />
           <h3>
             Boost your language skills by chatting with locals! Pick your
             language and start your learning journey.
