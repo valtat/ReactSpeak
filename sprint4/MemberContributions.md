@@ -2,7 +2,14 @@
 
 ## Jonne Karhunen:
 
-- Backend (routes, schemas/models, middleware, controllers, db)
+- Structure of the backend (inc. middlewares)
+- Authentication and authorization
+- Chat (backend only)
+- Quiz generation
+- Frontend protected routes
+- StudyView logic (no styling)
+- Role based routing in the frontend
+- AuthContext
 
 ## Elena Blinova:
 
